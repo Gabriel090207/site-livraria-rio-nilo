@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Pagamento - Livraria e Distribuidora Rio Nilo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="pagamentos.css">
+    <link rel="stylesheet" href="index.css">
+     <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
+</head>
+<body>
+
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="Nova logo rio nilo.png" alt="Logo Rio Nilo" class="logo1">
+        </div>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li class="dropdown"><a href="#buscar-escola">Escolas</a></li>
+          <li class="dropdown1"><a href="Livros.html">Livros</a></li>
+          <li class="faleconosco"><a href="#">Fale Conosco</a></li>
+        </ul>
+      </nav>>
+    </header>
+
+    <main>
+        <section id="formas-pagamento">
+            <h2>Formas de Pagamento</h2>
+            <div class="payment-methods-container">
+                <div class="payment-card animate-on-scroll" id="card-credito">
+                    <div class="icon-payment-circle"><i class="far fa-credit-card"></i></div>
+                    <h3>Cartão de Crédito</h3>
+                    <p>Pague suas compras de forma parcelada, com as principais bandeiras de cartão.</p>
+                </div>
+
+                <div class="payment-card animate-on-scroll" id="card-debito">
+                    <div class="icon-payment-circle"><i class="fas fa-money-check-alt"></i></div>
+                    <h3>Cartão de Débito</h3>
+                    <p>Pagamento à vista, de forma rápida e segura, direto da sua conta bancária.</p>
+                </div>
+
+                <div class="payment-card animate-on-scroll" id="card-pix">
+                    <div class="icon-payment-circle"><i class="fas fa-qrcode"></i></div>
+                    <h3>PIX</h3>
+                    <p>Aproveite a agilidade do PIX para pagamentos instantâneos a qualquer hora.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+      <div class="footer">
+
+        <!-- Coluna 1 -->
+        <div>
+          <h4>Central de Ajuda</h4>
+          <ul class="rodapé">
+            <li><a href="privacidade.html">Política de Privacidade</a></li>
+            <li><a href="entregas.html">Política de Fretes</a></li>
+            <li><a href="devolucao.html">Trocas e Devoluções</a></li>
+            <li><a href="garantia.html">Termos de Garantia</a></li>
+            <li><a href="pagamentos.html">Pagamentos</a></li>
+            <li><a href="faleconosco.html">Fale conosco</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 2 -->
+        <div>
+          <h4 class="sobre">Sobre nós</h4>
+          <ul class="rodapé">
+            <li ><a href="quemsomos.html">Quem somos</a></li>
+            
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Social e Pagamento -->         <h4 class="contatos">Contatos</h4>
+          <div class="rodapé">
+            <ul style="margin-left: -110px; margin-top: 20px;" >
+              <li style="list-style: none;" class="horario1" ><a href="https://wa.me/5571982290909" target="_blank">Whatsapp: 71 98229-0909</a></li>
+              <li style="list-style: none;" class="horario">E-mail: rionilodistribuidora@gmail.com</li>
+              <li style="list-style: none;" class="horario">Horário de atendimento: Segunda a Sexta-feira, das 9h às 18h</li>
+            </ul>
+          </div>
+        <div>
+          
+          <h4>Redes sociais</h4>
+          <div class="redesocial">
+            <a href="https://www.instagram.com/educacional.rionilo?igsh=MWtsZDVkejNpdDVmbQ==" target="_blank"
+              class="redeicones">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+          <br>
+          <h4>Formas de pagamento</h4>
+          <div class="formapagamento">
+            <img src="Mastercard-logo.png" alt="Mastercard" style="height: 40px;">
+            <img src="logovisa.png" alt="Visa" style="height: 50px;">
+            <img src="pix-banco-central-brasil-logo-png_seeklogo-500502.png" alt="Pix" style="height: 50px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="politica">
+        <p>Brasil &nbsp; | &nbsp; Política de privacidade &nbsp; | &nbsp; Cookies &nbsp; | &nbsp; Termos de uso</p>
+        <p style="margin-top: 10px;" class="politica1">© 2025 Livraria e Distribuidora Rio Nilo. Todos os direitos reservados. CNPJ:
+          19.291.176/0001-78 - Endereço: Av. Aliomar Baleeiro, 2262 - Galpão 8 - Jardim Cajazeiras, Salvador - BA,
+          41230-455</p>
+      </div>
+    </footer>
+
+
+    <script>
+        // JavaScript para a animação de entrada (similar ao anterior)
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentCards = document.querySelectorAll('.payment-card');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        // Para animar em sequência, podemos modificar aqui
+                        paymentCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animate');
+                            }, index * 200); // Atraso de 200ms entre cada cartão
+                        });
+                        observer.disconnect(); // Desconecta após a animação
+                    }
+                });
+            }, { threshold: 0.2 }); // Inicia quando 20% do elemento está visível
+
+            const paymentSection = document.getElementById('formas-pagamento');
+            if (paymentSection) {
+                observer.observe(paymentSection);
+            }
+        });
+    </script>
+
+</body>
+</html>

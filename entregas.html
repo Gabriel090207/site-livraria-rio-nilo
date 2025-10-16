@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livraria e Distribuidora Rio Nilo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pagamentos.css">
+  <link rel="stylesheet" href="index.css">
+  <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
+</head>
+
+<body>
+  <!--
+  <div class="video-popup" id="videoPopup">
+    <video id="tutorialVideo" controls>
+      <source src="Gravação de Tela 2025-05-31 200206.mp4" type="video/mp4">
+      Seu navegador não suporta vídeo.
+    </video>
+    <button id="skipBtn" class="skip-button">Prosseguir para o site</button>
+  </div> 
+-->
+  <header>
+
+    <!-- barra -->
+
+    <a href="https://wa.me/5571982290909" class="whatsapp-button" target="_blank" style="text-decoration:none">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <nav class="navbar">
+      <div class="logo">
+        <img src="Nova logo rio nilo.png" alt="Logo Rio Nilo" class="logo1">
+      </div>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li class="dropdown"><a href="#buscar-escola">Escolas</a></li>
+        <li class="dropdown1"><a href="Livros.html">Livros</a></li>
+        <li class="faleconosco"><a href="#">Fale Conosco</a></li>
+      </ul>
+    </nav>
+    </header>
+    <main class="entregas">
+    <section id="devolucao-info">
+            <h2>Política de Fretes</h2>
+            <p>
+                Não cobramos valores de frete. Os livros serão entregues <strong>diretamente nas escolas</strong> em até <strong>72 horas</strong> após o pedido ser realizado.
+            </p>
+
+            <h2>Problemas com a entrega</h2>
+            <p>
+                Se houver problemas com a entrega, entraremos em contato via <strong style="color: darkgreen;">whatsapp</strong>!
+            </p>
+        </section>
+  
+
+    <section id="processo-entrega">
+      <h2>Nosso Processo de Entrega</h2>
+      <div class="timeline-container-horizontal"> <div class="timeline-step" id="step-pedido">
+              <div class="icon-circle"><i class="fas fa-shopping-cart"></i></div>
+              <p>Pedido Realizado</p>
+          </div>
+          <div class="timeline-line horizontal-line" id="line-1"></div> <div class="timeline-step" id="step-preparacao">
+              <div class="icon-circle"><i class="fas fa-box-open"></i></div>
+              <p>Em Preparação</p>
+          </div>
+          <div class="timeline-line horizontal-line" id="line-2"></div> <div class="timeline-step" id="step-chegando">
+              <div class="icon-circle"><i class="fas fa-truck-moving"></i></div>
+              <p>Chegando na Escola</p>
+          </div>
+          <div class="timeline-line horizontal-line" id="line-3"></div> <div class="timeline-step" id="step-retirada">
+              <div class="icon-circle"><i class="fas fa-hand-holding"></i></div>
+              <p>Pronto para Retirada</p>
+          </div>
+          <div class="timeline-line horizontal-line" id="line-4"></div> <div class="timeline-step" id="step-concluido">
+              <div class="icon-circle"><i class="fas fa-check-circle"></i></div>
+              <p>100% Concluído </p>
+          </div>
+      </div>
+  </section>
+</main>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const steps = document.querySelectorAll('.timeline-step');
+        const lines = document.querySelectorAll('.horizontal-line'); // Alterado para a nova classe da linha
+
+        const animateSequence = (elements, delay = 2500) => {
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('animate');
+                }, delay * index);
+            });
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSequence(steps);
+                    animateSequence(lines, 2600);
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.1 });
+
+        const deliverySection = document.getElementById('processo-entrega');
+        if (deliverySection) {
+            observer.observe(deliverySection);
+        }
+    });
+</script>
+    <!-- rodape com ccs incluso dentro -->
+    <footer>
+      <div class="footer">
+
+        <!-- Coluna 1 -->
+        <div>
+          <h4>Central de Ajuda</h4>
+          <ul class="rodapé">
+            <li><a href="privacidade.html">Política de Privacidade</a></li>
+            <li><a href="entregas.html">Política de Fretes</a></li>
+            <li><a href="devolucao.html">Trocas e Devoluções</a></li>
+            <li><a href="garantia.html">Termos de Garantia</a></li>
+            <li><a href="pagamentos.html">Pagamentos</a></li>
+            <li><a href="faleconosco.html">Fale conosco</a></li>
+          </ul>
+        </div>
+
+        <!-- Coluna 2 -->
+        <div>
+          <h4 class="sobre">Sobre nós</h4>
+          <ul class="rodapé">
+            <li ><a href="quemsomos.html">Quem somos</a></li>
+            
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Social e Pagamento -->         <h4 class="contatos">Contatos</h4>
+          <div class="rodapé">
+            <ul style="margin-left: -110px; margin-top: 20px;" >
+              <li style="list-style: none;" class="horario1" ><a href="https://wa.me/5571982290909" target="_blank">Whatsapp: 71 98229-0909</a></li>
+              <li style="list-style: none;" class="horario">E-mail: rionilodistribuidora@gmail.com</li>
+              <li style="list-style: none;" class="horario">Horário de atendimento: Segunda a Sexta-feira, das 9h às 18h</li>
+            </ul>
+          </div>
+        <div>
+          
+          <h4>Redes sociais</h4>
+          <div class="redesocial">
+            <a href="https://www.instagram.com/educacional.rionilo?igsh=MWtsZDVkejNpdDVmbQ==" target="_blank"
+              class="redeicones">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+          <br>
+          <h4>Formas de pagamento</h4>
+          <div class="formapagamento">
+            <img src="Mastercard-logo.png" alt="Mastercard" style="height: 40px;">
+            <img src="logovisa.png" alt="Visa" style="height: 50px;">
+            <img src="pix-banco-central-brasil-logo-png_seeklogo-500502.png" alt="Pix" style="height: 50px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="politica">
+        <p>Brasil &nbsp; | &nbsp; Política de privacidade &nbsp; | &nbsp; Cookies &nbsp; | &nbsp; Termos de uso</p>
+        <p style="margin-top: 10px;" class="politica1">© 2025 Livraria e Distribuidora Rio Nilo. Todos os direitos reservados. CNPJ:
+          19.291.176/0001-78 - Endereço: Av. Aliomar Baleeiro, 2262 - Galpão 8 - Jardim Cajazeiras, Salvador - BA,
+          41230-455</p>
+      </div>
+    </footer>
+
+
+    <script>
+      // Mostrar botão após 3 minutos (180000 milissegundos)
+      setTimeout(() => {
+        document.getElementById('skipBtn').style.display = 'inline-block';
+      }, 9000);
+
+      // Fechar o popup ao clicar em "Pular"
+      document.getElementById('skipBtn').addEventListener('click', () => {
+        document.getElementById('videoPopup').style.display = 'none';
+      });
+    </script>
+
+
+    <script>
+      const prev = document.querySelector('.prev');
+      const next = document.querySelector('.next');
+      const items = document.querySelectorAll('.carousel-item');
+      let current = 0;
+
+      function updateCarousel() {
+        const inner = document.querySelector('.carousel-inner');
+        inner.style.transform = `translateX(-${current * 100}%)`;
+      }
+
+      prev.addEventListener('click', () => {
+        current = (current === 0) ? items.length - 1 : current - 1;
+        updateCarousel();
+      });
+
+      next.addEventListener('click', () => {
+        current = (current === items.length - 1) ? 0 : current + 1;
+        updateCarousel();
+      });
+    </script>
+
+
+  </header>

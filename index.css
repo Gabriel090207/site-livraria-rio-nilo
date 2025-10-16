@@ -1,0 +1,1205 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.computador{
+  display: block;
+}
+
+.mobile{
+  display: none;
+}
+
+body {
+  background: #ffffff;
+  color: #000000;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.cookie-consent-banner {
+  position: fixed;
+  bottom: 20px;
+ right: 35%; /* Adjust as needed for distance from the bottom */
+  /* Position the left edge at the horizontal center */
+  transform: translateX(-50%); /* Shift the element left by half its own width */
+  /* Remove or adjust these if they conflict with centering */
+  /* margin-right: 640px; */
+  /* margin-bottom: 30px; */
+  width: 550px;
+  max-width: 90%; /* Using 90% or a similar value is often better than 100% to ensure some padding on very small screens */
+  background-color: #fff;
+  color: #333;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  
+  opacity: 0;
+  transform: translateY(100px) translateX(-50%); /* Apply transform for centering AND animation */
+  
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  
+  display: none;
+}
+.cookie-consent-banner.show {
+  display: block; /* Torna visível */
+  opacity: 1; /* Transição para totalmente visível */
+  transform: translateY(0); /* Retorna à posição original */
+}
+
+.cookie-consent-banner p {
+  margin-bottom: 20px; /* Mais espaço para o parágrafo */
+  font-size: 0.9em;
+  line-height: 1.5;
+  color: #555; /* Cor do texto um pouco mais clara */
+}
+
+.cookie-consent-banner p a {
+  color: #F58220;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.cookie-consent-banner p a:hover {
+  text-decoration: underline;
+}
+
+.cookie-buttons {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os botões quebrem a linha se não houver espaço */
+  justify-content: center;
+  gap: 10px; /* Menor espaço entre os botões */
+}
+
+.btn-cookie-accept,
+.btn-cookie-reject {
+  padding: 10px 18px; /* Ajusta o padding dos botões */
+  border: none;
+  border-radius: 5px;
+  font-size: 0.85em; /* Fonte um pouco menor */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  flex-grow: 1; /* Permite que os botões cresçam para preencher o espaço */
+  min-width: 120px; /* Largura mínima para botões */
+}
+
+.btn-cookie-accept {
+  background-color:#F58220;
+  color: white;
+}
+
+.btn-cookie-accept:hover {
+  background-color: #f58320ad;
+  transform: translateY(-2px); /* Efeito sutil ao passar o mouse */
+}
+
+.btn-cookie-reject {
+  background-color: white; /* Cinza para rejeitar, menos agressivo que vermelho */
+  color: #F58220;
+  border: 1px solid #F58220;
+}
+
+.btn-cookie-reject:hover {
+  background-color: #d16c14;
+  color: white;
+  transform: translateY(-2px);
+}
+/* barra de cima */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000; /* Garante que fique por cima de outros elementos */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra opcional para destacar */
+}
+
+
+.navbar .logo {
+
+  display: flex;
+  align-items: center;
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.logo1 {
+  height: 50px;
+}
+
+.navbar .logo span {
+  color: orange;
+  font-weight: bold;
+}
+
+.navbar>ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar ul li {
+  position: relative;
+}
+
+/* menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  min-width: 160px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.dropdown-menu li {
+  display: block;
+}
+
+.dropdown-menu li a {
+  padding: 10px;
+  display: block;
+  color: black;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f0f0f0;
+  border-radius: 0px;
+}
+
+.navbar ul li a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover {
+  background: #F58220;
+  color: #fff;
+  transition: 0.5s;
+}
+
+/* carrossel */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  padding-top: 53px;
+  /* Altura da tela inteira */
+  margin: 0;
+  /* Remove margem para usar a tela toda */
+  overflow: hidden;
+}
+
+.carousel-inner {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+  min-width: 100%;
+  height: 800px;
+}
+
+.carousel-item img {
+  margin-top: 15px;
+
+
+  width: 100%;
+  
+
+  /* Cobre todo o espaço sem distorcer */
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+/*texto escola*/
+.texto__escola {
+  text-align: center;
+  padding: 50px;
+}
+
+#buscar-escola{
+  position: relative;
+  overflow: hidden;
+  padding-top: 100px;
+  padding-bottom: -20px;
+  text-align: center;
+}
+
+section#buscar-escola h2{
+  font-size: 2.7em;
+}
+
+section#buscar-escola p{
+  font-size: 22px;
+}
+
+div.secaoescola{
+  margin: 30px
+  auto 0;
+  display: inline-block;
+}
+
+button.botaoescolas{
+  border: none;
+  background: none;
+}
+
+img.escola{
+  width: 370px;
+  height: auto;
+  cursor: pointer;
+}
+
+img.escola:hover{
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+/* css do pop up depois so tem que colocar o html*/
+.video-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  /* branco transparente bem leve */
+  backdrop-filter: blur(8px);
+  /* desfoca o fundo atrás */
+  -webkit-backdrop-filter: blur(8px);
+  /* suporte para Safari */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  padding: 20px;
+}
+
+.video-popup video {
+  max-width: 50%;
+  height: auto;
+  border: 3px solid white;
+  border-radius: 8px;
+}
+
+.skip-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #F58220;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: none;
+}
+ 
+.skip-button:hover {
+  background: #c96415;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 2100px;
+  /* Ajuste o tamanho total do divisor */
+  margin: auto;
+  margin-top: 80px;
+}
+
+#tutorialVideo {
+  border: 5px solid #F58220;
+  border-radius: 10px;
+  margin: 80px auto 0 auto;
+  display: block;
+  width: 50%;
+  height: 50vh;
+  object-fit: cover;
+  overflow: hidden;
+  background: black; /* opcional, para cobrir barras pretas */
+}
+
+
+.text_title{
+  text-align: center;
+  font-size: 2.7em;
+  padding-top: 70px;
+}
+
+.text_paragraph{
+  text-align: center;
+  font-size: 20px;
+  padding-top: 20px;
+}
+
+#sobre-livraria{
+  display: flex;
+  align-items: center;
+  padding: 70px 80px;
+  gap: 50px;
+}
+
+.line {
+  width: 800px;
+  /* Define o comprimento das linhas */
+  height: 2px;
+  background-color: #F58220;
+  /* Cor verde neon */
+  margin: 0 10px;
+}
+.line1 {
+  width: 1750px;
+  /* Define o comprimento das linhas */
+  height: 2px;
+  background-color: #F58220;
+  /* Cor verde neon */
+  margin: 0 10px;
+}
+
+.texto{
+  flex: 1; 
+   background-size: cover; 
+   background-position: center; 
+   background-repeat: no-repeat; 
+   padding: 60px 30px; color: black; 
+   border-radius: 10px; 
+   margin-left: 30px;
+}
+
+.texto2{
+  margin-bottom: 20px;
+}
+.icon {
+  width: 105px;
+  /* Ajuste o tamanho do ícone */
+  height: auto;
+}
+
+footer{
+  background-color: #F58220;
+  color: #000;
+  padding: 50px 80px;
+}
+
+.footer{
+  display: flex; 
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+footer a{
+  text-decoration: none;
+  color: black;
+}
+
+footer a:hover{
+  color: #333;
+}
+
+.rodapé{
+  
+  list-style: none;
+  padding: 0;
+  line-height: 1.8;
+  margin-right: 130px;
+}
+
+.redesocial{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-weight: bold;
+}
+
+.redeicones{
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.formapagamento{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.politica{
+  border-top: 1px solid #444;
+  margin-top: 40px;
+  padding-top: 20px;
+  font-size: 14px;
+  color: #000;
+  font-weight: bold;
+}
+
+.whatsapp-button {
+    position: fixed; /* Faz o botão flutuar na tela */
+    width: 60px; /* Largura do botão */
+    height: 60px; /* Altura do botão */
+    bottom: 40px; /* Distância da parte inferior da tela */
+    right: 40px; /* Distância da parte direita da tela */
+    background-color: #25d366; /* Cor de fundo do WhatsApp */
+    color: #FFF; /* Cor do ícone (se for um ícone de texto, mas geralmente usamos imagem) */
+    border-radius: 50px; /* Deixa o botão redondo */
+    text-align: center; /* Centraliza o conteúdo (ícone) */
+    font-size: 30px; /* Tamanho do ícone (se for um ícone de fonte) */
+    box-shadow: 2px 2px 3px #999; /* Sombra para dar profundidade */
+    z-index: 100; /* Garante que o botão fique acima de outros elementos */
+    display: flex; /* Para centralizar a imagem dentro do botão */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.whatsapp-button img {
+    width: 35px; /* Tamanho da imagem do ícone */
+    height: 35px; /* Altura da imagem do ícone */
+}
+
+/* Efeito de hover (quando o mouse passa por cima) */
+.whatsapp-button:hover {
+    transform: scale(1.1); /* Aumenta um pouco o botão */
+    transition: all 0.3s ease; /* Transição suave */
+}
+
+
+
+
+@media (max-width: 768px){
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+  
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  
+  .cookie-consent-banner {
+    position: fixed; /* Continua fixo na tela */
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da direita para posicionar no canto inferior direito */
+    /* OU use left: 50%; transform: translateX(-50%); para centralizar na parte inferior */
+    margin-right: 640px;
+    margin-bottom: 30px;
+    width: 550px; /* Largura do card */
+    max-width: 100%; /* Garante que não ultrapasse a largura da tela em dispositivos pequenos */
+    background-color: #fff; /* Fundo branco para o card */
+    color: #333; /* Cor do texto */
+    padding: 25px;
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    z-index: 1000;
+    
+    opacity: 0;
+      transform: translateY(100px); /* Começa 100px abaixo da posição final */
+      
+      /* Transição para a animação */
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Duração e tipo de suavização */
+  
+      /* Importante: Mantenha display: none aqui se você quer que ele não ocupe espaço antes de aparecer */
+      display: none; /* Transições para animação */
+  }
+  
+  .cookie-consent-banner.show {
+    display: block; /* Torna visível */
+    opacity: 1; /* Transição para totalmente visível */
+    transform: translateY(0); /* Retorna à posição original */
+  }
+  
+  .cookie-consent-banner p {
+    margin-bottom: 20px; /* Mais espaço para o parágrafo */
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #555; /* Cor do texto um pouco mais clara */
+  }
+  
+  .cookie-consent-banner p a {
+    color: #F58220;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .cookie-consent-banner p a:hover {
+    text-decoration: underline;
+  }
+  
+  .cookie-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha se não houver espaço */
+    justify-content: center;
+    gap: 10px; /* Menor espaço entre os botões */
+  }
+  
+  .btn-cookie-accept,
+  .btn-cookie-reject {
+    padding: 10px 18px; /* Ajusta o padding dos botões */
+    border: none;
+    border-radius: 5px;
+    font-size: 0.85em; /* Fonte um pouco menor */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    flex-grow: 1; /* Permite que os botões cresçam para preencher o espaço */
+    min-width: 120px; /* Largura mínima para botões */
+  }
+  
+  .btn-cookie-accept {
+    background-color:#F58220;
+    color: white;
+  }
+  
+  .btn-cookie-accept:hover {
+    background-color: #f58320ad;
+    transform: translateY(-2px); /* Efeito sutil ao passar o mouse */
+  }
+  
+  .btn-cookie-reject {
+    background-color: white; /* Cinza para rejeitar, menos agressivo que vermelho */
+    color: #F58220;
+    border: 1px solid #F58220;
+  }
+  
+  .btn-cookie-reject:hover {
+    background-color: #d16c14;
+    color: white;
+    transform: translateY(-2px);
+  }
+  /* barra de cima */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000; /* Garante que fique por cima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra opcional para destacar */
+  }
+  
+  .logo1 {
+    
+    margin-left: -26px;
+    height: 30px;
+  }
+  
+  
+  
+  .navbar>ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar ul li {
+    position: relative;
+  }
+  
+  /* menu */
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .dropdown-menu li {
+    display: block;
+  }
+  
+  .dropdown-menu li a {
+    padding: 10px;
+    display: block;
+    color: black;
+    text-decoration: none;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  .dropdown-menu li a:hover {
+    background-color: #f0f0f0;
+    border-radius: 0px;
+  }
+  
+  .navbar ul li a {
+  margin-right: 5px;
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: -32px;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+  
+  .faleconosco {
+    margin-right: -27px;
+  }
+  
+  .navbar ul li a.active,
+  .navbar ul li a:hover {
+    background: #F58220;
+    color: #fff;
+    transition: 0.5s;
+  }
+  
+  /* carrossel */
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    padding-top: 53px;
+    /* Altura da tela inteira */
+    margin: 0;
+    /* Remove margem para usar a tela toda */
+    overflow: hidden;
+  }
+  
+  .carousel-inner {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  .carousel-item {
+    min-width: 100%;
+    height: 800px;
+  }
+  
+  .carousel-item img {
+    margin-top: 15px;
+  
+  
+    width: 100%;
+    
+  
+    /* Cobre todo o espaço sem distorcer */
+  }
+  
+  .computador{
+    display: none;
+  }
+  
+  .mobile{
+    display: flex;
+  }
+  
+  .prev,
+  .next {
+    margin-top: -30px;
+    position: absolute;
+    top: 30%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .prev {
+    margin-top: 50px;
+    left: 10px;
+  }
+  
+  .next {
+    margin-top: 50px;
+    right: 10px;
+  }
+  
+  /*texto escola*/
+  .texto__escola {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  #buscar-escola{
+ 
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: -20px;
+    text-align: center;
+  }
+  
+  section#buscar-escola h2{
+    
+    font-size: 2.7em;
+  }
+  
+  section#buscar-escola p{
+    font-size: 17px;
+  }
+  
+  div.secaoescola{
+    margin: 30px
+    auto 0;
+    display: inline-block;
+  }
+  
+  button.botaoescolas{
+    border: none;
+    background: none;
+  }
+  
+  img.escola{
+    width: 350px;
+    height: auto;
+    cursor: pointer;
+  }
+  
+  img.escola:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+  }
+  
+  /* css do pop up depois so tem que colocar o html*/
+  .video-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    /* branco transparente bem leve */
+    backdrop-filter: blur(8px);
+    /* desfoca o fundo atrás */
+    -webkit-backdrop-filter: blur(8px);
+    /* suporte para Safari */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    padding: 20px;
+  }
+  
+  .video-popup video {
+    max-width: 50%;
+    height: auto;
+    border: 3px solid white;
+    border-radius: 8px;
+  }
+  
+  .skip-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #F58220;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none;
+  }
+   
+  .skip-button:hover {
+    background: #c96415;
+  }
+  
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 2100px;
+    /* Ajuste o tamanho total do divisor */
+    margin: auto;
+    margin-top: 80px;
+  }
+  
+  #tutorialVideo {
+    border: 5px solid #F58220;
+    border-radius: 10px;
+    margin: 80px auto 0 auto;
+    display: block;
+    width: 90%;
+    height: 50vh;
+    object-fit: cover;
+    overflow: hidden;
+    background: black; /* opcional, para cobrir barras pretas */
+  }
+  
+  
+  .text_title{
+    text-align: center;
+    font-size: 1.7em;
+    padding-top: 70px;
+  }
+  
+  .text_paragraph{
+    text-align: center;
+    font-size: 17px;
+    padding-top: 20px;
+  }
+  
+  #sobre-livraria{
+    display: flex;
+    align-items: center;
+    padding: 70px 80px;
+    gap: 50px;
+  }
+  
+  .line {
+    width: 800px;
+    /* Define o comprimento das linhas */
+    height: 2px;
+    background-color: #F58220;
+    /* Cor verde neon */
+    margin: 0 10px;
+  }
+  .line1 {
+    width: 1750px;
+    /* Define o comprimento das linhas */
+    height: 2px;
+    background-color: #F58220;
+    /* Cor verde neon */
+    margin: 0 10px;
+  }
+  
+  .logo2 {
+    margin-top: -80px;
+    
+    max-width: 970px;
+    margin-left: -340px;
+   
+    height: -70px; 
+    object-fit: cover;
+          
+  }
+  
+  #sobre-livraria{
+    margin-top: -40px;
+  }
+  
+  .fundo {
+    flex: 0 0 650px; 
+    height: 00px; background-color: white; 
+    margin-left: -730px; display: 
+    flex; justify-content: center; 
+    align-items: center; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  
+  .texto {
+    margin-top: 20px;
+    flex: 1;  background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    padding: 60px 30px; color: black; 
+    border-radius: 10px;
+    margin-right: -85px;
+    margin-left: -790px;
+  }
+  
+  .icon {
+    width: 105px;
+    /* Ajuste o tamanho do ícone */
+    height: auto;
+  }
+  
+  footer{
+    margin-left: -40px;
+    background-color: #F58220;
+    color: #000;
+    padding: 50px 80px;
+  }
+  
+  .footer{
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+  
+  footer a{
+    text-decoration: none;
+    color: black;
+  }
+  
+  footer a:hover{
+    color: #333;
+  }
+  
+  .rodapé{
+  margin-right: -10px;
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    line-height: 1.8;
+  }
+   
+  
+  .sobre{
+    margin-right: 80px;
+  
+  }
+  
+  
+  
+  .redesocial{
+    display: flex;
+    gap: 20px;
+    margin-right: 30px;
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  .horario1  {
+    margin-top: -230px;
+    margin-right: -10px;
+    margin-left: 455px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  
+  }
+  .horario {
+    margin-top: 0px;
+    margin-right: -10px;
+    margin-left: 455px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  
+  }
+  
+  .contatos{
+   margin-left: -50px;
+   margin-bottom: -50px;
+  }
+  .redeicones{
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .formapagamento{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .politica{
+    border-top: 1px solid #444;
+    margin-top: 40px;
+    padding-top: 20px;
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+  }
+  
+  .politica1 {
+    border-top: 1px solid #444;
+    margin-top: -40px;
+    padding-top: 20px;
+    font-size: 14px;
+    
+   
+    color: #000;
+    font-weight: bold;
+  }
+  
+  
+  .whatsapp-button {
+      position: fixed; /* Faz o botão flutuar na tela */
+      width: 60px; /* Largura do botão */
+      height: 60px; /* Altura do botão */
+      bottom: 40px; /* Distância da parte inferior da tela */
+      right: 40px; /* Distância da parte direita da tela */
+      background-color: #25d366; /* Cor de fundo do WhatsApp */
+      color: #FFF; /* Cor do ícone (se for um ícone de texto, mas geralmente usamos imagem) */
+      border-radius: 50px; /* Deixa o botão redondo */
+      text-align: center; /* Centraliza o conteúdo (ícone) */
+      font-size: 30px; /* Tamanho do ícone (se for um ícone de fonte) */
+      box-shadow: 2px 2px 3px #999; /* Sombra para dar profundidade */
+      z-index: 100; /* Garante que o botão fique acima de outros elementos */
+      display: flex; /* Para centralizar a imagem dentro do botão */
+      justify-content: center; /* Centraliza horizontalmente */
+      align-items: center; /* Centraliza verticalmente */
+  }
+  
+  .whatsapp-button img {
+      width: 35px; /* Tamanho da imagem do ícone */
+      height: 35px; /* Altura da imagem do ícone */
+  }
+  
+  /* Efeito de hover (quando o mouse passa por cima) */
+  .whatsapp-button:hover {
+      transform: scale(1.1); /* Aumenta um pouco o botão */
+      transition: all 0.3s ease; /* Transição suave */
+  }
+  
+  .texto2 {
+    margin-bottom: -30px;
+    margin-top: 390px;
+    flex: 1;  background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    padding: 60px 30px; color: black; 
+    border-radius: 10px;
+    margin-left: -30px;
+  }
+  
+}
+
+@media (max-width:480px){
+  #tutorialVideo {
+    border: 5px solid #F58220;
+    border-radius: 10px;
+    margin: 80px auto 0 auto;
+    display: block;
+    width: 90%;
+    height: 30vh;
+    object-fit: cover;
+    overflow: hidden;
+    background: black; /* opcional, para cobrir barras pretas */
+  }
+  .logo2 {
+    margin-top: -80px;
+    
+    max-width: 970px;
+    margin-left: -630px;
+   
+    height: -70px; 
+    object-fit: cover;
+          
+  }
+
+  .contatos{
+    margin-left: 0px;
+    margin-bottom: -50px;
+   }
+
+   .horario1  {
+    margin-top: -30px;
+    margin-right: -10px;
+    margin-left: 111px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  
+  }
+  .horario {
+    margin-top: 0px;
+    margin-right: -10px;
+    margin-left: 111px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  
+  }
+  
+}
+
+@media(max-width:390px){
+
+    
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  .logo2 {
+    margin-top: -80px;
+    
+    max-width: 370px;
+    margin-left: -720px;
+   
+    height: -30px; 
+    object-fit: cover;
+          
+  }
+
+
+  .logo1 {
+ margin-top: -50px;
+    margin-left: 116px;
+    height: 30px;
+  }
+  
+  
+    
+  #buscar-escola{
+ margin-top: -250px;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    padding-bottom: -20px;
+    text-align: center;
+  }
+  .navbar>ul {
+    margin-left: -230px;
+   margin-right: 50px;
+    margin-top: 30px;
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+}

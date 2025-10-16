@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="finalizar.css"> 
+</head>
+<body>
+
+    <header>
+        <div>
+            <img class="logo" src="Nova logo rio nilo.png" alt="Livraria e Distribuidora Rio Nilo">
+        </div>
+        <div class="checkout-area">
+            <i class="fas fa-lock lock-icon"></i>
+            <span>Checkout</span>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="billing-details">
+            <h2>Detalhes de Cobrança</h2>
+            <form id="billingForm">
+                <div class="form-group col-2">
+                    <div>
+                        <label for="firstName">Nome</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div>
+                        <label for="lastName" class="textoform">Sobrenome</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                    <div>
+                        <label for="fullNameChild">Nome Completo da Criança</label>
+                        <input type="text" id="fullNameChild" required> 
+                    </div>
+                </div>
+                <div class="form-group col-2">
+                    <div>
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" placeholder="000.000.000-00" required>
+                    </div>
+                    <div>
+                        <label for="dob" class="textoform">Data de nascimento</label>
+                        <input type="date" id="dob" required>
+                    </div>
+                </div>
+                <div class="form-group col-2">
+                    <label for="email">Endereço de email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Celular</label>
+                    <input type="tel" id="phone" placeholder="(XX) XXXXX-XXXX" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">País</label>
+                    <input type="text" id="country" value="Brasil" readonly>
+                </div>
+                <div class="form-group col-2">
+                    <div>
+                        <label for="zipCode">CEP</label>
+                        <input type="text" id="zipCode" placeholder="XXXXX-XXX" required>
+                    </div>
+                    <div>
+                        <label for="address" class="textoform">Endereço</label>
+                        <input type="text" id="address" required>
+                    </div>
+                </div>
+                <div class="form-group col-2">
+                    <div>
+                        <label for="neighborhood">Bairro</label>
+                        <input type="text" id="neighborhood" required>
+                    </div>
+                    <div>
+                        <label for="number" class="textoform">Número</label>
+                        <input type="text" id="number" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="complement">Complemento</label>
+                    <input type="text" id="complement">
+                </div>
+            </form>
+
+            <div class="payment-methods">
+                <h3>Método de Pagamento</h3>
+                <div class="payment-options">
+                    <label>
+                        <input type="radio" name="paymentMethod" value="CreditCard" checked> <h3>Cartão de Crédito</h3>
+                    </label>
+                    <label>
+                        <input type="radio" name="paymentMethod" value="DebitCard"> <h3 >Cartão de Débito</h3>
+                    </label>
+                    <label>
+                        <input type="radio" name="paymentMethod" value="Pix"> <h3>Pix</h3>
+                    </label>
+                    <label>
+                        <input type="radio" name="paymentMethod" value="Boleto"> <h3>Boleto</h3> </label>
+                </div>
+
+                <div id="creditCardDetails" class="payment-details">
+                    <h4>Detalhes do Cartão de Crédito</h4>
+                    <div class="form-group">
+                        <label for="cardNumber">Número do Cartão:</label>
+                        <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="holder">Nome no Cartão:</label>
+                        <input type="text" id="holder" placeholder="Como no cartão">
+                    </div>
+                    <div class="form-group col-2">
+                        <div>
+                            <label for="expirationDate" class="texto5">Validade (MM/AAAA):</label>
+                            <input type="text" id="expirationDate" placeholder="MM/AAAA">
+                        </div>
+                        <div>
+                            <label for="securityCode" class="texto4">CVV:</label>
+                            <input type="text" id="securityCode" placeholder="XXX">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="installments">Parcelas:</label>
+                        <select id="installments">
+                            </select>
+                    </div>
+                </div>
+
+                <div id="debitCardDetails" class="payment-details">
+                    <h4>Detalhes do Cartão de Débito</h4>
+                    <p class="warning-message">Para pagamentos com Cartão de Débito, você será redirecionado para o site do seu banco para autenticação (3D Secure) após finalizar o pedido.</p>
+                    <div class="form-group">
+                        <label for="debitCardNumber">Número do Cartão:</label>
+                        <input type="text" id="debitCardNumber" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="debitHolder">Nome no Cartão:</label>
+                        <input type="text" id="debitHolder" placeholder="Como no cartão">
+                    </div>
+                    <div class="form-group col-2">
+                        <div>
+                            <label for="debitExpirationDate">Validade (MM/AAAA):</label>
+                            <input type="text" id="debitExpirationDate" placeholder="MM/AAAA">
+                        </div>
+                        <div>
+                            <label for="debitSecurityCode">CVV:</label>
+                            <input type="text" id="debitSecurityCode" placeholder="XXX">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pixDetails" class="payment-details hidden">
+                    <h4>Pagar com Pix</h4>
+                    <p>Ao finalizar o pedido, um QR Code será gerado para você pagar com o aplicativo do seu banco.</p>
+                    <div id="pix-qr-area" style="text-align: center; margin-top: 20px;" class="hidden">
+                        <img id="pix-qr-image" src="" alt="QR Code Pix" style="max-width: 200px; height: auto;">
+                        <p>Ou copie o código:</p>
+                        <textarea id="pix-qr-string" readonly style="width: 100%; height: 80px; resize: vertical;"></textarea>
+                        <button id="copyPixCodeBtn" style="margin-top: 10px; padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copiar Código Pix</button>
+                    </div>
+                </div>
+
+                <div id="boletoDetails" class="payment-details hidden">
+                    <h4>Pagar com Boleto</h4>
+                    <p>Ao finalizar o pedido, um boleto será gerado e poderá ser pago em qualquer banco ou aplicativo bancário.</p>
+                    <div id="boleto-info-area" style="text-align: center; margin-top: 20px;" class="hidden">
+                        <p><a id="boleto-link" href="#" target="_blank" style="color: #007bff; text-decoration: underline;">Visualizar Boleto</a></p>
+                        <p>Ou copie a linha digitável:</p>
+                        <textarea id="boleto-digitable-line" readonly style="width: 100%; height: 40px; resize: vertical;"></textarea>
+                        <button id="copyBoletoLineBtn" style="margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Copiar Linha Digitável</button>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+
+        <div class="order-summary">
+            <h2>Seu Pedido</h2>
+            <div id="checkout-items-summary">
+            </div>
+            <div class="total-amount" id="checkout-total-summary">
+            </div>
+            <button class="finalizar-button" id="finalizeOrderBtn">Finalizar pedido</button>
+            <button id="cancelar_button"><a href="loja.html"> Cancelar comprar</a></button>
+            <div id="responseMessage"></div>
+        </div>
+    </div>
+
+    <div id="overlay" class="hidden"></div> 
+    <div id="success-modal" class="hidden">
+        <div class="modal-content">
+            <span class="checkmark">&#10004;</span>
+            <h2>Pagamento Confirmado!</h2>
+            <p>Seu pedido foi processado com sucesso.</p>
+            <button id="viewOrderDetailsBtn">Ver Detalhes do Pedido</button>
+        </div>
+    </div>
+
+    <div id="order-summary-screen" class="hidden">
+        <div class="summary-content">
+            <h2>Seu Pedido #<span id="order-id-display"></span></h2>
+            <p>Agradecemos por sua compra!</p>
+            <p>A nota fiscal chegará em alguns minutos no seu WhatsApp.</p>
+
+            <h3>Itens Comprados:</h3>
+            <ul id="purchased-items-list">
+                </ul>
+
+            <h3>Total: <span id="final-order-total"></span></h3>
+
+            <button id="backToStoreBtn">Voltar para a Loja</button>
+        </div>
+    </div>
+
+    <script>
+        const cartKey = 'meuCarrinho';
+        let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        let currentTotal = 0; // Variável para armazenar o total do carrinho
+
+        // Referências aos elementos do DOM
+        const checkoutItemsSummary = document.getElementById('checkout-items-summary');
+        const checkoutTotalSummary = document.getElementById('checkout-total-summary');
+        const finalizeOrderBtn = document.getElementById('finalizeOrderBtn');
+        const responseMessageDiv = document.getElementById('responseMessage'); // Ainda manter para mensagens de erro
+        const installmentsSelect = document.getElementById('installments');
+
+        // --- REFERÊNCIAS PARA ELEMENTOS DE PAGAMENTO ---
+        const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+        const creditCardDetailsDiv = document.getElementById('creditCardDetails');
+        const debitCardDetailsDiv = document.getElementById('debitCardDetails');
+        const pixDetailsDiv = document.getElementById('pixDetails');
+        const boletoDetailsDiv = document.getElementById('boletoDetails');
+
+        // Referências para campos de débito
+        const debitCardNumberInput = document.getElementById('debitCardNumber');
+        const debitHolderInput = document.getElementById('debitHolder');
+        const debitExpirationDateInput = document.getElementById('debitExpirationDate');
+        const debitSecurityCodeInput = document.getElementById('debitSecurityCode');
+
+        // Referências para elementos de Pix
+        const pixQrArea = document.getElementById('pix-qr-area');
+        const pixQrImage = document.getElementById('pix-qr-image');
+        const pixQrString = document.getElementById('pix-qr-string');
+        const copyPixCodeBtn = document.getElementById('copyPixCodeBtn');
+
+        // Referências para elementos de Boleto
+        const boletoInfoArea = document.getElementById('boleto-info-area');
+        const boletoLink = document.getElementById('boleto-link');
+        const boletoDigitableLine = document.getElementById('boleto-digitable-line');
+        const copyBoletoLineBtn = document.getElementById('copyBoletoLineBtn');
+
+        // Novas referências para os elementos de animação/sucesso
+        const overlay = document.getElementById('overlay');
+        const successModal = document.getElementById('success-modal');
+        const viewOrderDetailsBtn = document.getElementById('viewOrderDetailsBtn');
+        const orderSummaryScreen = document.getElementById('order-summary-screen');
+        const orderIdDisplay = document.getElementById('order-id-display');
+        const purchasedItemsList = document.getElementById('purchased-items-list');
+        const finalOrderTotal = document.getElementById('final-order-total');
+        const backToStoreBtn = document.getElementById('backToStoreBtn');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCartSummary();
+            updateInstallmentsOptions();
+            finalizeOrderBtn.addEventListener('click', handleFinalizeOrder);
+
+            viewOrderDetailsBtn.addEventListener('click', showOrderSummary);
+            backToStoreBtn.addEventListener('click', () => {
+                window.location.href = 'loja.html';
+            });
+
+            paymentMethodRadios.forEach(radio => {
+                radio.addEventListener('change', handlePaymentMethodChange);
+            });
+            handlePaymentMethodChange(); 
+            
+            copyPixCodeBtn.addEventListener('click', () => {
+                pixQrString.select();
+                document.execCommand('copy');
+                alert('Código Pix copiado para a área de transferência!');
+            });
+
+            copyBoletoLineBtn.addEventListener('click', () => {
+                boletoDigitableLine.select();
+                document.execCommand('copy');
+                alert('Linha Digitável copiada para a área de transferência!');
+            });
+        });
+
+        function renderCartSummary() {
+            checkoutItemsSummary.innerHTML = '';
+            currentTotal = 0;
+
+            if (cart.length === 0) {
+                checkoutItemsSummary.innerHTML = '<p>Seu carrinho está vazio.</p>';
+                checkoutTotalSummary.textContent = 'Total: R$ 0,00';
+                finalizeOrderBtn.disabled = true;
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'order-item';
+
+                const priceNumber = parseFloat(
+                    item.price.replace('R$', '').replace('.', '').replace(',', '.').trim()
+                );
+                currentTotal += isNaN(priceNumber) ? 0 : priceNumber;
+
+                itemDiv.innerHTML = `
+                    <img src="${item.img}" alt="${item.name}" />
+                    <div class="order-item-info">
+                        <h3>${item.name}</h3>
+                        <p>${item.price}</p>
+                    </div>
+                    <button class="remove-btn" data-index="${index}">Remover</button>
+                `;
+                checkoutItemsSummary.appendChild(itemDiv);
+            });
+
+            checkoutTotalSummary.textContent = `Total: R$ ${currentTotal.toFixed(2).replace('.', ',')}`;
+
+            document.querySelectorAll('.order-item .remove-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const indexToRemove = parseInt(e.target.getAttribute('data-index'));
+                    cart.splice(indexToRemove, 1);
+                    localStorage.setItem(cartKey, JSON.stringify(cart));
+                    renderCartSummary();
+                    updateInstallmentsOptions();
+                });
+            });
+
+            updateInstallmentsOptions();
+        }
+
+        function updateInstallmentsOptions() {
+            installmentsSelect.innerHTML = '';
+            const maxInstallments = 12;
+
+            for (let i = 1; i <= maxInstallments; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                if (i === 1) {
+                    option.textContent = `1x (à vista) de R$ ${currentTotal.toFixed(2).replace('.', ',')}`;
+                } else {
+                    const installmentValue = currentTotal / i;
+                    if (installmentValue <= 0) {
+                        option.textContent = `${i}x de R$ 0,00`;
+                    } else {
+                        option.textContent = `${i}x de R$ ${installmentValue.toFixed(2).replace('.', ',')}`;
+                    }
+                }
+                installmentsSelect.appendChild(option);
+            }
+        }
+
+        function handlePaymentMethodChange() {
+            const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+
+            creditCardDetailsDiv.classList.add('hidden');
+            debitCardDetailsDiv.classList.add('hidden');
+            pixDetailsDiv.classList.add('hidden');
+            boletoDetailsDiv.classList.add('hidden');
+            pixQrArea.classList.add('hidden');
+            boletoInfoArea.classList.add('hidden');
+
+            document.querySelectorAll('.payment-details input, .payment-details select').forEach(input => {
+                input.removeAttribute('required');
+            });
+
+            if (selectedMethod === 'CreditCard') {
+                creditCardDetailsDiv.classList.remove('hidden');
+                document.getElementById('cardNumber').setAttribute('required', 'true');
+                document.getElementById('holder').setAttribute('required', 'true');
+                document.getElementById('expirationDate').setAttribute('required', 'true');
+                document.getElementById('securityCode').setAttribute('required', 'true');
+                document.getElementById('installments').setAttribute('required', 'true');
+            } else if (selectedMethod === 'DebitCard') {
+                debitCardDetailsDiv.classList.remove('hidden');
+                debitCardNumberInput.setAttribute('required', 'true');
+                debitHolderInput.setAttribute('required', 'true');
+                debitExpirationDateInput.setAttribute('required', 'true');
+                debitSecurityCodeInput.setAttribute('required', 'true');
+            } else if (selectedMethod === 'Pix') {
+                pixDetailsDiv.classList.remove('hidden');
+            } else if (selectedMethod === 'Boleto') { 
+                boletoDetailsDiv.classList.remove('hidden');
+            }
+        }
+
+
+        async function handleFinalizeOrder(event) {
+            event.preventDefault();
+
+            responseMessageDiv.style.display = 'none';
+            responseMessageDiv.classList.remove('success', 'error');
+
+            const billingData = {
+                email: document.getElementById('email').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                fullNameChild: document.getElementById('fullNameChild').value, 
+                cpf: document.getElementById('cpf').value,
+                dob: document.getElementById('dob').value,
+                phone: document.getElementById('phone').value,
+                country: document.getElementById('country').value,
+                zipCode: document.getElementById('zipCode').value,
+                address: document.getElementById('address').value,
+                neighborhood: document.getElementById('neighborhood').value,
+                number: document.getElementById('number').value,
+                complement: document.getElementById('complement').value,
+                // --- AQUI O NOME DA ESCOLA É ADICIONADO AO billingData ---
+                school: localStorage.getItem('currentSchoolName') || 'Escola Não Informada' 
+            };
+
+            for (const key in billingData) {
+                if (key !== 'complement' && key !== 'fullNameChild' && !billingData[key]) {
+                    responseMessageDiv.classList.add('error');
+                    responseMessageDiv.style.display = 'block';
+                    responseMessageDiv.innerHTML = `Por favor, preencha todos os campos de ${key.replace(/([A-Z])/g, ' $1').toLowerCase()}.`;
+                    return;
+                }
+            }
+
+            if (!validarCPF(billingData.cpf)) {
+                responseMessageDiv.classList.add('error');
+                responseMessageDiv.style.display = 'block';
+                responseMessageDiv.innerHTML = 'CPF inválido. Por favor, preencha corretamente.';
+                return;
+            }
+
+            const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            let paymentDetails = {};
+            let endpoint = '';
+
+            if (selectedPaymentMethod === 'CreditCard') {
+                endpoint = 'processar-pagamento';
+                const cardNumber = document.getElementById('cardNumber').value.replace(/ /g, "");
+                const holder = document.getElementById('holder').value;
+                const expirationDate = document.getElementById('expirationDate').value;
+                const securityCode = document.getElementById('securityCode').value;
+                const installments = document.getElementById('installments').value;
+
+                if (!cardNumber || !holder || !expirationDate || !securityCode || !installments) {
+                    responseMessageDiv.classList.add('error');
+                    responseMessageDiv.style.display = 'block';
+                    responseMessageDiv.innerHTML = 'Por favor, preencha todos os dados do cartão de crédito.';
+                    return;
+                }
+
+                paymentDetails = {
+                    cardNumber: cardNumber,
+                    holder: holder,
+                    expirationDate: expirationDate.replace('/', ''), 
+                    securityCode: securityCode,
+                    installments: parseInt(installments),
+                    amount: currentTotal.toFixed(2)
+                };
+            } else if (selectedPaymentMethod === 'DebitCard') {
+                endpoint = 'processar-debito';
+                const debitCardNumber = debitCardNumberInput.value.replace(/ /g, "");
+                const debitHolder = debitHolderInput.value;
+                const debitExpirationDate = debitExpirationDateInput.value;
+                const debitSecurityCode = debitSecurityCodeInput.value;
+
+                if (!debitCardNumber || !debitHolder || !debitExpirationDate || !debitSecurityCode) {
+                    responseMessageDiv.classList.add('error');
+                    responseMessageDiv.style.display = 'block';
+                    responseMessageDiv.innerHTML = 'Por favor, preencha todos os dados do cartão de débito.';
+                    return;
+                }
+
+                paymentDetails = {
+                    cardNumber: debitCardNumber,
+                    holder: debitHolder,
+                    expirationDate: debitExpirationDate.replace('/', ''),
+                    securityCode: debitSecurityCode,
+                    amount: currentTotal.toFixed(2)
+                };
+            } else if (selectedPaymentMethod === 'Pix') {
+                endpoint = 'processar-pix';
+                paymentDetails = {
+                    amount: currentTotal.toFixed(2)
+                };
+            } else if (selectedPaymentMethod === 'Boleto') { 
+                endpoint = 'processar-boleto';
+                paymentDetails = {
+                    amount: currentTotal.toFixed(2)
+                };
+            } else {
+                responseMessageDiv.classList.add('error');
+                responseMessageDiv.style.display = 'block';
+                responseMessageDiv.innerHTML = 'Por favor, selecione um método de pagamento.';
+                return;
+            }
+
+            try {
+                const fullPayload = {
+                    billingData: billingData,
+                    paymentMethod: selectedPaymentMethod,
+                    paymentDetails: paymentDetails,
+                    cartItems: cart
+                };
+
+                console.log('Payload enviado para o backend:', fullPayload);
+                console.log('Stringified payload:', JSON.stringify(fullPayload));
+
+                const BASE_URL = 'https://livraria-rio-nilo-backend.onrender.com'; 
+                const response = await fetch(`${BASE_URL}/${endpoint}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify(fullPayload)
+                });
+                let result;
+                try {
+                    result = await response.json();
+                } catch (jsonError) {
+                    console.error('Erro ao parsear JSON da resposta do backend:', jsonError);
+                    responseMessageDiv.style.display = 'block';
+                    responseMessageDiv.classList.add('error');
+                    responseMessageDiv.innerHTML = `Erro inesperado do servidor. Resposta não JSON. Status: ${response.status}. Detalhes: ${await response.text()}`;
+                    return;
+                }
+
+                responseMessageDiv.style.display = 'block'; 
+
+                if (response.ok) { 
+                    if (result.status === "success") {
+                        responseMessageDiv.style.display = 'none';
+
+                        if (selectedPaymentMethod === 'DebitCard' && result.redirect_url) {
+                            alert('Redirecionando para autenticação 3D Secure do seu banco...');
+                            window.location.href = result.redirect_url;
+                            return; 
+                        }
+                        else if (selectedPaymentMethod === 'Pix' && result.qr_code_string) {
+                            pixDetailsDiv.classList.remove('hidden'); 
+                            pixQrArea.classList.remove('hidden'); 
+                            pixQrImage.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(result.qr_code_string)}`; 
+                            pixQrString.value = result.qr_code_string;
+
+                            document.querySelector('.main-content').style.display = 'none'; 
+                            responseMessageDiv.style.display = 'none'; 
+                        }
+                        else if (selectedPaymentMethod === 'Boleto' && result.boleto_url) {
+                            boletoDetailsDiv.classList.remove('hidden'); 
+                            boletoInfoArea.classList.remove('hidden'); 
+                            boletoLink.href = result.boleto_url;
+                            boletoDigitableLine.value = result.digitable_line;
+
+                            document.querySelector('.main-content').style.display = 'none';
+                            responseMessageDiv.style.display = 'none';
+                        }
+                        else {
+                            overlay.classList.remove('hidden');
+                            successModal.classList.remove('hidden');
+
+                            sessionStorage.setItem('lastOrderCart', JSON.stringify(cart));
+                            sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+                            sessionStorage.setItem('lastOrderId', result.cielo_response.MerchantOrderId || result.cielo_response.Payment.PaymentId || 'N/A'); 
+                            
+                            localStorage.removeItem(cartKey);
+                            renderCartSummary(); 
+                        }
+
+                    } else {
+                        responseMessageDiv.classList.add('error');
+                        responseMessageDiv.innerHTML = `Erro no Pagamento: ❌<br><br>Mensagem: ${result.message || 'Erro desconhecido'}<br><br>Detalhes da Cielo:<pre>${JSON.stringify(result.cielo_error, null, 2)}</pre>`;
+                    }
+                } else {
+                    responseMessageDiv.classList.add('error');
+                    responseMessageDiv.innerHTML = `Erro na Comunicação com o Back-end: ❌<br><br>Mensagem: ${result.message || 'Erro inesperado'}`;
+                    if (result.cielo_error) {
+                        responseMessageDiv.innerHTML += `<br><br>Detalhes da Cielo:<pre>${JSON.stringify(result.cielo_error, null, 2)}</pre>`;
+                    }
+                }
+
+            } catch (error) {
+                responseMessageDiv.style.display = 'block';
+                responseMessageDiv.classList.add('error');
+                responseMessageDiv.innerHTML = `Erro de Conexão: ❌<br>Não foi possível conectar ao back-end. Certifique-se de que ele está rodando. Detalhes: ${error.message}`;
+                console.error('Erro ao enviar requisição (catch geral):', error);
+            }
+        }
+
+        function showOrderSummary() {
+            overlay.classList.add('hidden');
+            successModal.classList.add('hidden');
+
+            document.querySelector('.main-content').style.display = 'none';
+            responseMessageDiv.style.display = 'none';
+            pixQrArea.classList.add('hidden'); 
+            boletoInfoArea.classList.add('hidden');
+
+            orderSummaryScreen.classList.remove('hidden');
+
+            const lastOrderCart = JSON.parse(sessionStorage.getItem('lastOrderCart')) || [];
+            const lastOrderTotal = sessionStorage.getItem('lastOrderTotal') || '0.00';
+            const lastOrderId = sessionStorage.getItem('lastOrderId') || 'N/A';
+
+            orderIdDisplay.textContent = lastOrderId;
+            finalOrderTotal.textContent = `R$ ${lastOrderTotal.replace('.', ',')}`;
+
+            purchasedItemsList.innerHTML = '';
+            if (lastOrderCart.length === 0) {
+                purchasedItemsList.innerHTML = '<li>Nenhum item encontrado no pedido.</li>';
+            } else {
+                lastOrderCart.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <img src="${item.img}" alt="${item.name}">
+                        <div>
+                            <h4>${item.name}</h4>
+                            <p>${item.price}</p>
+                        </div>
+                    `;
+                    purchasedItemsList.appendChild(listItem);
+                });
+            }
+        }
+
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/[^\d]+/g, '');
+            if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+
+            let soma = 0;
+            for (let i = 0; i < 9; i++) soma += parseInt(cpf.charAt(i)) * (10 - i);
+            let resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) resto = 0;
+            if (resto !== parseInt(cpf.charAt(9))) return false;
+
+            soma = 0;
+            for (let i = 0; i < 10; i++) soma += parseInt(cpf.charAt(i)) * (11 - i);
+            resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) resto = 0;
+            if (resto !== parseInt(cpf.charAt(10))) return false;
+
+            return true;
+        }
+    </script>
+</body>
+</html>
