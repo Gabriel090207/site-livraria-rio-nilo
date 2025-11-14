@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja de Livros</title>
-  <meta name="description" content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
+  <meta name="description"
+    content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
   <link rel="canonical" href="https://www.livrariarionilo.com.br/loja.html">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
@@ -41,7 +42,7 @@
       <i class="fas fa-user" id="userIcon"></i>
       <div id="profileInfo" class="profile-dropdown">
         <p><strong>Usuário:</strong> João Silva</p>
-        <p><strong>Escola:</strong> Escola Santos Dumont</p> 
+        <p><strong>Escola:</strong> Escola Santos Dumont</p>
       </div>
       <div id="cart-container" style="position: relative;">
         <i class="fas fa-shopping-cart" id="cart-icon" style="cursor: pointer; position: relative;"></i>
@@ -57,7 +58,8 @@
       <div class="school-card">
         <h2>Creche</h2>
         <img src="unesp.png" alt="Logo da Escola" class="school-logo">
-        <h3 class="school-name" id="currentSchoolName">Escola Viva Criança</h3> </div>
+        <h3 class="school-name" id="currentSchoolName">Escola Viva Criança</h3>
+      </div>
       <nav class="texto">
         <h2>Filtrar</h2>
       </nav>
@@ -67,15 +69,13 @@
         <option value="">Todos</option>
         <option value="aventura">Infantil</option>
         <option value="terror">Fundamental Anos Iniciais</option>
-        <option value="biografia">Fundamental Anos Finais</option>
       </select>
 
       <label for="tipo">Série:</label>
       <select id="idade" class="filter">
         <option value="">Todos</option>
-        <option value="infantil">1 Ano - 5 Anos</option>
-        <option value="juvenil">1º Ano - 4º Ano</option>
-        <option value="adulto">5º Ano - 9º Ano</option>
+        <option value="infantil">G1 - G5</option>
+        <option value="juvenil">1º Ano - 5º Ano</option>
       </select>
 
     </nav>
@@ -89,46 +89,65 @@
 
       <div class="cards" id="book-cards-container">
         <div class="card">
-          <img src="livro1.png" alt="As Aventuras de Mike">
-          <h3>As Aventuras de Mike</h3>
-          <p>Editora Outro Planeta</p>
-          <p class="price">R$ 0,01</p>
+          <img src="Capas Livros Creche/INF1 (1).png" alt="Capa do livro educação infatil G1">
+          <h3>Educação infantil G1</h3>
+          <p class="price">R$500,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <div class="card">
-          <img src="livro3.png" alt="Five Nights at Freddy's">
-          <h3>Five Nights at Freddy's</h3>
-          <p>Intrínseca</p>
-          <p class="price">R$ 0,02</p>
+          <img src="Capas Livros Creche/INF2 (1).png" alt="Capa do livro educação infatil G2">
+          <h3>Educação infantil G2</h3>
+          <p class="price">R$575,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <div class="card">
-          <img src="livro1.png" alt="As Aventuras de Mike">
-          <h3>As Aventuras de Mike</h3>
-          <p>Editora Outro Planeta</p>
-          <p class="price">R$ 42,27</p>
-          <button class="add-to-cart">Comprar</button><br>
-        </div>
-        <div class="card">
-          <img src="livro2.png" alt="Olhos Prateados">
-          <h3>Olhos Prateados</h3>
-          <p>Intrínseca</p>
-          <p class="price">R$ 47,92</p>
+          <img src="Capas Livros Creche/INF3.png" alt="Capa do livro educação infatil G3">
+          <h3>Educação infantil G3</h3>
+          <p class="price">R$650,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <div class="card">
-          <img src="livro1.png" alt="As Aventuras de Mike">
-          <h3>As Aventuras de Mike</h3>
-          <p>Editora Outro Planeta</p>
-          <p class="price">R$ 42,27</p>
-          <button class="add-to-cart">Comprar</button><br>
+          <img src="Capas Livros Creche/INF4.png" alt="Capa do livro educação infatil G4">
+          <h3>Educação infantil G4</h3>
+          <p class="price">R$832,00</p>
+          <button class="add-to-cart">Comprar</button>
         </div>
         <div class="card">
-          <img src="livro1.png" alt="As Aventuras de Mike">
-          <h3>As Aventuras de Mike</h3>
-          <p>Editora Outro Planeta</p>
-          <p class="price">R$ 42,27</p>
-          <button class="add-to-cart">Comprar</button><br>
+          <img src="Capas Livros Creche/INF5.png" alt="Capa do livro educação infatil G5">
+          <h3>Educação infantil G5</h3>
+          <p class="price">R$0,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <!-- Anos iniciais -->
+        <div class="card">
+          <img src="Capas Livros Creche/Fundamental 1 01AM (1).png" alt="Capa do livro Fundamental 1">
+          <h3>Anos Iniciais 1ºAno</h3>
+          <p class="price">R$955,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/Fundamental 1 02AM (1).png" alt="Capa do livro Fundamental 2">
+          <h3>Anos Iniciais 2ºAno</h3>
+          <p class="price">R$955,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/Fundamental 1 03AM (1).png" alt="Capa do livro Fundamental 3">
+          <h3>Anos Iniciais 3ºAno</h3>
+          <p class="price">R$0,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/Fundamental 1 04AM (1).png" alt="Capa do livro Fundamental 4">
+          <h3>Anos Iniciais 4ºAno</h3>
+          <p class="price">R$0,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/Fundamental 1 05AM (1).png" alt="Capa do livro Fundamental 5">
+          <h3>Anos Iniciais 5ºAno</h3>
+          <p class="price">R$0,00</p>
+          <button class="add-to-cart">Comprar</button>
         </div>
       </div>
 
@@ -141,23 +160,23 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const schoolNameElement = document.getElementById('currentSchoolName');
-        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+    document.addEventListener('DOMContentLoaded', function () {
+      const schoolNameElement = document.getElementById('currentSchoolName');
+      let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
 
-        if (schoolNameElement && schoolNameElement.textContent) {
-            schoolName = schoolNameElement.textContent.trim();
-        } 
-        
-        // Salva o nome da escola no localStorage
-        localStorage.setItem('currentSchoolName', schoolName);
-        console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+      if (schoolNameElement && schoolNameElement.textContent) {
+        schoolName = schoolNameElement.textContent.trim();
+      }
 
-        // Opcional: Atualizar a exibição da escola no dropdown do perfil
-        const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
-        if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
-            profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
-        }
+      // Salva o nome da escola no localStorage
+      localStorage.setItem('currentSchoolName', schoolName);
+      console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+
+      // Opcional: Atualizar a exibição da escola no dropdown do perfil
+      const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
+      if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
+        profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
+      }
     });
   </script>
 
