@@ -221,6 +221,7 @@
         const cartKey = 'meuCarrinho';
         let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
         let currentTotal = 0; // Variável para armazenar o total do carrinho
+        const CRECHE_IDENTIFIER = 'escolavivacrianca';
 
         // Referências aos elementos do DOM
         const checkoutItemsSummary = document.getElementById('checkout-items-summary');
@@ -264,9 +265,70 @@
         const finalOrderTotal = document.getElementById('final-order-total');
         const backToStoreBtn = document.getElementById('backToStoreBtn');
 
+        function normalizeText(value = '') {
+            if (!value) return '';
+            let normalized = value.toLowerCase();
+            if (normalized.normalize) {
+                normalized = normalized.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            }
+            return normalized.replace(/\s+/g, '');
+        }
+
+        function isCrecheCheckout() {
+            return normalizeText(localStorage.getItem('currentSchoolName') || '') === CRECHE_IDENTIFIER;
+        }
+
+        function getSelectedPaymentMethodValue() {
+            const checked = document.querySelector('input[name="paymentMethod"]:checked');
+            return checked ? checked.value : 'CreditCard';
+        }
+
+        function parsePrice(value) {
+            if (typeof value === 'number') return value;
+            if (!value) return NaN;
+            const cleaned = value.toString()
+                .replace(/[R$\s]/gi, '')
+                .replace(/\./g, '')
+                .replace(',', '.');
+            return parseFloat(cleaned);
+        }
+
+        function formatPrice(value) {
+            const numericValue = typeof value === 'number' ? value : parsePrice(value);
+            if (Number.isNaN(numericValue)) return 'R$ 0,00';
+            return numericValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function getEffectivePriceInfo(item, paymentMethod = getSelectedPaymentMethodValue()) {
+            const inCrecheContext = isCrecheCheckout();
+            const hasPixDiscount = Boolean(item && item.pixDiscountApplied && item.discountedPrice);
+            let priceSource = item?.price || 'R$ 0,00';
+
+            if (inCrecheContext && hasPixDiscount) {
+                if (paymentMethod === 'Pix') {
+                    priceSource = item.discountedPrice;
+                } else {
+                    priceSource = item.originalPrice || item.price;
+                }
+            } else if (!item?.price && item?.originalPrice) {
+                priceSource = item.originalPrice;
+            }
+
+            const priceNumber = parsePrice(priceSource);
+            return {
+                priceNumber: Number.isNaN(priceNumber) ? 0 : priceNumber,
+                priceLabel: formatPrice(priceNumber)
+            };
+        }
+
+        function getCartWithEffectivePrices(paymentMethod = getSelectedPaymentMethodValue()) {
+            return cart.map(item => {
+                const effectiveInfo = getEffectivePriceInfo(item, paymentMethod);
+                return { ...item, price: effectiveInfo.priceLabel };
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            renderCartSummary();
-            updateInstallmentsOptions();
             finalizeOrderBtn.addEventListener('click', handleFinalizeOrder);
 
             viewOrderDetailsBtn.addEventListener('click', showOrderSummary);
@@ -307,23 +369,21 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'order-item';
 
-                const priceNumber = parseFloat(
-                    item.price.replace('R$', '').replace('.', '').replace(',', '.').trim()
-                );
-                currentTotal += isNaN(priceNumber) ? 0 : priceNumber;
+                const effectivePrice = getEffectivePriceInfo(item);
+                currentTotal += effectivePrice.priceNumber;
 
                 itemDiv.innerHTML = `
                     <img src="${item.img}" alt="${item.name}" />
                     <div class="order-item-info">
                         <h3>${item.name}</h3>
-                        <p>${item.price}</p>
+                        <p>${effectivePrice.priceLabel}</p>
                     </div>
                     <button class="remove-btn" data-index="${index}">Remover</button>
                 `;
                 checkoutItemsSummary.appendChild(itemDiv);
             });
 
-            checkoutTotalSummary.textContent = `Total: R$ ${currentTotal.toFixed(2).replace('.', ',')}`;
+            checkoutTotalSummary.textContent = `Total: ${formatPrice(currentTotal)}`;
 
             document.querySelectorAll('.order-item .remove-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -346,13 +406,13 @@
                 const option = document.createElement('option');
                 option.value = i;
                 if (i === 1) {
-                    option.textContent = `1x (à vista) de R$ ${currentTotal.toFixed(2).replace('.', ',')}`;
+                    option.textContent = `1x (à vista) de ${formatPrice(currentTotal)}`;
                 } else {
                     const installmentValue = currentTotal / i;
                     if (installmentValue <= 0) {
                         option.textContent = `${i}x de R$ 0,00`;
                     } else {
-                        option.textContent = `${i}x de R$ ${installmentValue.toFixed(2).replace('.', ',')}`;
+                        option.textContent = `${i}x de ${formatPrice(installmentValue)}`;
                     }
                 }
                 installmentsSelect.appendChild(option);
@@ -391,11 +451,14 @@
             } else if (selectedMethod === 'Boleto') { 
                 boletoDetailsDiv.classList.remove('hidden');
             }
+
+            renderCartSummary();
         }
 
 
         async function handleFinalizeOrder(event) {
             event.preventDefault();
+            renderCartSummary();
 
             responseMessageDiv.style.display = 'none';
             responseMessageDiv.classList.remove('success', 'error');
@@ -435,6 +498,7 @@
             }
 
             const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const adjustedCart = getCartWithEffectivePrices(selectedPaymentMethod);
             let paymentDetails = {};
             let endpoint = '';
 
@@ -504,7 +568,7 @@
                     billingData: billingData,
                     paymentMethod: selectedPaymentMethod,
                     paymentDetails: paymentDetails,
-                    cartItems: cart
+                    cartItems: adjustedCart
                 };
 
                 console.log('Payload enviado para o backend:', fullPayload);
@@ -562,7 +626,7 @@
                             overlay.classList.remove('hidden');
                             successModal.classList.remove('hidden');
 
-                            sessionStorage.setItem('lastOrderCart', JSON.stringify(cart));
+                            sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
                             sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
                             sessionStorage.setItem('lastOrderId', result.cielo_response.MerchantOrderId || result.cielo_response.Payment.PaymentId || 'N/A'); 
                             
@@ -606,7 +670,7 @@
             const lastOrderId = sessionStorage.getItem('lastOrderId') || 'N/A';
 
             orderIdDisplay.textContent = lastOrderId;
-            finalOrderTotal.textContent = `R$ ${lastOrderTotal.replace('.', ',')}`;
+            finalOrderTotal.textContent = formatPrice(parseFloat(lastOrderTotal));
 
             purchasedItemsList.innerHTML = '';
             if (lastOrderCart.length === 0) {

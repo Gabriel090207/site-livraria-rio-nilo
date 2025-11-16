@@ -11,6 +11,93 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
   <link rel="stylesheet" href="loja.css">
+  <style>
+    .pix-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(380px, 90%);
+      background: #fff;
+      border: 2px solid #F58220;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      display: none;
+      z-index: 2000;
+    }
+
+    .pix-modal.show {
+      display: block;
+      animation: pixPop 0.25s ease-out forwards;
+    }
+
+    .pix-modal h4 {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+      color: #333;
+      text-align: left;
+    }
+
+    .pix-modal-difference {
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .pix-modal-difference strong {
+      color: #F58220;
+    }
+
+    .pix-modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .pix-modal-btn {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .pix-modal-yes {
+      background: #F58220;
+      color: white;
+    }
+
+    .pix-modal-no {
+      background: #fff;
+      color: #F58220;
+      border: 1px solid #F58220;
+    }
+
+    .pix-modal-yes:hover {
+      background: #f79c4a;
+    }
+
+    .pix-modal-no:hover {
+      background: #ffe8d6;
+    }
+
+    @keyframes pixPop {
+      from {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -121,13 +208,13 @@
         <!-- Anos iniciais -->
         <div class="card">
           <img src="Capas Livros Creche/Fundamental 1 01AM (1).png" alt="Capa do livro Fundamental 1">
-          <h3>Anos Iniciais 1ºAno</h3>
+          <h3>Ensino Fundamental 1ºAno</h3>
           <p class="price">R$955,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <div class="card">
           <img src="Capas Livros Creche/Fundamental 1 02AM (1).png" alt="Capa do livro Fundamental 2">
-          <h3>Anos Iniciais 2ºAno</h3>
+          <h3>Ensino Fundamental 2ºAno</h3>
           <p class="price">R$955,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
@@ -139,6 +226,14 @@
 
   <div id="cart-notification" class="cart-notification">
     Item adicionado ao carrinho!
+  </div>
+  <div id="pixModal" class="pix-modal" role="dialog" aria-labelledby="pixModalTitle">
+    <h4 id="pixModalTitle">Deseja pagar no PIX e receber desconto no pagamento?</h4>
+    <p id="pixModalDifference" class="pix-modal-difference"></p>
+    <div class="pix-modal-buttons">
+      <button type="button" id="pixModalYes" class="pix-modal-btn pix-modal-yes">Sim</button>
+      <button type="button" id="pixModalNo" class="pix-modal-btn pix-modal-no">Não</button>
+    </div>
   </div>
 
   <script>
@@ -214,9 +309,136 @@
   <script>
     const cartKey = 'meuCarrinho';
     let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    const pixModal = document.getElementById('pixModal');
+    const pixModalYes = document.getElementById('pixModalYes');
+    const pixModalNo = document.getElementById('pixModalNo');
+    const pixModalDifference = document.getElementById('pixModalDifference');
+    const pixPreferenceKey = 'preferenciaPixCreche';
+    const pixDiscountPrices = {
+      educacaoinfantilg1: 'R$475,00',
+      educacaoinfantilg2: 'R$545,00',
+      educacaoinfantilg3: 'R$617,00',
+      educacaoinfantilg4: 'R$790,00',
+      ensinofundamental1ano: 'R$907,00',
+      ensinofundamental2ano: 'R$907,00'
+    };
+    let pendingCartItem = null;
+
+    function normalizeProductName(name = '') {
+      if (!name) return '';
+      let normalized = name.toLowerCase();
+      if (normalized.normalize) {
+        normalized = normalized.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      }
+      return normalized.replace(/[^a-z0-9]/g, '');
+    }
+
+    function parseCurrency(value) {
+      if (typeof value === 'number') return value;
+      if (!value) return NaN;
+      const cleaned = value.toString()
+        .replace(/[R$\s]/gi, '')
+        .replace(/\./g, '')
+        .replace(',', '.');
+      return parseFloat(cleaned);
+    }
+
+    function formatCurrency(value) {
+      if (typeof value !== 'number' || Number.isNaN(value)) return '';
+      return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function showPixModal() {
+      if (pixModal) {
+        updatePixModalDifference();
+        pixModal.classList.add('show');
+      }
+    }
+
+    function hidePixModal(cancelPending = false) {
+      pixModal?.classList.remove('show');
+      if (cancelPending) {
+        pendingCartItem = null;
+      }
+      if (pixModalDifference) {
+        pixModalDifference.textContent = '';
+        pixModalDifference.style.display = 'none';
+      }
+    }
+
+    function updatePixModalDifference() {
+      if (!pixModalDifference) return;
+      pixModalDifference.textContent = '';
+      pixModalDifference.style.display = 'none';
+      if (!pendingCartItem) return;
+
+      const discountedPrice = pendingCartItem.discountedPrice || pixDiscountPrices[normalizeProductName(pendingCartItem.name)];
+      if (!discountedPrice) return;
+
+      const originalValue = parseCurrency(pendingCartItem.originalPrice || pendingCartItem.price);
+      const discountedValue = parseCurrency(discountedPrice);
+      if (Number.isNaN(originalValue) || Number.isNaN(discountedValue)) return;
+
+      const difference = originalValue - discountedValue;
+      if (difference <= 0) return;
+
+      pixModalDifference.innerHTML = `Pagando no PIX você economiza <strong>${formatCurrency(difference)}</strong>: de <strong>${formatCurrency(originalValue)}</strong> por <strong>${formatCurrency(discountedValue)}</strong>.`;
+      pixModalDifference.style.display = 'block';
+    }
+
+    function handlePixResponse(choice) {
+      localStorage.setItem(pixPreferenceKey, choice);
+      hidePixModal();
+      if (pendingCartItem) {
+        const discountedPrice = pendingCartItem.discountedPrice || pixDiscountPrices[normalizeProductName(pendingCartItem.name)];
+        if (choice === 'sim' && discountedPrice) {
+          pendingCartItem.price = discountedPrice;
+          pendingCartItem.pixDiscountApplied = true;
+        } else {
+          pendingCartItem.price = pendingCartItem.originalPrice || pendingCartItem.price;
+          pendingCartItem.pixDiscountApplied = false;
+        }
+        addItemToCart(pendingCartItem);
+        pendingCartItem = null;
+      }
+    }
+
+    pixModalYes?.addEventListener('click', () => handlePixResponse('sim'));
+    pixModalNo?.addEventListener('click', () => handlePixResponse('nao'));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        hidePixModal(true);
+      }
+    });
 
     function saveCart() {
       localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
+
+    function addItemToCart(item) {
+      if (!item) return;
+      if (!item.originalPrice) {
+        item.originalPrice = item.price;
+      }
+      cart.push(item);
+      updateCartUI();
+
+      const cartIcon = document.getElementById('cart-icon');
+      if (cartIcon) {
+        cartIcon.classList.add('cart-icon-animation');
+        setTimeout(() => {
+          cartIcon.classList.remove('cart-icon-animation');
+        }, 500);
+      }
+
+      const notification = document.getElementById('cart-notification');
+      if (notification) {
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
     }
 
     function updateCartUI() {
@@ -280,56 +502,49 @@
     document.querySelectorAll('.card .add-to-cart').forEach(button => {
       button.addEventListener('click', () => {
         const card = button.closest('.card');
-        const img = card.querySelector('img').src;
-        const name = card.querySelector('h3').textContent;
-        const price = card.querySelector('.price').textContent;
+        if (!card) return;
+        const img = card.querySelector('img')?.src;
+        const name = card.querySelector('h3')?.textContent;
+        const price = card.querySelector('.price')?.textContent;
 
-        cart.push({ img, name, price });
-        updateCartUI();
+        if (!img || !name || !price) return;
 
-        const cartIcon = document.getElementById('cart-icon');
-        if (cartIcon) {
-          cartIcon.classList.add('cart-icon-animation');
-          setTimeout(() => {
-            cartIcon.classList.remove('cart-icon-animation');
-          }, 500);
-        }
+        const normalizedProductName = normalizeProductName(name);
+        const discountedPrice = pixDiscountPrices[normalizedProductName] || null;
 
-        const notification = document.getElementById('cart-notification');
-        if (notification) {
-          notification.classList.add('show');
-          setTimeout(() => {
-            notification.classList.remove('show');
-          }, 3000);
-        }
+        pendingCartItem = {
+          img,
+          name,
+          price,
+          originalPrice: price,
+          discountedPrice,
+          pixDiscountApplied: false
+        };
+        showPixModal();
       });
     });
 
     const individualBtn = document.querySelector('.container1 .add-to-cart');
     if (individualBtn) {
       individualBtn.addEventListener('click', () => {
-        const name = document.querySelector('.product-details h1').textContent;
-        const img = document.querySelector('.product-image img').src;
-        const price = document.querySelector('.product-details .price').textContent;
+        const name = document.querySelector('.product-details h1')?.textContent;
+        const img = document.querySelector('.product-image img')?.src;
+        const price = document.querySelector('.product-details .price')?.textContent;
 
-        cart.push({ img, name, price });
-        updateCartUI();
+        if (!img || !name || !price) return;
 
-        const cartIcon = document.getElementById('cart-icon');
-        if (cartIcon) {
-          cartIcon.classList.add('cart-icon-animation');
-          setTimeout(() => {
-            cartIcon.classList.remove('cart-icon-animation');
-          }, 500);
-        }
+        const normalizedProductName = normalizeProductName(name);
+        const discountedPrice = pixDiscountPrices[normalizedProductName] || null;
 
-        const notification = document.getElementById('cart-notification');
-        if (notification) {
-          notification.classList.add('show');
-          setTimeout(() => {
-            notification.classList.remove('show');
-          }, 3000);
-        }
+        pendingCartItem = {
+          img,
+          name,
+          price,
+          originalPrice: price,
+          discountedPrice,
+          pixDiscountApplied: false
+        };
+        showPixModal();
       });
     }
 
