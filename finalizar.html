@@ -186,7 +186,7 @@
             <div class="total-amount" id="checkout-total-summary">
             </div>
             <button class="finalizar-button" id="finalizeOrderBtn">Finalizar pedido</button>
-            <button id="cancelar_button"><a href="loja.html"> Cancelar comprar</a></button>
+            <button id="cancelarCompraBtn" class="cancelar-button">Cancelar compra</button>
             <div id="responseMessage"></div>
         </div>
     </div>
@@ -264,6 +264,7 @@
         const purchasedItemsList = document.getElementById('purchased-items-list');
         const finalOrderTotal = document.getElementById('final-order-total');
         const backToStoreBtn = document.getElementById('backToStoreBtn');
+        const cancelPurchaseBtn = document.getElementById('cancelarCompraBtn');
 
         function normalizeText(value = '') {
             if (!value) return '';
@@ -276,6 +277,43 @@
 
         function isCrecheCheckout() {
             return normalizeText(localStorage.getItem('currentSchoolName') || '') === CRECHE_IDENTIFIER;
+        }
+
+        function getReferrerStoreUrl() {
+            if (!document.referrer) return null;
+            try {
+                const refUrl = new URL(document.referrer, window.location.href);
+                if (refUrl.origin === window.location.origin) {
+                    return refUrl.pathname + refUrl.search;
+                }
+                return document.referrer;
+            } catch {
+                return document.referrer;
+            }
+        }
+
+        function rememberReferrerStore() {
+            const refUrl = getReferrerStoreUrl();
+            if (refUrl) {
+                sessionStorage.setItem('lastStoreUrl', refUrl);
+                localStorage.setItem('lastStoreUrl', refUrl);
+            }
+        }
+
+        function determineStoreRedirectTarget() {
+            return sessionStorage.getItem('lastStoreUrl')
+                || localStorage.getItem('lastStoreUrl')
+                || getReferrerStoreUrl()
+                || 'loja.html';
+        }
+
+        function redirectToLastStore() {
+            const target = determineStoreRedirectTarget();
+            if (target === 'history-back') {
+                window.history.back();
+                return;
+            }
+            window.location.href = target;
         }
 
         function getSelectedPaymentMethodValue() {
@@ -329,11 +367,18 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            rememberReferrerStore();
+            renderCartSummary();
             finalizeOrderBtn.addEventListener('click', handleFinalizeOrder);
 
             viewOrderDetailsBtn.addEventListener('click', showOrderSummary);
-            backToStoreBtn.addEventListener('click', () => {
-                window.location.href = 'loja.html';
+            backToStoreBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                redirectToLastStore();
+            });
+            cancelPurchaseBtn?.addEventListener('click', (event) => {
+                event.preventDefault();
+                redirectToLastStore();
             });
 
             paymentMethodRadios.forEach(radio => {
