@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
-    <meta name="description" content="Finalize sua compra na Livraria Rio Nilo informando dados do respons&aacute;vel, endere&ccedil;o e forma de pagamento em um checkout seguro e criptografado.">
+    <meta name="description"
+        content="Finalize sua compra na Livraria Rio Nilo informando dados do respons&aacute;vel, endere&ccedil;o e forma de pagamento em um checkout seguro e criptografado.">
     <link rel="canonical" href="https://www.livrariarionilo.com.br/finalizar.html">
     <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="finalizar.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="finalizar.css">
 </head>
+
 <body>
 
     <header>
@@ -37,7 +41,7 @@
                     </div>
                     <div>
                         <label for="fullNameChild">Nome Completo da Criança</label>
-                        <input type="text" id="fullNameChild" required> 
+                        <input type="text" id="fullNameChild" required>
                     </div>
                 </div>
                 <div class="form-group col-2">
@@ -91,17 +95,34 @@
             <div class="payment-methods">
                 <h3>Método de Pagamento</h3>
                 <div class="payment-options">
-                    <label>
-                        <input type="radio" name="paymentMethod" value="CreditCard" checked> <h3>Cartão de Crédito</h3>
-                    </label>
-                    <label>
-                        <input type="radio" name="paymentMethod" value="DebitCard"> <h3 >Cartão de Débito</h3>
-                    </label>
-                    <label>
-                        <input type="radio" name="paymentMethod" value="Pix"> <h3>Pix</h3>
-                    </label>
-                    <label>
-                        <input type="radio" name="paymentMethod" value="Boleto"> <h3>Boleto</h3> </label>
+                    <div class="payment-option-wrapper">
+                        <input type="radio" id="payment-credit" name="paymentMethod" value="CreditCard" checked>
+                        <label for="payment-credit" class="payment-option">
+                            <i class="fas fa-credit-card"></i>
+                            <span>Crédito</span>
+                        </label>
+                    </div>
+                    <div class="payment-option-wrapper">
+                        <input type="radio" id="payment-debit" name="paymentMethod" value="DebitCard">
+                        <label for="payment-debit" class="payment-option">
+                            <i class="fas fa-money-check"></i>
+                            <span>Débito</span>
+                        </label>
+                    </div>
+                    <div class="payment-option-wrapper">
+                        <input type="radio" id="payment-pix" name="paymentMethod" value="Pix">
+                        <label for="payment-pix" class="payment-option">
+                            <i class="fas fa-qrcode"></i>
+                            <span>Pix</span>
+                        </label>
+                    </div>
+                    <div class="payment-option-wrapper">
+                        <input type="radio" id="payment-boleto" name="paymentMethod" value="Boleto">
+                        <label for="payment-boleto" class="payment-option">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Boleto</span>
+                        </label>
+                    </div>
                 </div>
 
                 <div id="creditCardDetails" class="payment-details">
@@ -127,13 +148,14 @@
                     <div class="form-group">
                         <label for="installments">Parcelas:</label>
                         <select id="installments">
-                            </select>
+                        </select>
                     </div>
                 </div>
 
                 <div id="debitCardDetails" class="payment-details">
                     <h4>Detalhes do Cartão de Débito</h4>
-                    <p class="warning-message">Para pagamentos com Cartão de Débito, você será redirecionado para o site do seu banco para autenticação (3D Secure) após finalizar o pedido.</p>
+                    <p class="warning-message">Para pagamentos com Cartão de Débito, você será redirecionado para o site
+                        do seu banco para autenticação (3D Secure) após finalizar o pedido.</p>
                     <div class="form-group">
                         <label for="debitCardNumber">Número do Cartão:</label>
                         <input type="text" id="debitCardNumber" placeholder="0000 0000 0000 0000">
@@ -160,24 +182,32 @@
                     <div id="pix-qr-area" style="text-align: center; margin-top: 20px;" class="hidden">
                         <img id="pix-qr-image" src="" alt="QR Code Pix" style="max-width: 200px; height: auto;">
                         <p>Ou copie o código:</p>
-                        <textarea id="pix-qr-string" readonly style="width: 100%; height: 80px; resize: vertical;"></textarea>
-                        <button id="copyPixCodeBtn" style="margin-top: 10px; padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copiar Código Pix</button>
+                        <textarea id="pix-qr-string" readonly
+                            style="width: 100%; height: 80px; resize: vertical;"></textarea>
+                        <button id="copyPixCodeBtn"
+                            style="margin-top: 10px; padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer;">Copiar
+                            Código Pix</button>
                     </div>
                 </div>
 
                 <div id="boletoDetails" class="payment-details hidden">
                     <h4>Pagar com Boleto</h4>
-                    <p>Ao finalizar o pedido, um boleto será gerado e poderá ser pago em qualquer banco ou aplicativo bancário.</p>
+                    <p>Ao finalizar o pedido, um boleto será gerado e poderá ser pago em qualquer banco ou aplicativo
+                        bancário.</p>
                     <div id="boleto-info-area" style="text-align: center; margin-top: 20px;" class="hidden">
-                        <p><a id="boleto-link" href="#" target="_blank" style="color: #007bff; text-decoration: underline;">Visualizar Boleto</a></p>
+                        <p><a id="boleto-link" href="#" target="_blank"
+                                style="color: #007bff; text-decoration: underline;">Visualizar Boleto</a></p>
                         <p>Ou copie a linha digitável:</p>
-                        <textarea id="boleto-digitable-line" readonly style="width: 100%; height: 40px; resize: vertical;"></textarea>
-                        <button id="copyBoletoLineBtn" style="margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Copiar Linha Digitável</button>
+                        <textarea id="boleto-digitable-line" readonly
+                            style="width: 100%; height: 40px; resize: vertical;"></textarea>
+                        <button id="copyBoletoLineBtn"
+                            style="margin-top: 10px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">Copiar
+                            Linha Digitável</button>
                     </div>
                 </div>
 
             </div>
-            </div>
+        </div>
 
         <div class="order-summary">
             <h2>Seu Pedido</h2>
@@ -191,7 +221,7 @@
         </div>
     </div>
 
-    <div id="overlay" class="hidden"></div> 
+    <div id="overlay" class="hidden"></div>
     <div id="success-modal" class="hidden">
         <div class="modal-content">
             <span class="checkmark">&#10004;</span>
@@ -209,7 +239,7 @@
 
             <h3>Itens Comprados:</h3>
             <ul id="purchased-items-list">
-                </ul>
+            </ul>
 
             <h3>Total: <span id="final-order-total"></span></h3>
 
@@ -384,8 +414,8 @@
             paymentMethodRadios.forEach(radio => {
                 radio.addEventListener('change', handlePaymentMethodChange);
             });
-            handlePaymentMethodChange(); 
-            
+            handlePaymentMethodChange();
+
             copyPixCodeBtn.addEventListener('click', () => {
                 pixQrString.select();
                 document.execCommand('copy');
@@ -493,7 +523,7 @@
                 debitSecurityCodeInput.setAttribute('required', 'true');
             } else if (selectedMethod === 'Pix') {
                 pixDetailsDiv.classList.remove('hidden');
-            } else if (selectedMethod === 'Boleto') { 
+            } else if (selectedMethod === 'Boleto') {
                 boletoDetailsDiv.classList.remove('hidden');
             }
 
@@ -512,7 +542,7 @@
                 email: document.getElementById('email').value,
                 firstName: document.getElementById('firstName').value,
                 lastName: document.getElementById('lastName').value,
-                fullNameChild: document.getElementById('fullNameChild').value, 
+                fullNameChild: document.getElementById('fullNameChild').value,
                 cpf: document.getElementById('cpf').value,
                 dob: document.getElementById('dob').value,
                 phone: document.getElementById('phone').value,
@@ -523,7 +553,7 @@
                 number: document.getElementById('number').value,
                 complement: document.getElementById('complement').value,
                 // --- AQUI O NOME DA ESCOLA É ADICIONADO AO billingData ---
-                school: localStorage.getItem('currentSchoolName') || 'Escola Não Informada' 
+                school: localStorage.getItem('currentSchoolName') || 'Escola Não Informada'
             };
 
             for (const key in billingData) {
@@ -565,7 +595,7 @@
                 paymentDetails = {
                     cardNumber: cardNumber,
                     holder: holder,
-                    expirationDate: expirationDate.replace('/', ''), 
+                    expirationDate: expirationDate.replace('/', ''),
                     securityCode: securityCode,
                     installments: parseInt(installments),
                     amount: currentTotal.toFixed(2)
@@ -596,7 +626,7 @@
                 paymentDetails = {
                     amount: currentTotal.toFixed(2)
                 };
-            } else if (selectedPaymentMethod === 'Boleto') { 
+            } else if (selectedPaymentMethod === 'Boleto') {
                 endpoint = 'processar-boleto';
                 paymentDetails = {
                     amount: currentTotal.toFixed(2)
@@ -619,7 +649,7 @@
                 console.log('Payload enviado para o backend:', fullPayload);
                 console.log('Stringified payload:', JSON.stringify(fullPayload));
 
-                const BASE_URL = 'https://livraria-rio-nilo-backend.onrender.com'; 
+                const BASE_URL = 'https://livraria-rio-nilo-backend.onrender.com';
                 const response = await fetch(`${BASE_URL}/${endpoint}`, {
                     method: 'POST',
                     headers: {
@@ -638,29 +668,29 @@
                     return;
                 }
 
-                responseMessageDiv.style.display = 'block'; 
+                responseMessageDiv.style.display = 'block';
 
-                if (response.ok) { 
+                if (response.ok) {
                     if (result.status === "success") {
                         responseMessageDiv.style.display = 'none';
 
                         if (selectedPaymentMethod === 'DebitCard' && result.redirect_url) {
                             alert('Redirecionando para autenticação 3D Secure do seu banco...');
                             window.location.href = result.redirect_url;
-                            return; 
+                            return;
                         }
                         else if (selectedPaymentMethod === 'Pix' && result.qr_code_string) {
-                            pixDetailsDiv.classList.remove('hidden'); 
-                            pixQrArea.classList.remove('hidden'); 
-                            pixQrImage.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(result.qr_code_string)}`; 
+                            pixDetailsDiv.classList.remove('hidden');
+                            pixQrArea.classList.remove('hidden');
+                            pixQrImage.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(result.qr_code_string)}`;
                             pixQrString.value = result.qr_code_string;
 
-                            document.querySelector('.main-content').style.display = 'none'; 
-                            responseMessageDiv.style.display = 'none'; 
+                            document.querySelector('.main-content').style.display = 'none';
+                            responseMessageDiv.style.display = 'none';
                         }
                         else if (selectedPaymentMethod === 'Boleto' && result.boleto_url) {
-                            boletoDetailsDiv.classList.remove('hidden'); 
-                            boletoInfoArea.classList.remove('hidden'); 
+                            boletoDetailsDiv.classList.remove('hidden');
+                            boletoInfoArea.classList.remove('hidden');
                             boletoLink.href = result.boleto_url;
                             boletoDigitableLine.value = result.digitable_line;
 
@@ -673,10 +703,10 @@
 
                             sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
                             sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-                            sessionStorage.setItem('lastOrderId', result.cielo_response.MerchantOrderId || result.cielo_response.Payment.PaymentId || 'N/A'); 
-                            
+                            sessionStorage.setItem('lastOrderId', result.cielo_response.MerchantOrderId || result.cielo_response.Payment.PaymentId || 'N/A');
+
                             localStorage.removeItem(cartKey);
-                            renderCartSummary(); 
+                            renderCartSummary();
                         }
 
                     } else {
@@ -705,7 +735,7 @@
 
             document.querySelector('.main-content').style.display = 'none';
             responseMessageDiv.style.display = 'none';
-            pixQrArea.classList.add('hidden'); 
+            pixQrArea.classList.add('hidden');
             boletoInfoArea.classList.add('hidden');
 
             orderSummaryScreen.classList.remove('hidden');
@@ -755,4 +785,5 @@
         }
     </script>
 </body>
+
 </html>
