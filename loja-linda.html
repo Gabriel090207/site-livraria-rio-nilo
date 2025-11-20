@@ -171,6 +171,22 @@
             profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
         }
     });
+
+    // --- SALVAR NOME COMPLETO DA CRIANÇA ---
+document.addEventListener("DOMContentLoaded", function () {
+    const userParagraph = document.querySelector("#profileInfo p:first-child");
+
+    if (userParagraph) {
+        // Remove "Usuário:" e pega só o nome
+        const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
+
+        // Salva no localStorage
+        localStorage.setItem("nomeDaCrianca", rawText);
+
+        console.log("[loja.html] Nome da criança salvo:", rawText);
+    }
+});
+
   </script>
 
   <script>

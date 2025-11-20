@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel de Vendas</title>
+  <link rel="stylesheet" href="portalescola.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar">
+      <div class="left-section">
+        <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+        <div class="logo">
+          <img src="Nova logo rio nilo.png" alt="Logo Rio Nilo" style="height:50px;" class="logo" />
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="dashboard-container">
+    <!-- Coluna esquerda -->
+    <div class="left-column">
+      <!-- Bloco de quantidade de vendas -->
+      <div class="card total-sales">
+        <h3>Quantidade de vendas:</h3>
+        <p class="total-number" id="total-vendas">0</p>
+      </div>
+
+      <!-- Bloco de gráfico -->
+      <div class="card chart-card" id="chartContainer">
+        <p style="text-align:center; color:#888;">Carregando produtos...</p>
+      </div>
+    </div>
+
+    <!-- Coluna direita -->
+    <div class="right-column">
+      <!-- Barra de pesquisa -->
+      <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Pesquisar criança, responsável ou livro..."
+          id="searchInput"
+        />
+      </div>
+
+      <!-- Cards -->
+      <div id="cardsContainer">
+        <p style="text-align:center; color:#888;">Carregando vendas...</p>
+      </div>
+
+      <!-- Paginação -->
+      <div class="pagination" id="pagination">
+        <button class="page-btn prev">&laquo;</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn next">&raquo;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Importa o JS -->
+  <script src="portalescola.js"></script>
+</body>
+</html>

@@ -396,7 +396,52 @@
             });
         }
 
+
         document.addEventListener('DOMContentLoaded', () => {
+
+// 🔹 Autopreencher "Nome Completo da Criança"
+const childName = localStorage.getItem('nomeUsuarioLogado'); // <-- chave certa
+const fullNameChildInput = document.getElementById('fullNameChild');
+
+if (childName && fullNameChildInput) {
+    fullNameChildInput.value = childName;
+}
+// 🔹 fim do autopreenchimento
+
+// resto do código ORIGINAL (uma vez só)
+rememberReferrerStore();
+renderCartSummary();
+finalizeOrderBtn.addEventListener('click', handleFinalizeOrder);
+
+viewOrderDetailsBtn.addEventListener('click', showOrderSummary);
+backToStoreBtn.addEventListener('click', (event) => {
+    event.preventDefault();
+    redirectToLastStore();
+});
+
+cancelPurchaseBtn?.addEventListener('click', (event) => {
+    event.preventDefault();
+    redirectToLastStore();
+});
+
+paymentMethodRadios.forEach(radio => {
+    radio.addEventListener('change', handlePaymentMethodChange);
+});
+handlePaymentMethodChange();
+
+copyPixCodeBtn.addEventListener('click', () => {
+    pixQrString.select();
+    document.execCommand('copy');
+    alert('Código Pix copiado para a área de transferência!');
+});
+
+copyBoletoLineBtn.addEventListener('click', () => {
+    boletoDigitableLine.select();
+    document.execCommand('copy');
+    alert('Linha Digitável copiada para a área de transferência!');
+});
+
+
             rememberReferrerStore();
             renderCartSummary();
             finalizeOrderBtn.addEventListener('click', handleFinalizeOrder);
@@ -674,40 +719,45 @@
                     if (result.status === "success") {
                         responseMessageDiv.style.display = 'none';
 
-                        if (selectedPaymentMethod === 'DebitCard' && result.redirect_url) {
-                            alert('Redirecionando para autenticação 3D Secure do seu banco...');
-                            window.location.href = result.redirect_url;
-                            return;
-                        }
-                        else if (selectedPaymentMethod === 'Pix' && result.qr_code_string) {
-                            pixDetailsDiv.classList.remove('hidden');
-                            pixQrArea.classList.remove('hidden');
-                            pixQrImage.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(result.qr_code_string)}`;
-                            pixQrString.value = result.qr_code_string;
+                        // --- PAGAMENTO PIX ---
+if (selectedPaymentMethod === 'Pix' && result.qr_code_string) {
+    pixDetailsDiv.classList.remove('hidden');
+    pixQrArea.classList.remove('hidden');
+    pixQrImage.src = `https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(result.qr_code_string)}`;
+    pixQrString.value = result.qr_code_string;
 
-                            document.querySelector('.main-content').style.display = 'none';
-                            responseMessageDiv.style.display = 'none';
-                        }
-                        else if (selectedPaymentMethod === 'Boleto' && result.boleto_url) {
-                            boletoDetailsDiv.classList.remove('hidden');
-                            boletoInfoArea.classList.remove('hidden');
-                            boletoLink.href = result.boleto_url;
-                            boletoDigitableLine.value = result.digitable_line;
+    document.querySelector('.main-content').style.display = 'none';
+    responseMessageDiv.style.display = 'none';
+}
+// --- PAGAMENTO BOLETO ---
+else if (selectedPaymentMethod === 'Boleto' && result.boleto_url) {
+    boletoDetailsDiv.classList.remove('hidden');
+    boletoInfoArea.classList.remove('hidden');
+    boletoLink.href = result.boleto_url;
+    boletoDigitableLine.value = result.digitable_line;
 
-                            document.querySelector('.main-content').style.display = 'none';
-                            responseMessageDiv.style.display = 'none';
-                        }
-                        else {
-                            overlay.classList.remove('hidden');
-                            successModal.classList.remove('hidden');
+    document.querySelector('.main-content').style.display = 'none';
+    responseMessageDiv.style.display = 'none';
+}
+// --- CRÉDITO OU DÉBITO (agora débito funciona como crédito à vista)
+else {
+    overlay.classList.remove('hidden');
+    successModal.classList.remove('hidden');
 
-                            sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
-                            sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-                            sessionStorage.setItem('lastOrderId', result.cielo_response.MerchantOrderId || result.cielo_response.Payment.PaymentId || 'N/A');
+    sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
+    sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+    sessionStorage.setItem(
+        'lastOrderId',
+        result.cielo_response.MerchantOrderId ||
+        result.cielo_response.Payment.PaymentId ||
+        'N/A'
+    );
 
-                            localStorage.removeItem(cartKey);
-                            renderCartSummary();
-                        }
+    localStorage.removeItem(cartKey);
+    renderCartSummary();
+}
+
+                        
 
                     } else {
                         responseMessageDiv.classList.add('error');

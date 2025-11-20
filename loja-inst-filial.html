@@ -90,6 +90,14 @@
           <p class="price">R$150,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
+
+
+        <div class="card">
+          <img src="Aprender com alegria.webp" alt="Capa do livro Aprender com Alegria">
+          <h3>Aprender com Alegria - Meu Primeiro Livro - 2 Anos</h3>
+          <p class="price">R$0,01</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
       </div>
 
     </main>
@@ -119,8 +127,23 @@
             profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
         }
     });
-  </script>
 
+    // --- SALVAR NOME COMPLETO DA CRIANÇA ---
+document.addEventListener("DOMContentLoaded", function () {
+    const userParagraph = document.querySelector("#profileInfo p:first-child");
+
+    if (userParagraph) {
+        // Remove "Usuário:" e pega só o nome
+        const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
+
+        // Salva no localStorage
+        localStorage.setItem("nomeDaCrianca", rawText);
+
+        console.log("[loja.html] Nome da criança salvo:", rawText);
+    }
+});
+
+  </script>
   <script>
     // Menu lateral
     const menuIcon = document.querySelector('.menu-icon');

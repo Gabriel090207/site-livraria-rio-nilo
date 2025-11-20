@@ -237,24 +237,40 @@
   </div>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const schoolNameElement = document.getElementById('currentSchoolName');
-      let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+    document.addEventListener('DOMContentLoaded', function() {
+        const schoolNameElement = document.getElementById('currentSchoolName');
+        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
 
-      if (schoolNameElement && schoolNameElement.textContent) {
-        schoolName = schoolNameElement.textContent.trim();
-      }
+        if (schoolNameElement && schoolNameElement.textContent) {
+            schoolName = schoolNameElement.textContent.trim();
+        } 
+        
+        // Salva o nome da escola no localStorage
+        localStorage.setItem('currentSchoolName', schoolName);
+        console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
 
-      // Salva o nome da escola no localStorage
-      localStorage.setItem('currentSchoolName', schoolName);
-      console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
-
-      // Opcional: Atualizar a exibição da escola no dropdown do perfil
-      const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
-      if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
-        profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
-      }
+        // Opcional: Atualizar a exibição da escola no dropdown do perfil
+        const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
+        if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
+            profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
+        }
     });
+
+    // --- SALVAR NOME COMPLETO DA CRIANÇA ---
+document.addEventListener("DOMContentLoaded", function () {
+    const userParagraph = document.querySelector("#profileInfo p:first-child");
+
+    if (userParagraph) {
+        // Remove "Usuário:" e pega só o nome
+        const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
+
+        // Salva no localStorage
+        localStorage.setItem("nomeDaCrianca", rawText);
+
+        console.log("[loja.html] Nome da criança salvo:", rawText);
+    }
+});
+
   </script>
 
   <script>
