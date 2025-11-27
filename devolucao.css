@@ -1,0 +1,213 @@
+.devolucao{
+    margin-top: 180px;
+}
+/* Seção de Informações e Botão */
+#devolucao-info {
+    margin-top: 380px;
+    text-align: center;
+    padding: 80px 20px;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#devolucao-info h2 {
+    font-size: 2.8em;
+    color: #F58220; /* Cor azul para o título */
+    margin-bottom: 30px;
+    font-weight: 800;
+}
+
+#devolucao-info p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 40px;
+    padding: 0 20px;
+}
+
+.devolucao-button {
+    display: inline-block;
+    background-color: #28a745; /* Cor verde */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.devolucao-button:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+
+/* Seção do Processo de Devolução (reutiliza estilos do processo de entrega) */
+#processo-devolucao {
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #f0f5fa; /* Fundo diferente para a seção de processo */
+    margin-top: 50px;
+    border-top: 1px solid #e0e0e0;
+}
+
+#processo-devolucao h2 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 50px;
+}
+
+.timeline-container-horizontal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 160px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.timeline-step.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.icon-circle {
+    background-color: #007bff; /* Cor azul para os ícones */
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-step p {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #555;
+    text-align: center;
+}
+
+.horizontal-line {
+    background-color: #007bff; /* Linhas em azul para destaque */
+    height: 4px;
+    width: 0;
+    margin: 0 5px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.horizontal-line.animate {
+    animation: drawHorizontalLine 1s forwards ease-out;
+    opacity: 1;
+}
+
+@keyframes drawHorizontalLine {
+    from { width: 0; }
+    to { width: 80px; }
+}
+
+/* Rodapé (copiada do seu index.css) - Adapte conforme seu estilo real */
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 20px;
+    }
+    .navbar ul {
+        display: none; /* Ou adapte para um menu hambúrguer */
+    }
+    #devolucao-info {
+        padding: 40px 15px;
+        margin: 20px auto;
+    }
+    #devolucao-info h2 {
+        font-size: 2em;
+    }
+    #devolucao-info p {
+        font-size: 1em;
+    }
+    .devolucao-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    #processo-devolucao h2 {
+        font-size: 2em;
+    }
+    .timeline-container-horizontal {
+        flex-direction: column;
+        align-items: center;
+    }
+    .timeline-step {
+        width: 80%;
+        margin: 15px 0;
+    }
+    .horizontal-line {
+        width: 4px;
+        height: 60px;
+        margin: 10px 0;
+    }
+    @keyframes drawHorizontalLine {
+        from { height: 0; }
+        to { height: 60px; }
+    }
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 15px;
+    }
+    .footer div {
+        margin-bottom: 20px;
+    }
+    .redesocial, .formapagamento {
+        justify-content: center;
+    }
+}
+
+@media(max-width:390px){
+
+    
+    html, body {
+      overflow-x: hidden;
+    }
+    
+    .logo2 {
+      margin-top: -80px;
+      
+      max-width: 370px;
+      margin-left: -720px;
+     
+      height: -30px; 
+      object-fit: cover;
+            
+    }
+  
+  }

@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja de Livros</title>
+  <meta name="description"
+    content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
+  <link rel="canonical" href="https://www.livrariarionilo.com.br/loja.html">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
+  <link rel="stylesheet" href="loja.css">
+  <style>
+    .pix-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(380px, 90%);
+      background: #fff;
+      border: 2px solid #F58220;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      display: none;
+      z-index: 2000;
+    }
+
+    .pix-modal.show {
+      display: block;
+      animation: pixPop 0.25s ease-out forwards;
+    }
+
+    .pix-modal h4 {
+      margin-bottom: 15px;
+      font-size: 1.05rem;
+      color: #333;
+      text-align: left;
+    }
+
+    .pix-modal-difference {
+      margin-bottom: 15px;
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .pix-modal-difference strong {
+      color: #F58220;
+    }
+
+    .pix-modal-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .pix-modal-btn {
+      flex: 1;
+      padding: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    .pix-modal-yes {
+      background: #F58220;
+      color: white;
+    }
+
+    .pix-modal-no {
+      background: #fff;
+      color: #F58220;
+      border: 1px solid #F58220;
+    }
+
+    .pix-modal-yes:hover {
+      background: #f79c4a;
+    }
+
+    .pix-modal-no:hover {
+      background: #ffe8d6;
+    }
+
+    @keyframes pixPop {
+      from {
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="https://wa.me/5571982290909" class="whatsapp-button" target="_blank" style="text-decoration:none">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <div class="side-menu" id="side-menu">
+    <div class="side-menu-header">
+      <h2>Menu</h2>
+      <i class="fas fa-times" id="close-menu"></i>
+    </div>
+    <ul>
+      <li><i class="fas fa-home"></i><a href="index.html">Início</a></li>
+      <li><i class="fas fa-phone"></i> <a href="faleconosco.html">Contato </a></li>
+      <li><i class="fas fa-info-circle"> <a href="quemsomos.html"></i>Sobre nós</a></li>
+    </ul>
+  </div>
+
+  <header>
+    <i class="fas fa-bars menu-icon" id="menu-toggle"></i>
+    <div class="logo"> <img src="Nova logo rio nilo.png" alt="Logo Rio Nilo" style="height:50px;"></div>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar livros..." id="search-input">
+    </div>
+
+    <div class="header-icons">
+      <i class="fas fa-user" id="userIcon"></i>
+      <div id="profileInfo" class="profile-dropdown">
+        <p><strong>Usuário:</strong> João Silva</p>
+        <p><strong>Escola:</strong> Escola Santos Dumont</p>
+      </div>
+      <div id="cart-container" style="position: relative;">
+        <i class="fas fa-shopping-cart" id="cart-icon" style="cursor: pointer; position: relative;"></i>
+        <span id="cart-badge" style="display:none;">0</span>
+
+        <div id="cart-dropdown"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="sidebar">
+      <div class="school-card">
+        <h2>Creche</h2>
+        <img src="unesp.png" alt="Logo da Escola" class="school-logo">
+        <h3 class="school-name" id="currentSchoolName">Escola Viva Criança</h3>
+      </div>
+      <nav class="texto">
+        <h2>Filtrar</h2>
+      </nav>
+
+      <label for="tipo">Categoria:</label>
+      <select id="tipo" class="filter">
+        <option value="">Todos</option>
+        <option value="aventura">Infantil</option>
+        <option value="terror">Fundamental Anos Iniciais</option>
+      </select>
+
+      <label for="tipo">Série:</label>
+      <select id="idade" class="filter">
+        <option value="">Todos</option>
+        <option value="infantil">G1 - G5</option>
+        <option value="juvenil">1º Ano - 5º Ano</option>
+      </select>
+
+    </nav>
+
+    <main class="content">
+
+      <div class="carousel">
+        <img id="carousel-image" src="Imagen (1).png" alt="Banner">
+      </div>
+      <h2 class="section-title">Livros em Destaque</h2>
+
+      <div class="cards" id="book-cards-container">
+        <div class="card">
+          <img src="Capas Livros Creche/INF1 (1).png" alt="Capa do livro educação infatil G1">
+          <h3>Educação infantil G1</h3>
+          <p class="price">R$500,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/INF2 (1).png" alt="Capa do livro educação infatil G2">
+          <h3>Educação infantil G2</h3>
+          <p class="price">R$575,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/INF3.png" alt="Capa do livro educação infatil G3">
+          <h3>Educação infantil G3</h3>
+          <p class="price">R$650,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/INF4.png" alt="Capa do livro educação infatil G4">
+          <h3>Educação infantil G4</h3>
+          <p class="price">R$832,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/INF5.png" alt="Capa do livro educação infatil G5">
+          <h3>Educação infantil G5</h3>
+          <p class="price">R$832,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <!-- Anos iniciais -->
+        <div class="card">
+          <img src="Capas Livros Creche/Fundamental 1 01AM (1).png" alt="Capa do livro Fundamental 1">
+          <h3>Ensino Fundamental 1ºAno</h3>
+          <p class="price">R$955,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+        <div class="card">
+          <img src="Capas Livros Creche/Fundamental 1 02AM (1).png" alt="Capa do livro Fundamental 2">
+          <h3>Ensino Fundamental 2ºAno</h3>
+          <p class="price">R$955,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <div id="cart-notification" class="cart-notification">
+    Item adicionado ao carrinho!
+  </div>
+  <div id="pixModal" class="pix-modal" role="dialog" aria-labelledby="pixModalTitle">
+    <h4 id="pixModalTitle">Deseja pagar no PIX e receber desconto no pagamento?</h4>
+    <p id="pixModalDifference" class="pix-modal-difference"></p>
+    <div class="pix-modal-buttons">
+      <button type="button" id="pixModalYes" class="pix-modal-btn pix-modal-yes">Sim</button>
+      <button type="button" id="pixModalNo" class="pix-modal-btn pix-modal-no">Não</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const schoolNameElement = document.getElementById('currentSchoolName');
+        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+
+        if (schoolNameElement && schoolNameElement.textContent) {
+            schoolName = schoolNameElement.textContent.trim();
+        } 
+        
+        // Salva o nome da escola no localStorage
+        localStorage.setItem('currentSchoolName', schoolName);
+        console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+
+        // Opcional: Atualizar a exibição da escola no dropdown do perfil
+        const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
+        if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
+            profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
+        }
+    });
+
+    // --- SALVAR NOME COMPLETO DA CRIANÇA ---
+document.addEventListener("DOMContentLoaded", function () {
+    const userParagraph = document.querySelector("#profileInfo p:first-child");
+
+    if (userParagraph) {
+        // Remove "Usuário:" e pega só o nome
+        const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
+
+        // Salva no localStorage
+        localStorage.setItem("nomeDaCrianca", rawText);
+
+        console.log("[loja.html] Nome da criança salvo:", rawText);
+    }
+});
+
+  </script>
+
+  <script>
+    // Menu lateral
+    const menuIcon = document.querySelector('.menu-icon');
+    const sideMenu = document.getElementById('side-menu');
+    const closeMenu = document.getElementById('close-menu');
+
+    menuIcon?.addEventListener('click', () => {
+      sideMenu.classList.add('open');
+    });
+
+    closeMenu?.addEventListener('click', () => {
+      sideMenu.classList.remove('open');
+    });
+
+    // Perfil do usuário
+    const userIcon = document.getElementById('userIcon');
+    const profileInfo = document.getElementById('profileInfo');
+
+    userIcon?.addEventListener('click', () => {
+      profileInfo.style.display = profileInfo.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Esconde o dropdown se clicar fora
+    document.addEventListener('click', (e) => {
+      if (!profileInfo.contains(e.target) && !userIcon.contains(e.target)) {
+        profileInfo.style.display = 'none';
+      }
+    });
+
+    // --- NOVA FUNÇÃO: Para atualizar o nome do usuário na interface (ADICIONADA AQUI) ---
+    function atualizarNomeUsuario(nome) {
+      const userParagraph = document.querySelector("#profileInfo p:first-child");
+      if (userParagraph) {
+        userParagraph.innerHTML = `<strong>Usuário:</strong> ${nome}`;
+      }
+    }
+
+    // --- Lógica para carregar o nome do localStorage ao carregar a página (ADICIONADA AQUI) ---
+    // Esta parte é um pouco redundante com o bloco script anterior, mas deixo se você quiser mantê-la separada
+    document.addEventListener("DOMContentLoaded", function () {
+      const nomePersistido = localStorage.getItem('nomeUsuarioLogado'); // Tenta recuperar o nome
+      if (nomePersistido) {
+        atualizarNomeUsuario(nomePersistido); // Se encontrou, atualiza a interface
+      } else {
+        atualizarNomeUsuario("Convidado"); // Define um nome padrão
+      }
+    });
+  </script>
+
+  <script>
+    const cartKey = 'meuCarrinho';
+    let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+    const pixModal = document.getElementById('pixModal');
+    const pixModalYes = document.getElementById('pixModalYes');
+    const pixModalNo = document.getElementById('pixModalNo');
+    const pixModalDifference = document.getElementById('pixModalDifference');
+    const pixPreferenceKey = 'preferenciaPixCreche';
+    const pixDiscountPrices = {
+      educacaoinfantilg1: 'R$475,00',
+      educacaoinfantilg2: 'R$545,00',
+      educacaoinfantilg3: 'R$617,00',
+      educacaoinfantilg4: 'R$790,00',
+      ensinofundamental1ano: 'R$907,00',
+      ensinofundamental2ano: 'R$907,00'
+    };
+    let pendingCartItem = null;
+
+    function normalizeProductName(name = '') {
+      if (!name) return '';
+      let normalized = name.toLowerCase();
+      if (normalized.normalize) {
+        normalized = normalized.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      }
+      return normalized.replace(/[^a-z0-9]/g, '');
+    }
+
+    function parseCurrency(value) {
+      if (typeof value === 'number') return value;
+      if (!value) return NaN;
+      const cleaned = value.toString()
+        .replace(/[R$\s]/gi, '')
+        .replace(/\./g, '')
+        .replace(',', '.');
+      return parseFloat(cleaned);
+    }
+
+    function formatCurrency(value) {
+      if (typeof value !== 'number' || Number.isNaN(value)) return '';
+      return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function showPixModal() {
+      if (pixModal) {
+        updatePixModalDifference();
+        pixModal.classList.add('show');
+      }
+    }
+
+    function hidePixModal(cancelPending = false) {
+      pixModal?.classList.remove('show');
+      if (cancelPending) {
+        pendingCartItem = null;
+      }
+      if (pixModalDifference) {
+        pixModalDifference.textContent = '';
+        pixModalDifference.style.display = 'none';
+      }
+    }
+
+    function updatePixModalDifference() {
+      if (!pixModalDifference) return;
+      pixModalDifference.textContent = '';
+      pixModalDifference.style.display = 'none';
+      if (!pendingCartItem) return;
+
+      const discountedPrice = pendingCartItem.discountedPrice || pixDiscountPrices[normalizeProductName(pendingCartItem.name)];
+      if (!discountedPrice) return;
+
+      const originalValue = parseCurrency(pendingCartItem.originalPrice || pendingCartItem.price);
+      const discountedValue = parseCurrency(discountedPrice);
+      if (Number.isNaN(originalValue) || Number.isNaN(discountedValue)) return;
+
+      const difference = originalValue - discountedValue;
+      if (difference <= 0) return;
+
+      pixModalDifference.innerHTML = `Pagando no PIX você economiza <strong>${formatCurrency(difference)}</strong>: de <strong>${formatCurrency(originalValue)}</strong> por <strong>${formatCurrency(discountedValue)}</strong>.`;
+      pixModalDifference.style.display = 'block';
+    }
+
+    function handlePixResponse(choice) {
+      localStorage.setItem(pixPreferenceKey, choice);
+      hidePixModal();
+      if (pendingCartItem) {
+        const discountedPrice = pendingCartItem.discountedPrice || pixDiscountPrices[normalizeProductName(pendingCartItem.name)];
+        if (choice === 'sim' && discountedPrice) {
+          pendingCartItem.price = discountedPrice;
+          pendingCartItem.pixDiscountApplied = true;
+        } else {
+          pendingCartItem.price = pendingCartItem.originalPrice || pendingCartItem.price;
+          pendingCartItem.pixDiscountApplied = false;
+        }
+        addItemToCart(pendingCartItem);
+        pendingCartItem = null;
+      }
+    }
+
+    pixModalYes?.addEventListener('click', () => handlePixResponse('sim'));
+    pixModalNo?.addEventListener('click', () => handlePixResponse('nao'));
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        hidePixModal(true);
+      }
+    });
+
+    function saveCart() {
+      localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
+
+    function addItemToCart(item) {
+      if (!item) return;
+      if (!item.originalPrice) {
+        item.originalPrice = item.price;
+      }
+      cart.push(item);
+      updateCartUI();
+
+      const cartIcon = document.getElementById('cart-icon');
+      if (cartIcon) {
+        cartIcon.classList.add('cart-icon-animation');
+        setTimeout(() => {
+          cartIcon.classList.remove('cart-icon-animation');
+        }, 500);
+      }
+
+      const notification = document.getElementById('cart-notification');
+      if (notification) {
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById('cart-badge');
+      const dropdown = document.getElementById('cart-dropdown');
+
+      if (!badge || !dropdown) return;
+
+      if (cart.length === 0) {
+        badge.style.display = 'none';
+        dropdown.innerHTML = '<p>Carrinho vazio</p>';
+        saveCart();
+        return;
+      }
+
+      badge.style.display = 'inline-block';
+      badge.textContent = cart.length;
+
+      dropdown.innerHTML = ''; // Limpa o conteúdo atual para recriar
+
+      cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+
+        itemDiv.innerHTML = `
+                <img src="${item.img}" alt="${item.name}">
+                <div class="info">
+                    <h4>${item.name}</h4>
+                    <p>${item.price}</p>
+                    <button class="remove-btn" data-index="${index}">Remover</button>
+                </div>
+            `;
+        dropdown.appendChild(itemDiv);
+      });
+
+      const finishBtn = document.createElement('button');
+      finishBtn.textContent = 'Finalizar Compra';
+      finishBtn.style.cssText = `
+                width: 100%; padding: 10px; background: #F58220; color: white;
+                border: none; border-radius: 5px; text-transform: uppercase; cursor: pointer; margin-top: 5px; font-weight: 800;
+            `;
+
+      finishBtn.addEventListener('click', () => {
+        window.location.href = 'finalizar.html';
+      });
+
+      dropdown.appendChild(finishBtn);
+
+      document.querySelectorAll('.remove-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const idx = e.target.getAttribute('data-index');
+          cart.splice(idx, 1);
+          updateCartUI();
+        });
+      });
+
+      saveCart();
+      dropdown.style.display = 'block';
+    }
+
+    document.querySelectorAll('.card .add-to-cart').forEach(button => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.card');
+        if (!card) return;
+        const img = card.querySelector('img')?.src;
+        const name = card.querySelector('h3')?.textContent;
+        const price = card.querySelector('.price')?.textContent;
+
+        if (!img || !name || !price) return;
+
+        const normalizedProductName = normalizeProductName(name);
+        const discountedPrice = pixDiscountPrices[normalizedProductName] || null;
+
+        pendingCartItem = {
+          img,
+          name,
+          price,
+          originalPrice: price,
+          discountedPrice,
+          pixDiscountApplied: false
+        };
+        showPixModal();
+      });
+    });
+
+    const individualBtn = document.querySelector('.container1 .add-to-cart');
+    if (individualBtn) {
+      individualBtn.addEventListener('click', () => {
+        const name = document.querySelector('.product-details h1')?.textContent;
+        const img = document.querySelector('.product-image img')?.src;
+        const price = document.querySelector('.product-details .price')?.textContent;
+
+        if (!img || !name || !price) return;
+
+        const normalizedProductName = normalizeProductName(name);
+        const discountedPrice = pixDiscountPrices[normalizedProductName] || null;
+
+        pendingCartItem = {
+          img,
+          name,
+          price,
+          originalPrice: price,
+          discountedPrice,
+          pixDiscountApplied: false
+        };
+        showPixModal();
+      });
+    }
+
+    const cartIcon = document.getElementById('cart-icon');
+    const cartDropdown = document.getElementById('cart-dropdown');
+
+    if (cartIcon && cartDropdown) {
+      cartIcon.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (cartDropdown.style.display === 'block') {
+          cartDropdown.style.display = 'none';
+        } else {
+          updateCartUI();
+        }
+      });
+
+      cartDropdown.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!cartIcon.contains(e.target) && !cartDropdown.contains(e.target)) {
+          cartDropdown.style.display = 'none';
+        }
+      });
+    }
+
+    updateCartUI();
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById('search-input');
+      const bookCardsContainer = document.getElementById('book-cards-container');
+      const bookCards = bookCardsContainer ? bookCardsContainer.querySelectorAll('.card') : [];
+
+      if (searchInput && bookCards.length > 0) {
+        searchInput.addEventListener('keyup', function () {
+          const searchTerm = searchInput.value.toLowerCase();
+
+          bookCards.forEach(card => {
+            const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+            const publisher = card.querySelector('p:nth-of-type(1)')?.textContent.toLowerCase() || '';
+
+            if (title.includes(searchTerm) || publisher.includes(searchTerm)) {
+              card.style.display = 'block'; // Show the card
+            } else {
+              card.style.display = 'none'; // Hide the card
+            }
+          });
+        });
+      } else {
+        console.warn("Search input or book cards container not found. Search functionality might not work as expected.");
+      }
+    });
+  </script>
+
+</body>
+
+</html>

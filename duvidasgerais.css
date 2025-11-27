@@ -1,0 +1,164 @@
+.faq-section {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.faq-item {
+    margin-top: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 7px 20px;
+    background-color: #F58220;
+    color: #fff;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+    /* REMOVA OU COMENTE AS LINHAS ABAIXO PARA PERMITIR A QUEBRA DE LINHA */
+    /* white-space: nowrap; */ /* 🔹 Impede quebra de linha */
+    /* overflow: hidden; */   /* 🔹 Esconde o excesso */
+    /* text-overflow: ellipsis; */ /* 🔹 Adiciona "..." caso o texto seja muito grande */
+    min-height: 50px; /* Mantém um tamanho uniforme */
+    /* Adicione estas propriedades para quebra de linha e ajuste de texto */
+    flex-wrap: wrap; /* Permite que os itens dentro do flexbox quebrem a linha */
+    text-align: left; /* Alinha o texto à esquerda, se desejar */
+}
+.faq-question:hover {
+    background-color: #f58320a9;
+}
+
+.duvidas1 {
+    margin-top: 80px;
+    background-color: white;
+    padding: 10px;
+}
+
+.faq-answer {
+    margin-top: -10px;
+    max-height: 0;
+    overflow: hidden;
+    background:white;
+     border: 1px solid #F58220; /* Adiciona uma borda fina branca */
+    border-top: none; /* Remove a borda superior para não afetar a parte azul */
+    color: #F58220;
+    text-align: left;
+    padding: 0 50px;
+    border-radius: 0 0 10px 10px;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+}
+.faq-item.active .faq-answer {
+    max-height: 2500px; /* Aumente este valor para algo bem maior que o texto esperado */
+    padding: 25px 20px;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+    margin-left: 10px; /* 🔹 Dá um espaçamento para não grudar no texto */
+}
+
+.faq-item.active .arrow {
+    transform: rotate(180deg);
+}
+
+
+h1 {
+    font-size: 39px;
+    font-weight: bold;
+}
+
+
+
+@media (max-width: 768px){
+    .faq-answer {
+      
+        max-height: 0;
+        overflow: hidden;
+        background:white;
+         border: 1px solid #F58220; /* Adiciona uma borda fina branca */
+        border-top: none; /* Remove a borda superior para não afetar a parte azul */
+        color: #F58220;
+        text-align: left;
+        padding: 0 50px;
+        border-radius: 0 0 10px 10px;
+        transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+    }
+    .faq-item.active .faq-answer {
+        max-height: 1500px; /* Aumente este valor para algo bem maior que o texto esperado */
+        padding: 45px 20px;
+    }
+    .faq-question{
+     margin-top: -5px;
+    }
+}
+
+@media (max-width:480px) {
+    .faq-question {
+        margin-top: -10px;
+        font-size: 11px;
+        margin-left: -10px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          font-weight: bold;
+          padding: 7px 20px;
+          background-color: #F58220;
+          color: #fff;
+          border-radius: 10px;
+          transition: background-color 0.3s;
+          white-space: nowrap; /* 🔹 Impede quebra de linha */
+          overflow: hidden; /* 🔹 Esconde o excesso */
+          text-overflow: ellipsis; /* 🔹 Adiciona "..." caso o texto seja muito grande */
+          min-height: 50px; /* 🔹 Mantém um tamanho uniforme */
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 1500px; /* Aumente este valor para algo bem maior que o texto esperado */
+        padding: 55px 10px;
+    }
+      
+}
+
+@media (max-width:390px) {
+    .faq-question {
+        margin-top: -10px;
+        font-size: 9px;
+        margin-left: -17px;
+        margin-right: 2px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          font-weight: bold;
+          padding: 7px 30px;
+          background-color: #F58220;
+          color: #fff;
+          border-radius: 10px;
+          transition: background-color 0.3s;
+          white-space: nowrap; /* 🔹 Impede quebra de linha */
+          overflow: hidden; /* 🔹 Esconde o excesso */
+          text-overflow: ellipsis; /* 🔹 Adiciona "..." caso o texto seja muito grande */
+          min-height: 50px; /* 🔹 Mantém um tamanho uniforme */
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 1500px; /* Aumente este valor para algo bem maior que o texto esperado */
+        padding: 68px 10px;
+    }
+    .arrow {
+        transition: transform 0.3s ease;
+        margin-left: -2px;
+        margin-right: -5px; /* 🔹 Dá um espaçamento para não grudar no texto */
+    }
+      
+}

@@ -1,0 +1,5 @@
+*.zip
+*.mp4
+Capas*/   # ignora as pastas enormes de capas
+*.png
+*.jpeg
