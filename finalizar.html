@@ -781,17 +781,34 @@ else {
     overlay.classList.remove('hidden');
     successModal.classList.remove('hidden');
 
-    sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
-    sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-    sessionStorage.setItem(
-        'lastOrderId',
-        result.cielo_response.MerchantOrderId ||
-        result.cielo_response.Payment.PaymentId ||
-        'N/A'
-    );
+    const paymentId = result.cielo_response.Payment.PaymentId;
 
-    localStorage.removeItem(cartKey);
-    renderCartSummary();
+    // 🔥 Polling para cartão e débito (igual ao PIX)
+    let cardInterval = setInterval(async () => {
+        try {
+            const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
+            const statusData = await statusResponse.json();
+
+            console.log("Status atual cartão/débito:", statusData);
+
+            if (statusData.status === 2) {
+                clearInterval(cardInterval);
+
+                // salvar resumo
+                sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
+                sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+                sessionStorage.setItem('lastOrderId', paymentId);
+
+                // limpar carrinho
+                localStorage.removeItem(cartKey);
+                renderCartSummary();
+            }
+
+        } catch (err) {
+            console.error("Erro ao verificar status cartão/débito:", err);
+        }
+    }, 5000);
+
 }
 
                         
