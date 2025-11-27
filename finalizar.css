@@ -1217,3 +1217,22 @@ h2 {
     border-radius: 5px;
     cursor: pointer;
 }
+
+
+
+/* Tela de resumo (tanto pedido normal quanto PIX) */
+#order-summary-screen {
+    position: relative;      /* nada de fixed aqui */
+    min-height: auto;
+    padding: 40px 0;
+    overflow-y: visible;     /* deixa o conteúdo crescer */
+}
+
+#order-summary-screen .summary-content {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
