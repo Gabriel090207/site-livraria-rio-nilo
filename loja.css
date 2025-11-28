@@ -342,6 +342,77 @@ header {
   margin-bottom: 10px;
 }
 
+.card-slider {
+  position: relative;
+  width: 100%;
+  height: clamp(180px, 32vw, 260px);
+  margin-bottom: 12px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.card-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.card-slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.card-slider button:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.card-slider .prev-slide {
+  left: 8px;
+}
+
+.card-slider .next-slide {
+  right: 8px;
+}
+
+/* Ajusta altura do slider em telas menores para manter propor��o das capas */
+@media (max-width: 768px) {
+  .card-slider {
+    height: clamp(160px, 45vw, 220px);
+  }
+
+  .card-slider {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .card-slider img {
+        width: 100% !important; 
+        height: 100% !important;
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+  .card-slider {
+    height: clamp(140px, 60vw, 200px);
+  }
+}
+
 .card h3 {
   font-size: 20px;
   margin-bottom: 5px;
@@ -1289,8 +1360,7 @@ li a {
   }
   
   /* barra lateral com filtros etc */
-  .container {
-  
+  .container{
     display: flex;
     margin: 20px;
   }
@@ -1693,5 +1763,16 @@ li a {
       transform: scale(1.1); /* Aumenta um pouco o botão */
       transition: all 0.3s ease; /* Transição suave */
   }
-}
 
+  .card-slider {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .card-slider img {
+        width: 100% !important; 
+        height: 100% !important;
+        margin: 0 !important;
+    }
+}

@@ -7,11 +7,11 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-.computador{
+.computador {
   display: block;
 }
 
-.mobile{
+.mobile {
   display: none;
 }
 
@@ -23,42 +23,53 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
 .cookie-consent-banner {
   position: fixed;
   bottom: 20px;
- right: 35%; /* Adjust as needed for distance from the bottom */
+  right: 35%;
+  /* Adjust as needed for distance from the bottom */
   /* Position the left edge at the horizontal center */
-  transform: translateX(-50%); /* Shift the element left by half its own width */
+  transform: translateX(-50%);
+  /* Shift the element left by half its own width */
   /* Remove or adjust these if they conflict with centering */
   /* margin-right: 640px; */
   /* margin-bottom: 30px; */
   width: 550px;
-  max-width: 90%; /* Using 90% or a similar value is often better than 100% to ensure some padding on very small screens */
+  max-width: 90%;
+  /* Using 90% or a similar value is often better than 100% to ensure some padding on very small screens */
   background-color: #fff;
   color: #333;
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  
+
   opacity: 0;
-  transform: translateY(100px) translateX(-50%); /* Apply transform for centering AND animation */
-  
+  transform: translateY(100px) translateX(-50%);
+  /* Apply transform for centering AND animation */
+
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  
+
   display: none;
 }
+
 .cookie-consent-banner.show {
-  display: block; /* Torna visível */
-  opacity: 1; /* Transição para totalmente visível */
-  transform: translateY(0); /* Retorna à posição original */
+  display: block;
+  /* Torna visível */
+  opacity: 1;
+  /* Transição para totalmente visível */
+  transform: translateY(0);
+  /* Retorna à posição original */
 }
 
 .cookie-consent-banner p {
-  margin-bottom: 20px; /* Mais espaço para o parágrafo */
+  margin-bottom: 20px;
+  /* Mais espaço para o parágrafo */
   font-size: 0.9em;
   line-height: 1.5;
-  color: #555; /* Cor do texto um pouco mais clara */
+  color: #555;
+  /* Cor do texto um pouco mais clara */
 }
 
 .cookie-consent-banner p a {
@@ -73,35 +84,43 @@ html {
 
 .cookie-buttons {
   display: flex;
-  flex-wrap: wrap; /* Permite que os botões quebrem a linha se não houver espaço */
+  flex-wrap: wrap;
+  /* Permite que os botões quebrem a linha se não houver espaço */
   justify-content: center;
-  gap: 10px; /* Menor espaço entre os botões */
+  gap: 10px;
+  /* Menor espaço entre os botões */
 }
 
 .btn-cookie-accept,
 .btn-cookie-reject {
-  padding: 10px 18px; /* Ajusta o padding dos botões */
+  padding: 10px 18px;
+  /* Ajusta o padding dos botões */
   border: none;
   border-radius: 5px;
-  font-size: 0.85em; /* Fonte um pouco menor */
+  font-size: 0.85em;
+  /* Fonte um pouco menor */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  flex-grow: 1; /* Permite que os botões cresçam para preencher o espaço */
-  min-width: 120px; /* Largura mínima para botões */
+  flex-grow: 1;
+  /* Permite que os botões cresçam para preencher o espaço */
+  min-width: 120px;
+  /* Largura mínima para botões */
 }
 
 .btn-cookie-accept {
-  background-color:#F58220;
+  background-color: #F58220;
   color: white;
 }
 
 .btn-cookie-accept:hover {
   background-color: #f58320ad;
-  transform: translateY(-2px); /* Efeito sutil ao passar o mouse */
+  transform: translateY(-2px);
+  /* Efeito sutil ao passar o mouse */
 }
 
 .btn-cookie-reject {
-  background-color: white; /* Cinza para rejeitar, menos agressivo que vermelho */
+  background-color: white;
+  /* Cinza para rejeitar, menos agressivo que vermelho */
   color: #F58220;
   border: 1px solid #F58220;
 }
@@ -111,6 +130,7 @@ html {
   color: white;
   transform: translateY(-2px);
 }
+
 /* barra de cima */
 .navbar {
   position: fixed;
@@ -122,10 +142,75 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 1000; /* Garante que fique por cima de outros elementos */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra opcional para destacar */
+  z-index: 1000;
+  /* Garante que fique por cima de outros elementos */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  /* sombra opcional para destacar */
 }
 
+.hamburger {
+  display: none;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+
+  .hamburger {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #F58220;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  /* Transforma o menu em uma "Gaveta" lateral */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* Começa escondido fora da tela */
+    width: 70%;
+    /* Ocupa 70% da tela */
+    height: 100vh;
+    background-color: white;
+    flex-direction: column;
+    /* Um link embaixo do outro */
+    justify-content: center;
+    /* Centraliza no meio da tela */
+    align-items: center;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    transition: 0.4s ease;
+    gap: 40px;
+    /* Espaço entre os links */
+  }
+
+  /* Classe que ativa o menu (será colocada pelo JavaScript) */
+  .nav-menu.active {
+    right: 0;
+    /* Traz o menu para a tela */
+  }
+
+  /* Aumenta o tamanho dos links no celular para facilitar o toque */
+  .nav-menu li a {
+    font-size: 22px;
+  }
+}
 
 .navbar .logo {
 
@@ -229,7 +314,7 @@ html {
 
 
   width: 100%;
-  
+
 
   /* Cobre todo o espaço sem distorcer */
 }
@@ -262,7 +347,7 @@ html {
   padding: 50px;
 }
 
-#buscar-escola{
+#buscar-escola {
   position: relative;
   overflow: hidden;
   padding-top: 100px;
@@ -270,32 +355,31 @@ html {
   text-align: center;
 }
 
-section#buscar-escola h2{
+section#buscar-escola h2 {
   font-size: 2.7em;
 }
 
-section#buscar-escola p{
+section#buscar-escola p {
   font-size: 22px;
 }
 
-div.secaoescola{
-  margin: 30px
-  auto 0;
+div.secaoescola {
+  margin: 30px auto 0;
   display: inline-block;
 }
 
-button.botaoescolas{
+button.botaoescolas {
   border: none;
   background: none;
 }
 
-img.escola{
+img.escola {
   width: 370px;
   height: auto;
   cursor: pointer;
 }
 
-img.escola:hover{
+img.escola:hover {
   transform: scale(1.1);
   transition: 0.5s;
 }
@@ -340,7 +424,7 @@ img.escola:hover{
   cursor: pointer;
   display: none;
 }
- 
+
 .skip-button:hover {
   background: #c96415;
 }
@@ -365,23 +449,24 @@ img.escola:hover{
   height: 50vh;
   object-fit: cover;
   overflow: hidden;
-  background: black; /* opcional, para cobrir barras pretas */
+  background: black;
+  /* opcional, para cobrir barras pretas */
 }
 
 
-.text_title{
+.text_title {
   text-align: center;
   font-size: 2.7em;
   padding-top: 70px;
 }
 
-.text_paragraph{
+.text_paragraph {
   text-align: center;
   font-size: 20px;
   padding-top: 20px;
 }
 
-#sobre-livraria{
+#sobre-livraria {
   display: flex;
   align-items: center;
   padding: 70px 80px;
@@ -396,6 +481,7 @@ img.escola:hover{
   /* Cor verde neon */
   margin: 0 10px;
 }
+
 .line1 {
   width: 1750px;
   /* Define o comprimento das linhas */
@@ -405,74 +491,76 @@ img.escola:hover{
   margin: 0 10px;
 }
 
-.texto{
-  flex: 1; 
-   background-size: cover; 
-   background-position: center; 
-   background-repeat: no-repeat; 
-   padding: 60px 30px; color: black; 
-   border-radius: 10px; 
-   margin-left: 30px;
+.texto {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 30px;
+  color: black;
+  border-radius: 10px;
+  margin-left: 30px;
 }
 
-.texto2{
+.texto2 {
   margin-bottom: 20px;
 }
+
 .icon {
   width: 105px;
   /* Ajuste o tamanho do ícone */
   height: auto;
 }
 
-footer{
+footer {
   background-color: #F58220;
   color: #000;
   padding: 50px 80px;
 }
 
-.footer{
-  display: flex; 
+.footer {
+  display: flex;
   flex-wrap: wrap;
   gap: 40px;
 }
 
-footer a{
+footer a {
   text-decoration: none;
   color: black;
 }
 
-footer a:hover{
+footer a:hover {
   color: #333;
 }
 
-.rodapé{
-  
+.rodapé {
+
   list-style: none;
   padding: 0;
   line-height: 1.8;
   margin-right: 130px;
 }
 
-.redesocial{
+.redesocial {
   display: flex;
   gap: 20px;
   align-items: center;
   font-weight: bold;
 }
 
-.redeicones{
+.redeicones {
   color: #000;
   font-size: 24px;
   font-weight: bold;
 }
 
-.formapagamento{
+.formapagamento {
   display: flex;
   gap: 15px;
   align-items: center;
 }
 
-.politica{
+.politica {
   border-top: 1px solid #444;
   margin-top: 40px;
   padding-top: 20px;
@@ -482,144 +570,187 @@ footer a:hover{
 }
 
 .whatsapp-button {
-    position: fixed; /* Faz o botão flutuar na tela */
-    width: 60px; /* Largura do botão */
-    height: 60px; /* Altura do botão */
-    bottom: 40px; /* Distância da parte inferior da tela */
-    right: 40px; /* Distância da parte direita da tela */
-    background-color: #25d366; /* Cor de fundo do WhatsApp */
-    color: #FFF; /* Cor do ícone (se for um ícone de texto, mas geralmente usamos imagem) */
-    border-radius: 50px; /* Deixa o botão redondo */
-    text-align: center; /* Centraliza o conteúdo (ícone) */
-    font-size: 30px; /* Tamanho do ícone (se for um ícone de fonte) */
-    box-shadow: 2px 2px 3px #999; /* Sombra para dar profundidade */
-    z-index: 100; /* Garante que o botão fique acima de outros elementos */
-    display: flex; /* Para centralizar a imagem dentro do botão */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
+  position: fixed;
+  /* Faz o botão flutuar na tela */
+  width: 60px;
+  /* Largura do botão */
+  height: 60px;
+  /* Altura do botão */
+  bottom: 40px;
+  /* Distância da parte inferior da tela */
+  right: 40px;
+  /* Distância da parte direita da tela */
+  background-color: #25d366;
+  /* Cor de fundo do WhatsApp */
+  color: #FFF;
+  /* Cor do ícone (se for um ícone de texto, mas geralmente usamos imagem) */
+  border-radius: 50px;
+  /* Deixa o botão redondo */
+  text-align: center;
+  /* Centraliza o conteúdo (ícone) */
+  font-size: 30px;
+  /* Tamanho do ícone (se for um ícone de fonte) */
+  box-shadow: 2px 2px 3px #999;
+  /* Sombra para dar profundidade */
+  z-index: 100;
+  /* Garante que o botão fique acima de outros elementos */
+  display: flex;
+  /* Para centralizar a imagem dentro do botão */
+  justify-content: center;
+  /* Centraliza horizontalmente */
+  align-items: center;
+  /* Centraliza verticalmente */
 }
 
 .whatsapp-button img {
-    width: 35px; /* Tamanho da imagem do ícone */
-    height: 35px; /* Altura da imagem do ícone */
+  width: 35px;
+  /* Tamanho da imagem do ícone */
+  height: 35px;
+  /* Altura da imagem do ícone */
 }
 
 /* Efeito de hover (quando o mouse passa por cima) */
 .whatsapp-button:hover {
-    transform: scale(1.1); /* Aumenta um pouco o botão */
-    transition: all 0.3s ease; /* Transição suave */
+  transform: scale(1.1);
+  /* Aumenta um pouco o botão */
+  transition: all 0.3s ease;
+  /* Transição suave */
 }
 
-
-
-
-@media (max-width: 768px){
+@media (max-width: 768px) {
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
   }
-  
+
   body {
     background: #ffffff;
     color: #000000;
   }
-  
-  html, body {
+
+  html,
+  body {
     overflow-x: hidden;
   }
-  
-  
+
+
   .cookie-consent-banner {
-    position: fixed; /* Continua fixo na tela */
-    bottom: 20px; /* Distância do fundo */
-    right: 20px; /* Distância da direita para posicionar no canto inferior direito */
+    position: fixed;
+    /* Continua fixo na tela */
+    bottom: 20px;
+    /* Distância do fundo */
+    right: 20px;
+    /* Distância da direita para posicionar no canto inferior direito */
     /* OU use left: 50%; transform: translateX(-50%); para centralizar na parte inferior */
     margin-right: 640px;
     margin-bottom: 30px;
-    width: 550px; /* Largura do card */
-    max-width: 100%; /* Garante que não ultrapasse a largura da tela em dispositivos pequenos */
-    background-color: #fff; /* Fundo branco para o card */
-    color: #333; /* Cor do texto */
+    width: 550px;
+    /* Largura do card */
+    max-width: 100%;
+    /* Garante que não ultrapasse a largura da tela em dispositivos pequenos */
+    background-color: #fff;
+    /* Fundo branco para o card */
+    color: #333;
+    /* Cor do texto */
     padding: 25px;
-    border-radius: 8px; /* Cantos arredondados */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada */
+    border-radius: 8px;
+    /* Cantos arredondados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* Sombra mais pronunciada */
     z-index: 1000;
-    
+
     opacity: 0;
-      transform: translateY(100px); /* Começa 100px abaixo da posição final */
-      
-      /* Transição para a animação */
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Duração e tipo de suavização */
-  
-      /* Importante: Mantenha display: none aqui se você quer que ele não ocupe espaço antes de aparecer */
-      display: none; /* Transições para animação */
+    transform: translateY(100px);
+    /* Começa 100px abaixo da posição final */
+
+    /* Transição para a animação */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    /* Duração e tipo de suavização */
+
+    /* Importante: Mantenha display: none aqui se você quer que ele não ocupe espaço antes de aparecer */
+    display: none;
+    /* Transições para animação */
   }
-  
+
   .cookie-consent-banner.show {
-    display: block; /* Torna visível */
-    opacity: 1; /* Transição para totalmente visível */
-    transform: translateY(0); /* Retorna à posição original */
+    display: block;
+    /* Torna visível */
+    opacity: 1;
+    /* Transição para totalmente visível */
+    transform: translateY(0);
+    /* Retorna à posição original */
   }
-  
+
   .cookie-consent-banner p {
-    margin-bottom: 20px; /* Mais espaço para o parágrafo */
+    margin-bottom: 20px;
+    /* Mais espaço para o parágrafo */
     font-size: 0.9em;
     line-height: 1.5;
-    color: #555; /* Cor do texto um pouco mais clara */
+    color: #555;
+    /* Cor do texto um pouco mais clara */
   }
-  
+
   .cookie-consent-banner p a {
     color: #F58220;
     text-decoration: none;
     font-weight: bold;
   }
-  
+
   .cookie-consent-banner p a:hover {
     text-decoration: underline;
   }
-  
+
   .cookie-buttons {
     display: flex;
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha se não houver espaço */
+    flex-wrap: wrap;
+    /* Permite que os botões quebrem a linha se não houver espaço */
     justify-content: center;
-    gap: 10px; /* Menor espaço entre os botões */
+    gap: 10px;
+    /* Menor espaço entre os botões */
   }
-  
+
   .btn-cookie-accept,
   .btn-cookie-reject {
-    padding: 10px 18px; /* Ajusta o padding dos botões */
+    padding: 10px 18px;
+    /* Ajusta o padding dos botões */
     border: none;
     border-radius: 5px;
-    font-size: 0.85em; /* Fonte um pouco menor */
+    font-size: 0.85em;
+    /* Fonte um pouco menor */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    flex-grow: 1; /* Permite que os botões cresçam para preencher o espaço */
-    min-width: 120px; /* Largura mínima para botões */
+    flex-grow: 1;
+    /* Permite que os botões cresçam para preencher o espaço */
+    min-width: 120px;
+    /* Largura mínima para botões */
   }
-  
+
   .btn-cookie-accept {
-    background-color:#F58220;
+    background-color: #F58220;
     color: white;
   }
-  
+
   .btn-cookie-accept:hover {
     background-color: #f58320ad;
-    transform: translateY(-2px); /* Efeito sutil ao passar o mouse */
+    transform: translateY(-2px);
+    /* Efeito sutil ao passar o mouse */
   }
-  
+
   .btn-cookie-reject {
-    background-color: white; /* Cinza para rejeitar, menos agressivo que vermelho */
+    background-color: white;
+    /* Cinza para rejeitar, menos agressivo que vermelho */
     color: #F58220;
     border: 1px solid #F58220;
   }
-  
+
   .btn-cookie-reject:hover {
     background-color: #d16c14;
     color: white;
     transform: translateY(-2px);
   }
+
   /* barra de cima */
   .navbar {
     position: fixed;
@@ -631,28 +762,22 @@ footer a:hover{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 1000; /* Garante que fique por cima de outros elementos */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra opcional para destacar */
+    z-index: 1000;
+    /* Garante que fique por cima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* sombra opcional para destacar */
   }
-  
-  .logo1 {
-    
-    margin-left: -26px;
-    height: 30px;
-  }
-  
-  
-  
+
   .navbar>ul {
     list-style: none;
     display: flex;
     gap: 20px;
   }
-  
+
   .navbar ul li {
     position: relative;
   }
-  
+
   /* menu */
   .dropdown-menu {
     display: none;
@@ -663,49 +788,44 @@ footer a:hover{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 1000;
   }
-  
+
   .dropdown-menu li {
     display: block;
   }
-  
+
   .dropdown-menu li a {
     padding: 10px;
     display: block;
     color: black;
     text-decoration: none;
   }
-  
+
   .dropdown:hover .dropdown-menu {
     display: block;
   }
-  
+
   .dropdown-menu li a:hover {
     background-color: #f0f0f0;
     border-radius: 0px;
   }
-  
+
   .navbar ul li a {
-  margin-right: 5px;
+    margin-right: 5px;
     color: black;
     font-size: 14px;
     font-weight: bold;
-    margin-left: -32px;
     text-decoration: none;
     padding: 5px 10px;
     border-radius: 10px;
   }
-  
-  .faleconosco {
-    margin-right: -27px;
-  }
-  
+
   .navbar ul li a.active,
   .navbar ul li a:hover {
     background: #F58220;
     color: #fff;
     transition: 0.5s;
   }
-  
+
   /* carrossel */
   .carousel {
     position: relative;
@@ -717,36 +837,36 @@ footer a:hover{
     /* Remove margem para usar a tela toda */
     overflow: hidden;
   }
-  
+
   .carousel-inner {
     display: flex;
     height: 100%;
     transition: transform 0.5s ease-in-out;
   }
-  
+
   .carousel-item {
     min-width: 100%;
     height: 800px;
   }
-  
+
   .carousel-item img {
     margin-top: 15px;
-  
-  
+
+
     width: 100%;
-    
-  
+
+
     /* Cobre todo o espaço sem distorcer */
   }
-  
-  .computador{
+
+  .computador {
     display: none;
   }
-  
-  .mobile{
+
+  .mobile {
     display: flex;
   }
-  
+
   .prev,
   .next {
     margin-top: -30px;
@@ -761,63 +881,62 @@ footer a:hover{
     cursor: pointer;
     border-radius: 50%;
   }
-  
+
   .prev {
     margin-top: 50px;
     left: 10px;
   }
-  
+
   .next {
     margin-top: 50px;
     right: 10px;
   }
-  
+
   /*texto escola*/
   .texto__escola {
     text-align: center;
     padding: 50px;
   }
-  
-  #buscar-escola{
- 
+
+  #buscar-escola {
     position: relative;
     overflow: hidden;
     padding-top: 100px;
     padding-bottom: -20px;
     text-align: center;
   }
-  
-  section#buscar-escola h2{
-    
+
+  section#buscar-escola h2 {
+    margin-top: 60px !important;
+    display: block;
     font-size: 2.7em;
   }
-  
-  section#buscar-escola p{
+
+  section#buscar-escola p {
     font-size: 17px;
   }
-  
-  div.secaoescola{
-    margin: 30px
-    auto 0;
+
+  div.secaoescola {
+    margin: 30px auto 0;
     display: inline-block;
   }
-  
-  button.botaoescolas{
+
+  button.botaoescolas {
     border: none;
     background: none;
   }
-  
-  img.escola{
+
+  img.escola {
     width: 350px;
     height: auto;
     cursor: pointer;
   }
-  
-  img.escola:hover{
+
+  img.escola:hover {
     transform: scale(1.1);
     transition: 0.5s;
   }
-  
+
   /* css do pop up depois so tem que colocar o html*/
   .video-popup {
     position: fixed;
@@ -839,14 +958,14 @@ footer a:hover{
     color: white;
     padding: 20px;
   }
-  
+
   .video-popup video {
     max-width: 50%;
     height: auto;
     border: 3px solid white;
     border-radius: 8px;
   }
-  
+
   .skip-button {
     margin-top: 20px;
     padding: 10px 20px;
@@ -858,11 +977,11 @@ footer a:hover{
     cursor: pointer;
     display: none;
   }
-   
+
   .skip-button:hover {
     background: #c96415;
   }
-  
+
   .divider {
     display: flex;
     align-items: center;
@@ -873,7 +992,7 @@ footer a:hover{
     margin: auto;
     margin-top: 80px;
   }
-  
+
   #tutorialVideo {
     border: 5px solid #F58220;
     border-radius: 10px;
@@ -883,29 +1002,84 @@ footer a:hover{
     height: 50vh;
     object-fit: cover;
     overflow: hidden;
-    background: black; /* opcional, para cobrir barras pretas */
+    background: black;
+    /* opcional, para cobrir barras pretas */
   }
-  
-  
-  .text_title{
+
+
+  .text_title {
     text-align: center;
     font-size: 1.7em;
     padding-top: 70px;
   }
-  
-  .text_paragraph{
+
+  .text_paragraph {
     text-align: center;
     font-size: 17px;
     padding-top: 20px;
   }
-  
-  #sobre-livraria{
-    display: flex;
-    align-items: center;
-    padding: 70px 80px;
-    gap: 50px;
+
+  /* Ajusta o container principal da seção */
+  #sobre-livraria {
+    padding: 20px !important;
+    margin: 0 !important;
+    display: block !important;
+    /* Remove o comportamento de linha */
+    width: 100%;
+    overflow: hidden;
+    /* Evita rolagem horizontal */
   }
-  
+
+  /* Força a div que segura a imagem e o texto a ficar em coluna */
+  #sobre-livraria>div {
+    display: flex !important;
+    flex-direction: column !important;
+    /* Um embaixo do outro */
+    margin-top: 0 !important;
+    width: 100% !important;
+    align-items: center;
+  }
+
+  /* A DIV que segura a imagem (tinha largura fixa de 450px no HTML) */
+  /* O !important aqui é essencial para vencer o estilo inline do HTML */
+  #sobre-livraria>div>div:first-child {
+    flex: none !important;
+    width: 100% !important;
+    /* Ocupa a largura da tela */
+    height: auto !important;
+    /* Altura automática */
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  /* A Imagem em si */
+  .logo2 {
+    width: 100% !important;
+    max-width: 300px !important;
+    /* Limita o tamanho para não ficar gigante */
+    height: auto !important;
+    margin: 0 auto !important;
+    margin-top: 50px !important;
+    display: block;
+    object-fit: contain;
+  }
+
+  /* A caixa de Texto */
+  .texto {
+    width: 100% !important;
+    margin: 10px 0 0 0 !important;
+    /* Dá um espacinho da imagem */
+    padding: 10px !important;
+    text-align: center;
+    /* Centraliza o texto */
+  }
+
+  /* O Título "Sobre a Livraria" */
+  .texto2 {
+    margin: 0 !important;
+    margin-bottom: 5px !important;
+  }
+
   .line {
     width: 800px;
     /* Define o comprimento das linhas */
@@ -914,6 +1088,7 @@ footer a:hover{
     /* Cor verde neon */
     margin: 0 10px;
   }
+
   .line1 {
     width: 1750px;
     /* Define o comprimento das linhas */
@@ -922,104 +1097,68 @@ footer a:hover{
     /* Cor verde neon */
     margin: 0 10px;
   }
-  
-  .logo2 {
-    margin-top: -80px;
-    
-    max-width: 970px;
-    margin-left: -340px;
-   
-    height: -70px; 
-    object-fit: cover;
-          
-  }
-  
-  #sobre-livraria{
-    margin-top: -40px;
-  }
-  
-  .fundo {
-    flex: 0 0 650px; 
-    height: 00px; background-color: white; 
-    margin-left: -730px; display: 
-    flex; justify-content: center; 
-    align-items: center; 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  }
-  
-  
-  .texto {
-    margin-top: 20px;
-    flex: 1;  background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    padding: 60px 30px; color: black; 
-    border-radius: 10px;
-    margin-right: -85px;
-    margin-left: -790px;
-  }
-  
+
   .icon {
     width: 105px;
     /* Ajuste o tamanho do ícone */
     height: auto;
   }
-  
-  footer{
+
+
+
+  footer {
     margin-left: -40px;
     background-color: #F58220;
     color: #000;
     padding: 50px 80px;
   }
-  
-  .footer{
-    display: flex; 
+
+  .footer {
+    display: flex;
     flex-wrap: wrap;
     gap: 40px;
   }
-  
-  footer a{
+
+  footer a {
     text-decoration: none;
     color: black;
   }
-  
-  footer a:hover{
+
+  footer a:hover {
     color: #333;
   }
-  
-  .rodapé{
-  margin-right: -10px;
+
+  .rodapé {
+    margin-right: -10px;
     text-align: left;
     list-style: none;
     padding: 0;
     line-height: 1.8;
   }
-   
-  
-  .sobre{
+
+  .sobre {
     margin-right: 80px;
-  
+
   }
-  
-  
-  
-  .redesocial{
+
+  .redesocial {
     display: flex;
     gap: 20px;
     margin-right: 30px;
     align-items: center;
     font-weight: bold;
   }
-  
-  .horario1  {
+
+  .horario1 {
     margin-top: -230px;
     margin-right: -10px;
     margin-left: 455px;
     display: flex;
     gap: 20px;
     align-items: center;
-  
+
   }
+
   .horario {
     margin-top: 0px;
     margin-right: -10px;
@@ -1027,26 +1166,27 @@ footer a:hover{
     display: flex;
     gap: 20px;
     align-items: center;
-  
+
   }
-  
-  .contatos{
-   margin-left: -50px;
-   margin-bottom: -50px;
+
+  .contatos {
+    margin-left: -50px;
+    margin-bottom: -50px;
   }
-  .redeicones{
+
+  .redeicones {
     color: #000;
     font-size: 24px;
     font-weight: bold;
   }
-  
-  .formapagamento{
+
+  .formapagamento {
     display: flex;
     gap: 15px;
     align-items: center;
   }
-  
-  .politica{
+
+  .politica {
     border-top: 1px solid #444;
     margin-top: 40px;
     padding-top: 20px;
@@ -1054,62 +1194,83 @@ footer a:hover{
     color: #000;
     font-weight: bold;
   }
-  
+
   .politica1 {
     border-top: 1px solid #444;
     margin-top: -40px;
     padding-top: 20px;
     font-size: 14px;
-    
-   
+
+
     color: #000;
     font-weight: bold;
   }
-  
-  
+
+
   .whatsapp-button {
-      position: fixed; /* Faz o botão flutuar na tela */
-      width: 60px; /* Largura do botão */
-      height: 60px; /* Altura do botão */
-      bottom: 40px; /* Distância da parte inferior da tela */
-      right: 40px; /* Distância da parte direita da tela */
-      background-color: #25d366; /* Cor de fundo do WhatsApp */
-      color: #FFF; /* Cor do ícone (se for um ícone de texto, mas geralmente usamos imagem) */
-      border-radius: 50px; /* Deixa o botão redondo */
-      text-align: center; /* Centraliza o conteúdo (ícone) */
-      font-size: 30px; /* Tamanho do ícone (se for um ícone de fonte) */
-      box-shadow: 2px 2px 3px #999; /* Sombra para dar profundidade */
-      z-index: 100; /* Garante que o botão fique acima de outros elementos */
-      display: flex; /* Para centralizar a imagem dentro do botão */
-      justify-content: center; /* Centraliza horizontalmente */
-      align-items: center; /* Centraliza verticalmente */
+    position: fixed;
+    /* Faz o botão flutuar na tela */
+    width: 60px;
+    /* Largura do botão */
+    height: 60px;
+    /* Altura do botão */
+    bottom: 40px;
+    /* Distância da parte inferior da tela */
+    right: 40px;
+    /* Distância da parte direita da tela */
+    background-color: #25d366;
+    /* Cor de fundo do WhatsApp */
+    color: #FFF;
+    /* Cor do ícone (se for um ícone de texto, mas geralmente usamos imagem) */
+    border-radius: 50px;
+    /* Deixa o botão redondo */
+    text-align: center;
+    /* Centraliza o conteúdo (ícone) */
+    font-size: 30px;
+    /* Tamanho do ícone (se for um ícone de fonte) */
+    box-shadow: 2px 2px 3px #999;
+    /* Sombra para dar profundidade */
+    z-index: 100;
+    /* Garante que o botão fique acima de outros elementos */
+    display: flex;
+    /* Para centralizar a imagem dentro do botão */
+    justify-content: center;
+    /* Centraliza horizontalmente */
+    align-items: center;
+    /* Centraliza verticalmente */
   }
-  
+
   .whatsapp-button img {
-      width: 35px; /* Tamanho da imagem do ícone */
-      height: 35px; /* Altura da imagem do ícone */
+    width: 35px;
+    /* Tamanho da imagem do ícone */
+    height: 35px;
+    /* Altura da imagem do ícone */
   }
-  
+
   /* Efeito de hover (quando o mouse passa por cima) */
   .whatsapp-button:hover {
-      transform: scale(1.1); /* Aumenta um pouco o botão */
-      transition: all 0.3s ease; /* Transição suave */
+    transform: scale(1.1);
+    /* Aumenta um pouco o botão */
+    transition: all 0.3s ease;
+    /* Transição suave */
   }
-  
+
   .texto2 {
     margin-bottom: -30px;
     margin-top: 390px;
-    flex: 1;  background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    padding: 60px 30px; color: black; 
+    flex: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 60px 30px;
+    color: black;
     border-radius: 10px;
     margin-left: -30px;
   }
-  
+
 }
 
-@media (max-width:480px){
+@media (max-width:480px) {
   #tutorialVideo {
     border: 5px solid #F58220;
     border-radius: 10px;
@@ -1119,33 +1280,34 @@ footer a:hover{
     height: 30vh;
     object-fit: cover;
     overflow: hidden;
-    background: black; /* opcional, para cobrir barras pretas */
+    background: black;
+    /* opcional, para cobrir barras pretas */
   }
+
   .logo2 {
     margin-top: -80px;
-    
     max-width: 970px;
     margin-left: -630px;
-   
-    height: -70px; 
+    height: -70px;
     object-fit: cover;
-          
+
   }
 
-  .contatos{
+  .contatos {
     margin-left: 0px;
     margin-bottom: -50px;
-   }
+  }
 
-   .horario1  {
+  .horario1 {
     margin-top: -30px;
     margin-right: -10px;
     margin-left: 111px;
     display: flex;
     gap: 20px;
     align-items: center;
-  
+
   }
+
   .horario {
     margin-top: 0px;
     margin-right: -10px;
@@ -1153,53 +1315,39 @@ footer a:hover{
     display: flex;
     gap: 20px;
     align-items: center;
-  
+
   }
-  
+
 }
 
-@media(max-width:390px){
+@media(max-width:390px) {
 
-    
-  html, body {
+
+  html,
+  body {
     overflow-x: hidden;
   }
-  
+
   .logo2 {
     margin-top: -80px;
-    
     max-width: 370px;
     margin-left: -720px;
-   
-    height: -30px; 
+    height: -30px;
     object-fit: cover;
-          
-  }
 
+  }
 
   .logo1 {
- margin-top: -50px;
-    margin-left: 116px;
     height: 30px;
   }
-  
-  
-    
-  #buscar-escola{
- margin-top: -250px;
+
+  #buscar-escola {
+    margin-top: -250px;
     position: relative;
     overflow: hidden;
     padding-top: 100px;
     padding-bottom: -20px;
     text-align: center;
   }
-  .navbar>ul {
-    margin-left: -230px;
-   margin-right: 50px;
-    margin-top: 30px;
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
-  
+
 }

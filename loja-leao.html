@@ -10,6 +10,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
   <link rel="stylesheet" href="loja.css">
+  <style>
+    /* Ajuste local para não cortar capas nos slides desta loja */
+    .card-slider {
+      height: 260px;
+    }
+
+    .card-slider img {object-fit: contain;
+    }
+    
+    .card[data-fit="cover"]
+
+    .card-slider img {object-fit: cover;
+    }
+  </style>
 </head>
 
 <body>
@@ -24,7 +38,7 @@
       <i class="fas fa-times" id="close-menu"></i>
     </div>
     <ul>
-      <li><i class="fas fa-home"></i><a href="index.html">Início</a></li>
+      <li><i class="fas fa-home"></i><a href="index.html">Inicio</a></li>
       <li><i class="fas fa-phone"></i> <a href="faleconosco.html">Contato </a></li>
       <li><i class="fas fa-info-circle"> <a href="quemsomos.html"></i>Sobre nós</a></li>
     </ul>
@@ -40,7 +54,7 @@
     <div class="header-icons">
       <i class="fas fa-user" id="userIcon"></i>
       <div id="profileInfo" class="profile-dropdown">
-        <p><strong>Usuário:</strong> João Silva</p>
+        <p><strong>Usuario:</strong> João Silva</p>
         <p><strong>Escola:</strong> Escola Santos Dumont</p> 
       </div>
       <div id="cart-container" style="position: relative;">
@@ -87,7 +101,7 @@
 
       <div class="cards" id="book-cards-container">
         <div class="card">
-          <img src="Capas Leao de Juda/HORA DE APRENDER - INTEGRADO - 1º ANO - ESTUDANTE.jpg" alt="Capa do livro Ensino Fundamental 1ºAno">
+          <img src="Capas Leao de Juda/HORA DE APRENDER - INTEGRADO - 1º ANO - ESTUDANTE.jpg" alt="Capa do livro Ensino Fundamental 1ºano">
           <h3>Ensino Fundamental 1ºano</h3>
           <p class="price">R$ 390,00</p>
           <button class="add-to-cart">Comprar</button>
@@ -116,25 +130,25 @@
           <p class="price">R$ 580,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-         <div class="card">
+         <div class="card" data-images="Capas Leao de Juda/EVOLUIR - FUND - 6º ANO - MOD1.jpg|Capas Leao de Juda/EVOLUIR - FUND - 6º ANO - MOD2.jpg|Capas Leao de Juda/EVOLUIR - FUND - 6º ANO - MOD3.jpg|Capas Leao de Juda/EVOLUIR - FUND - 6º ANO - MOD4.jpg">
           <img src="Capas Leao de Juda/EVOLUIR - FUND - 6º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 6ºano">
           <h3>Ensino Fundamental 6ºano</h3>
           <p class="price">R$ 770,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-         <div class="card">
+         <div class="card" data-images="Capas Leao de Juda/EVOLUIR - FUND - 7º ANO - MOD1.jpg|Capas Leao de Juda/EVOLUIR - FUND - 7º ANO - MOD2.jpg|Capas Leao de Juda/EVOLUIR - FUND - 7º ANO - MOD3.jpg|Capas Leao de Juda/EVOLUIR - FUND - 7º ANO - MOD4.jpg">
           <img src="Capas Leao de Juda/EVOLUIR - FUND - 7º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 7ºano">
           <h3>Ensino Fundamental 7ºano</h3>
           <p class="price">R$ 770,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-         <div class="card">
+         <div class="card" data-images="Capas Leao de Juda/EVOLUIR - FUND - 8º ANO - MOD1.jpg|Capas Leao de Juda/EVOLUIR - FUND - 8º ANO - MOD2.jpg|Capas Leao de Juda/EVOLUIR - FUND - 8º ANO - MOD3.jpg|Capas Leao de Juda/EVOLUIR - FUND - 8º ANO - MOD4.jpg">
           <img src="Capas Leao de Juda/EVOLUIR - FUND - 8º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 8ºano">
           <h3>Ensino Fundamental 8ºano</h3>
           <p class="price">R$ 770,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-         <div class="card">
+         <div class="card" data-images="Capas Leao de Juda/EVOLUIR - FUND - 9º ANO - MOD1.jpg|Capas Leao de Juda/EVOLUIR - FUND - 9º ANO - MOD2.jpg|Capas Leao de Juda/EVOLUIR - FUND - 9º ANO - MOD3.jpg|Capas Leao de Juda/EVOLUIR - FUND - 9º ANO - MOD4.jpg">
           <img src="Capas Leao de Juda/EVOLUIR - FUND - 9º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 9ºAno">
           <h3>Ensino Fundamental 9ºano</h3>
           <p class="price">R$ 770,00</p>
@@ -153,7 +167,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
         const schoolNameElement = document.getElementById('currentSchoolName');
-        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+        let schoolName = 'Escola NÃ£o Identificada'; // Valor padrÃ£o de fallback
 
         if (schoolNameElement && schoolNameElement.textContent) {
             schoolName = schoolNameElement.textContent.trim();
@@ -163,25 +177,25 @@
         localStorage.setItem('currentSchoolName', schoolName);
         console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
 
-        // Opcional: Atualizar a exibição da escola no dropdown do perfil
+        // Opcional: Atualizar a exibiÃ§Ã£o da escola no dropdown do perfil
         const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
         if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
             profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
         }
     });
 
-    // --- SALVAR NOME COMPLETO DA CRIANÇA ---
+    // --- SALVAR NOME COMPLETO DA CRIANÃ‡A ---
 document.addEventListener("DOMContentLoaded", function () {
     const userParagraph = document.querySelector("#profileInfo p:first-child");
 
     if (userParagraph) {
-        // Remove "Usuário:" e pega só o nome
-        const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
+        // Remove "UsuÃ¡rio:" e pega sÃ³ o nome
+        const rawText = userParagraph.textContent.replace("UsuÃ¡rio:", "").trim();
 
         // Salva no localStorage
         localStorage.setItem("nomeDaCrianca", rawText);
 
-        console.log("[loja.html] Nome da criança salvo:", rawText);
+        console.log("[loja.html] Nome da crianÃ§a salvo:", rawText);
     }
 });
 
@@ -201,7 +215,7 @@ document.addEventListener("DOMContentLoaded", function () {
       sideMenu.classList.remove('open');
     });
 
-    // Perfil do usuário
+    // Perfil do usuÃ¡rio
     const userIcon = document.getElementById('userIcon');
     const profileInfo = document.getElementById('profileInfo');
 
@@ -216,32 +230,92 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // --- NOVA FUNÇÃO: Para atualizar o nome do usuário na interface (ADICIONADA AQUI) ---
+    // --- NOVA FUNÃ‡ÃƒO: Para atualizar o nome do usuÃ¡rio na interface (ADICIONADA AQUI) ---
     function atualizarNomeUsuario(nome) {
       const userParagraph = document.querySelector("#profileInfo p:first-child");
       if (userParagraph) {
-        userParagraph.innerHTML = `<strong>Usuário:</strong> ${nome}`;
+        userParagraph.innerHTML = `<strong>UsuÃ¡rio:</strong> ${nome}`;
       }
     }
 
-    // --- Lógica para carregar o nome do localStorage ao carregar a página (ADICIONADA AQUI) ---
-    // Esta parte é um pouco redundante com o bloco script anterior, mas deixo se você quiser mantê-la separada
+    // --- LÃ³gica para carregar o nome do localStorage ao carregar a pÃ¡gina (ADICIONADA AQUI) ---
+    // Esta parte Ã© um pouco redundante com o bloco script anterior, mas deixo se vocÃª quiser mantÃª-la separada
     document.addEventListener("DOMContentLoaded", function () {
       const nomePersistido = localStorage.getItem('nomeUsuarioLogado'); // Tenta recuperar o nome
       if (nomePersistido) {
         atualizarNomeUsuario(nomePersistido); // Se encontrou, atualiza a interface
       } else {
-        atualizarNomeUsuario("Convidado"); // Define um nome padrão
+        atualizarNomeUsuario("Convidado"); // Define um nome padrÃ£o
       }
     });
   </script>
 
-  <script>
+    <script>
     const cartKey = 'meuCarrinho';
     let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
 
     function saveCart() {
       localStorage.setItem(cartKey, JSON.stringify(cart));
+    }
+
+    function setupCardSliders() {
+      document.querySelectorAll('.card').forEach(card => {
+        const baseImg = card.querySelector('img');
+        if (!baseImg) return;
+
+        const images = [];
+        const mainSrc = baseImg.getAttribute('src');
+        if (mainSrc) images.push(mainSrc);
+
+        const extra = card.getAttribute('data-images');
+        if (extra) {
+          extra.split('|').map(s => s.trim()).filter(Boolean).forEach(src => {
+            if (!images.includes(src)) images.push(src);
+          });
+        }
+
+        if (images.length <= 1) return;
+
+        const slider = document.createElement('div');
+        slider.className = 'card-slider';
+        slider.dataset.index = '0';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = images[0];
+        imgEl.alt = baseImg.alt || '';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'prev-slide';
+        prevBtn.innerHTML = '&#10094;';
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'next-slide';
+        nextBtn.innerHTML = '&#10095;';
+
+        function updateSlide(step) {
+          const total = images.length;
+          let idx = parseInt(slider.dataset.index || '0', 10);
+          idx = (idx + step + total) % total;
+          slider.dataset.index = String(idx);
+          imgEl.src = images[idx];
+        }
+
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(-1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(1);
+        });
+
+        slider.appendChild(imgEl);
+        slider.appendChild(prevBtn);
+        slider.appendChild(nextBtn);
+
+        baseImg.replaceWith(slider);
+      });
     }
 
     function updateCartUI() {
@@ -260,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function () {
       badge.style.display = 'inline-block';
       badge.textContent = cart.length;
 
-      dropdown.innerHTML = ''; // Limpa o conteúdo atual para recriar
+      dropdown.innerHTML = '';
 
       cart.forEach((item, index) => {
         const itemDiv = document.createElement('div');
@@ -290,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       dropdown.appendChild(finishBtn);
 
-      document.querySelectorAll('.remove-btn').forEach(btn => {
+      dropdown.querySelectorAll('.remove-btn').forEach(btn => {
         btn.addEventListener('click', e => {
           const idx = e.target.getAttribute('data-index');
           cart.splice(idx, 1);
@@ -302,87 +376,44 @@ document.addEventListener("DOMContentLoaded", function () {
       dropdown.style.display = 'block';
     }
 
-    document.querySelectorAll('.card .add-to-cart').forEach(button => {
-      button.addEventListener('click', () => {
-        const card = button.closest('.card');
-        const img = card.querySelector('img').src;
-        const name = card.querySelector('h3').textContent;
-        const price = card.querySelector('.price').textContent;
+    function attachAddToCartHandlers() {
+      document.querySelectorAll('.card .add-to-cart').forEach(button => {
+        button.addEventListener('click', () => {
+          const card = button.closest('.card');
+          const imgEl = card.querySelector('.card-slider img') || card.querySelector('img');
+          const img = imgEl ? imgEl.src : '';
+          const name = card.querySelector('h3')?.textContent || '';
+          const price = card.querySelector('.price')?.textContent || '';
 
-        cart.push({ img, name, price });
-        updateCartUI();
+          if (!img || !name || !price) return;
 
-        const cartIcon = document.getElementById('cart-icon');
-        if (cartIcon) {
-          cartIcon.classList.add('cart-icon-animation');
-          setTimeout(() => {
-            cartIcon.classList.remove('cart-icon-animation');
-          }, 500);
-        }
-
-        const notification = document.getElementById('cart-notification');
-        if (notification) {
-          notification.classList.add('show');
-          setTimeout(() => {
-            notification.classList.remove('show');
-          }, 3000);
-        }
-      });
-    });
-
-    const individualBtn = document.querySelector('.container1 .add-to-cart');
-    if (individualBtn) {
-      individualBtn.addEventListener('click', () => {
-        const name = document.querySelector('.product-details h1').textContent;
-        const img = document.querySelector('.product-image img').src;
-        const price = document.querySelector('.product-details .price').textContent;
-
-        cart.push({ img, name, price });
-        updateCartUI();
-
-        const cartIcon = document.getElementById('cart-icon');
-        if (cartIcon) {
-          cartIcon.classList.add('cart-icon-animation');
-          setTimeout(() => {
-            cartIcon.classList.remove('cart-icon-animation');
-          }, 500);
-        }
-
-        const notification = document.getElementById('cart-notification');
-        if (notification) {
-          notification.classList.add('show');
-          setTimeout(() => {
-            notification.classList.remove('show');
-          }, 3000);
-        }
-      });
-    }
-
-    const cartIcon = document.getElementById('cart-icon');
-    const cartDropdown = document.getElementById('cart-dropdown');
-
-    if (cartIcon && cartDropdown) {
-      cartIcon.addEventListener('click', (event) => {
-        event.stopPropagation();
-        if (cartDropdown.style.display === 'block') {
-          cartDropdown.style.display = 'none';
-        } else {
+          cart.push({ img, name, price });
           updateCartUI();
-        }
-      });
 
-      cartDropdown.addEventListener('click', (event) => {
-        event.stopPropagation();
-      });
+          const cartIcon = document.getElementById('cart-icon');
+          if (cartIcon) {
+            cartIcon.classList.add('cart-icon-animation');
+            setTimeout(() => {
+              cartIcon.classList.remove('cart-icon-animation');
+            }, 500);
+          }
 
-      document.addEventListener('click', (e) => {
-        if (!cartIcon.contains(e.target) && !cartDropdown.contains(e.target)) {
-          cartDropdown.style.display = 'none';
-        }
+          const notification = document.getElementById('cart-notification');
+          if (notification) {
+            notification.classList.add('show');
+            setTimeout(() => {
+              notification.classList.remove('show');
+            }, 3000);
+          }
+        });
       });
     }
 
-    updateCartUI();
+    window.addEventListener('DOMContentLoaded', () => {
+      setupCardSliders();
+      attachAddToCartHandlers();
+      updateCartUI();
+    });
   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {

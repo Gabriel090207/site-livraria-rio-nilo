@@ -206,13 +206,13 @@
           <button class="add-to-cart">Comprar</button>
         </div>
         <!-- Anos iniciais -->
-        <div class="card">
+        <div class="card" data-images="Capas Livros Creche/Fundamental 1 01AM (1).png|Capas Livros Creche/Fundamental 1 01BM (1).png">
           <img src="Capas Livros Creche/Fundamental 1 01AM (1).png" alt="Capa do livro Fundamental 1">
           <h3>Ensino Fundamental 1ºAno</h3>
           <p class="price">R$955,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
+        <div class="card" data-images="Capas Livros Creche/Fundamental 1 02AM (1).png|Capas Livros Creche/Fundamental 1 02BM (1).png">
           <img src="Capas Livros Creche/Fundamental 1 02AM (1).png" alt="Capa do livro Fundamental 2">
           <h3>Ensino Fundamental 2ºAno</h3>
           <p class="price">R$955,00</p>
@@ -617,6 +617,68 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   </script>
 
+  <script>
+    // Slider simples para múltiplas capas nos cards (usa data-images="img1|img2|...")
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.card').forEach(card => {
+        const baseImg = card.querySelector('img');
+        if (!baseImg) return;
+
+        const images = [];
+        const mainSrc = baseImg.getAttribute('src');
+        if (mainSrc) images.push(mainSrc);
+
+        const extra = card.getAttribute('data-images');
+        if (extra) {
+          extra.split('|').map(s => s.trim()).filter(Boolean).forEach(src => {
+            if (!images.includes(src)) images.push(src);
+          });
+        }
+
+        if (images.length <= 1) return;
+
+        const slider = document.createElement('div');
+        slider.className = 'card-slider';
+        slider.dataset.index = '0';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = images[0];
+        imgEl.alt = baseImg.alt || '';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'prev-slide';
+        prevBtn.innerHTML = '&#10094;';
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'next-slide';
+        nextBtn.innerHTML = '&#10095;';
+
+        function updateSlide(step) {
+          const total = images.length;
+          let idx = parseInt(slider.dataset.index || '0', 10);
+          idx = (idx + step + total) % total;
+          slider.dataset.index = String(idx);
+          imgEl.src = images[idx];
+        }
+
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(-1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(1);
+        });
+
+        slider.appendChild(imgEl);
+        slider.appendChild(prevBtn);
+        slider.appendChild(nextBtn);
+
+        baseImg.replaceWith(slider);
+      });
+    });
+  </script>
 </body>
 
 </html>

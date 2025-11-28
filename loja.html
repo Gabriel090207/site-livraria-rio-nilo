@@ -56,7 +56,7 @@
     <nav class="sidebar">
       <div class="school-card">
         <h2>Instituto</h2>
-        <img src="Aldaberto carvalho.jpg" alt="Logo da Escola" class="school-logo">
+        <img src="Logo Escolas/Logo Adalberto.png" alt="Logo da Escola" class="school-logo">
         <h3 class="school-name" id="currentSchoolName">Adalberto Carvalho - Matriz</h3> </div>
       <nav class="texto">
         <h2>Filtrar</h2>
@@ -346,6 +346,68 @@
     });
   </script>
 
+  <script>
+    // Slider simples para múltiplas capas nos cards (usa data-images="img1|img2|...")
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.card').forEach(card => {
+        const baseImg = card.querySelector('img');
+        if (!baseImg) return;
+
+        const images = [];
+        const mainSrc = baseImg.getAttribute('src');
+        if (mainSrc) images.push(mainSrc);
+
+        const extra = card.getAttribute('data-images');
+        if (extra) {
+          extra.split('|').map(s => s.trim()).filter(Boolean).forEach(src => {
+            if (!images.includes(src)) images.push(src);
+          });
+        }
+
+        if (images.length <= 1) return;
+
+        const slider = document.createElement('div');
+        slider.className = 'card-slider';
+        slider.dataset.index = '0';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = images[0];
+        imgEl.alt = baseImg.alt || '';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'prev-slide';
+        prevBtn.innerHTML = '&#10094;';
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'next-slide';
+        nextBtn.innerHTML = '&#10095;';
+
+        function updateSlide(step) {
+          const total = images.length;
+          let idx = parseInt(slider.dataset.index || '0', 10);
+          idx = (idx + step + total) % total;
+          slider.dataset.index = String(idx);
+          imgEl.src = images[idx];
+        }
+
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(-1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(1);
+        });
+
+        slider.appendChild(imgEl);
+        slider.appendChild(prevBtn);
+        slider.appendChild(nextBtn);
+
+        baseImg.replaceWith(slider);
+      });
+    });
+  </script>
 </body>
 
 </html>

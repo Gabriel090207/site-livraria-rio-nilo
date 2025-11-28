@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="finalizar.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 para deixar o aleta mais bonito -->
 </head>
 
 <body>
@@ -59,7 +60,7 @@
                     <input type="email" id="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="phone">Celular</label>
+                    <label for="phone">Celular (WhatsApp)</label>
                     <input type="tel" id="phone" placeholder="(XX) XXXXX-XXXX" required>
                 </div>
                 <div class="form-group">
@@ -114,13 +115,6 @@
                         <label for="payment-pix" class="payment-option">
                             <i class="fas fa-qrcode"></i>
                             <span>Pix</span>
-                        </label>
-                    </div>
-                    <div class="payment-option-wrapper">
-                        <input type="radio" id="payment-boleto" name="paymentMethod" value="Boleto">
-                        <label for="payment-boleto" class="payment-option">
-                            <i class="fas fa-file-invoice-dollar"></i>
-                            <span>Boleto</span>
                         </label>
                     </div>
                 </div>
@@ -178,7 +172,8 @@
 
                 <div id="pixDetails" class="payment-details hidden">
                     <h4>Pagar com Pix</h4>
-                    <p>Ao finalizar o pedido, um QR Code será gerado para você pagar com o aplicativo do seu banco.</p>
+                    <p>Após clicar no botão FINALIZAR COMPRA, o código PIX será gerado, cópie e cole no seu banco para
+                        conseguir pagar.</p>
                     <div id="pix-qr-area" style="text-align: center; margin-top: 20px;" class="hidden">
                         <img id="pix-qr-image" src="" alt="QR Code Pix" style="max-width: 200px; height: auto;">
                         <p>Ou copie o código:</p>
@@ -215,8 +210,8 @@
             </div>
             <div class="total-amount" id="checkout-total-summary">
             </div>
-            <button class="finalizar-button" id="finalizeOrderBtn">Finalizar pedido</button>
-            <button id="cancelarCompraBtn" class="cancelar-button">Cancelar compra</button>
+            <button class="finalizar-button" id="finalizeOrderBtn">Finalizar Compra</button>
+            <button id="cancelarCompraBtn" class="cancelar-button">Cancelar Compra</button>
             <div id="responseMessage"></div>
         </div>
     </div>
@@ -232,31 +227,31 @@
     </div>
 
     <div id="order-summary-screen" class="hidden">
-    <div class="summary-content">
-        <h2>Seu Pedido #<span id="order-id-display"></span></h2>
-        <p id="order-main-message">Agradecemos por sua compra!</p>
-        <p id="order-sub-message">A nota fiscal chegará em alguns minutos no seu WhatsApp.</p>
+        <div class="summary-content">
+            <h2>Seu Pedido #<span id="order-id-display"></span></h2>
+            <p id="order-main-message">Agradecemos por sua compra!</p>
+            <p id="order-sub-message">Caso tenha alguma dúvida entre em contato conosco via whatsapp.</p>
 
-        <h3>Itens Comprados:</h3>
-        <ul id="purchased-items-list"></ul>
+            <h3>Itens Comprados:</h3>
+            <ul id="purchased-items-list"></ul>
 
-        <h3>Total: <span id="final-order-total"></span></h3>
+            <h3>Total: <span id="final-order-total"></span></h3>
 
-        <!-- 🔹 Área especial para PIX (fica escondida para cartão/boleto) -->
-        <div id="pix-summary-area" class="hidden">
-            <h3>Código Pix para pagamento</h3>
-            <p>Copie o código abaixo e pague no app do seu banco:</p>
-            <textarea id="pix-code-display" readonly
-                style="width: 100%; height: 90px; resize: vertical;"></textarea>
+            <!-- 🔹 Área especial para PIX (fica escondida para cartão/boleto) -->
+            <div id="pix-summary-area" class="hidden">
+                <h3>Código Pix para pagamento</h3>
+                <p>Copie o código abaixo e pague no app do seu banco:</p>
+                <textarea id="pix-code-display" readonly
+                    style="width: 100%; height: 90px; resize: vertical;"></textarea>
+            </div>
+
+            <button id="backToStoreBtn">Voltar para a Loja</button>
         </div>
-
-        <button id="backToStoreBtn">Voltar para a Loja</button>
     </div>
-</div>
 
 
 
-    
+
 
     <script>
         const cartKey = 'meuCarrinho';
@@ -306,9 +301,9 @@
         const finalOrderTotal = document.getElementById('final-order-total');
         const backToStoreBtn = document.getElementById('backToStoreBtn');
         const orderMainMessage = document.getElementById('order-main-message');
-const orderSubMessage  = document.getElementById('order-sub-message');
-const pixSummaryArea   = document.getElementById('pix-summary-area');
-const pixCodeDisplay   = document.getElementById('pix-code-display');
+        const orderSubMessage = document.getElementById('order-sub-message');
+        const pixSummaryArea = document.getElementById('pix-summary-area');
+        const pixCodeDisplay = document.getElementById('pix-code-display');
 
         const cancelPurchaseBtn = document.getElementById('cancelarCompraBtn');
 
@@ -415,47 +410,47 @@ const pixCodeDisplay   = document.getElementById('pix-code-display');
 
         document.addEventListener('DOMContentLoaded', () => {
 
-// 🔹 Autopreencher "Nome Completo da Criança"
-const childName = localStorage.getItem('nomeUsuarioLogado'); // <-- chave certa
-const fullNameChildInput = document.getElementById('fullNameChild');
+            // 🔹 Autopreencher "Nome Completo da Criança"
+            const childName = localStorage.getItem('nomeUsuarioLogado'); // <-- chave certa
+            const fullNameChildInput = document.getElementById('fullNameChild');
 
-if (childName && fullNameChildInput) {
-    fullNameChildInput.value = childName;
-}
-// 🔹 fim do autopreenchimento
+            if (childName && fullNameChildInput) {
+                fullNameChildInput.value = childName;
+            }
+            // 🔹 fim do autopreenchimento
 
-// resto do código ORIGINAL (uma vez só)
-rememberReferrerStore();
-renderCartSummary();
-finalizeOrderBtn.addEventListener('click', handleFinalizeOrder);
+            // resto do código ORIGINAL (uma vez só)
+            rememberReferrerStore();
+            renderCartSummary();
+            finalizeOrderBtn.addEventListener('click', handleFinalizeOrder);
 
-viewOrderDetailsBtn.addEventListener('click', showOrderSummary);
-backToStoreBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    redirectToLastStore();
-});
+            viewOrderDetailsBtn.addEventListener('click', showOrderSummary);
+            backToStoreBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                redirectToLastStore();
+            });
 
-cancelPurchaseBtn?.addEventListener('click', (event) => {
-    event.preventDefault();
-    redirectToLastStore();
-});
+            cancelPurchaseBtn?.addEventListener('click', (event) => {
+                event.preventDefault();
+                redirectToLastStore();
+            });
 
-paymentMethodRadios.forEach(radio => {
-    radio.addEventListener('change', handlePaymentMethodChange);
-});
-handlePaymentMethodChange();
+            paymentMethodRadios.forEach(radio => {
+                radio.addEventListener('change', handlePaymentMethodChange);
+            });
+            handlePaymentMethodChange();
 
-copyPixCodeBtn.addEventListener('click', () => {
-    pixQrString.select();
-    document.execCommand('copy');
-    alert('Código Pix copiado para a área de transferência!');
-});
+            copyPixCodeBtn.addEventListener('click', () => {
+                pixQrString.select();
+                document.execCommand('copy');
+                alert('Código Pix copiado para a área de transferência!');
+            });
 
-copyBoletoLineBtn.addEventListener('click', () => {
-    boletoDigitableLine.select();
-    document.execCommand('copy');
-    alert('Linha Digitável copiada para a área de transferência!');
-});
+            copyBoletoLineBtn.addEventListener('click', () => {
+                boletoDigitableLine.select();
+                document.execCommand('copy');
+                alert('Linha Digitável copiada para a área de transferência!');
+            });
 
 
             rememberReferrerStore();
@@ -735,137 +730,145 @@ copyBoletoLineBtn.addEventListener('click', () => {
                     if (result.status === "success") {
                         responseMessageDiv.style.display = 'none';
 
-const qrString = result.cielo_response?.Payment?.QrCodeString;
+                        const qrString = result.cielo_response?.Payment?.QrCodeString;
 
-if (selectedPaymentMethod === 'Pix' && result.qr_code_string) {
-    const pixCode  = result.qr_code_string;
-    const paymentId = result.cielo_response.Payment.PaymentId;
+                        if (selectedPaymentMethod === 'Pix' && result.qr_code_string) {
+                            const pixCode = result.qr_code_string;
+                            const paymentId = result.cielo_response.Payment.PaymentId;
 
-    // Tela bonita no estilo "pedido finalizado", mas para PIX
-    showPixSummaryScreen(
-    pixCode,
-    adjustedCart,
-    paymentId,
-    billingData,
-    currentTotal,
-    selectedPaymentMethod
-);
-
-
-    // (se quiser ainda manter o QR code, dá pra colocar ele aí embaixo também depois)
-
-    // Continua verificando status em background
-    let pixInterval = setInterval(async () => {
-        try {
-            const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
-            const statusData = await statusResponse.json();
-
-            console.log("Status atual do PIX:", statusData);
-
-            if (statusData.status === 2) { // Pago!
-                clearInterval(pixInterval);
-
-                alert('Pagamento Pix confirmado! ✅');
-
-                // Depois do pagamento confirmado, você pode:
-                // - limpar carrinho
-                // - atualizar alguma mensagem
-                sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
-                sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-                sessionStorage.setItem('lastOrderId', paymentId);
-
-                localStorage.removeItem(cartKey);
-                renderCartSummary();
-            }
-
-        } catch (err) {
-            console.error("Erro ao verificar status PIX:", err);
-        }
-    }, 5000); // verifica a cada 5s
-
-    // IMPORTANTE: dá um return aqui pra não cair nos outros fluxos
-    return;
-}
+                            // Tela bonita no estilo "pedido finalizado", mas para PIX
+                            showPixSummaryScreen(
+                                pixCode,
+                                adjustedCart,
+                                paymentId,
+                                billingData,
+                                currentTotal,
+                                selectedPaymentMethod
+                            );
 
 
-// Inicia a verificação automática do pagamento PIX
-if (selectedPaymentMethod === 'Pix') {
-    const paymentId = result.cielo_response.Payment.PaymentId;
+                            // (se quiser ainda manter o QR code, dá pra colocar ele aí embaixo também depois)
 
-    let pixInterval = setInterval(async () => {
-        try {
-            const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
-            const statusData = await statusResponse.json();
+                            // Continua verificando status em background
+                            let pixInterval = setInterval(async () => {
+                                try {
+                                    const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
+                                    const statusData = await statusResponse.json();
 
-            console.log("Status atual do PIX:", statusData);
+                                    console.log("Status atual do PIX:", statusData);
 
-            if (statusData.status === 2) { // Pago!
-                clearInterval(pixInterval);
+                                    if (statusData.status === 2) { // Pago!
+                                        clearInterval(pixInterval);
 
-                overlay.classList.remove('hidden');
-                successModal.classList.remove('hidden');
+                                        await Swal.fire({
+                                            title: 'Pagamento Pix Confirmado! 🎉',
+                                            text: 'Seu pedido foi processado com sucesso.',
+                                            icon: 'success',
+                                            confirmButtonColor: '#ff7a00', 
+                                            confirmButtonText: 'Ver Detalhes',
+                                            timer: 20000, // Fecha sozinho em 2 min
+                                            timerProgressBar: true
+                                        });
 
-                sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
-                sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-                sessionStorage.setItem('lastOrderId', paymentId);
+                                        // Depois do pagamento confirmado, você pode:
+                                        // - limpar carrinho
+                                        // - atualizar alguma mensagem
+                                        sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
+                                        sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+                                        sessionStorage.setItem('lastOrderId', paymentId);
 
-                // Limpando carrinho
-                localStorage.removeItem(cartKey);
-                renderCartSummary();
-            }
+                                        localStorage.removeItem(cartKey);
+                                        renderCartSummary();
+                                    }
 
-        } catch (err) {
-            console.error("Erro ao verificar status PIX:", err);
-        }
-    }, 5000); // Verifica a cada 5 segundos
-}
+                                } catch (err) {
+                                    console.error("Erro ao verificar status PIX:", err);
+                                }
+                            }, 5000); // verifica a cada 5s
 
-// --- PAGAMENTO BOLETO ---
-else if (selectedPaymentMethod === 'Boleto' && result.boleto_url) {
-    boletoDetailsDiv.classList.remove('hidden');
-    boletoInfoArea.classList.remove('hidden');
-    boletoLink.href = result.boleto_url;
-    boletoDigitableLine.value = result.digitable_line;
+                            // IMPORTANTE: dá um return aqui pra não cair nos outros fluxos
+                            return;
+                        }
 
-    document.querySelector('.main-content').style.display = 'none';
-    responseMessageDiv.style.display = 'none';
-}
-// --- CRÉDITO OU DÉBITO (agora débito funciona como crédito à vista)
-else {
-    overlay.classList.remove('hidden');
-    successModal.classList.remove('hidden');
 
-    const paymentId = result.cielo_response.Payment.PaymentId;
+                        // Inicia a verificação automática do pagamento PIX
+                        if (selectedPaymentMethod === 'Pix') {
+                            const paymentId = result.cielo_response.Payment.PaymentId;
 
-    // 🔥 Polling para cartão e débito (igual ao PIX)
-    let cardInterval = setInterval(async () => {
-        try {
-            const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
-            const statusData = await statusResponse.json();
+                            let pixInterval = setInterval(async () => {
+                                try {
+                                    const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
+                                    const statusData = await statusResponse.json();
 
-            console.log("Status atual cartão/débito:", statusData);
+                                    console.log("Status atual do PIX:", statusData);
 
-            if (statusData.status === 2) {
-                clearInterval(cardInterval);
+                                    if (statusData.status === 2) { // Pago!
+                                        clearInterval(pixInterval);
 
-                // salvar resumo
-                sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
-                sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-                sessionStorage.setItem('lastOrderId', paymentId);
+                                        overlay.classList.remove('hidden');
+                                        successModal.classList.remove('hidden');
 
-                // limpar carrinho
-                localStorage.removeItem(cartKey);
-                renderCartSummary();
-            }
+                                        sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
+                                        sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+                                        sessionStorage.setItem('lastOrderId', paymentId);
 
-        } catch (err) {
-            console.error("Erro ao verificar status cartão/débito:", err);
-        }
-    }, 5000);
+                                        // Limpando carrinho
+                                        localStorage.removeItem(cartKey);
+                                        renderCartSummary();
+                                    }
 
-}
+                                } catch (err) {
+                                    console.error("Erro ao verificar status PIX:", err);
+                                }
+                            }, 5000); // Verifica a cada 5 segundos
+                        }
 
-                        
+                        // --- PAGAMENTO BOLETO ---
+                        else if (selectedPaymentMethod === 'Boleto' && result.boleto_url) {
+                            boletoDetailsDiv.classList.remove('hidden');
+                            boletoInfoArea.classList.remove('hidden');
+                            boletoLink.href = result.boleto_url;
+                            boletoDigitableLine.value = result.digitable_line;
+
+                            document.querySelector('.main-content').style.display = 'none';
+                            responseMessageDiv.style.display = 'none';
+                        }
+                        // --- CRÉDITO OU DÉBITO (agora débito funciona como crédito à vista)
+                        else {
+                            overlay.classList.remove('hidden');
+                            successModal.classList.remove('hidden');
+
+                            const paymentId = result.cielo_response.Payment.PaymentId;
+
+                            // 🔥 Polling para cartão e débito (igual ao PIX)
+                            let cardInterval = setInterval(async () => {
+                                try {
+                                    const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
+                                    const statusData = await statusResponse.json();
+
+                                    console.log("Status atual cartão/débito:", statusData);
+
+                                    if (statusData.status === 2) {
+                                        clearInterval(cardInterval);
+
+                                        // salvar resumo
+                                        sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
+                                        sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+                                        sessionStorage.setItem('lastOrderId', paymentId);
+
+                                        // limpar carrinho
+                                        localStorage.removeItem(cartKey);
+                                        renderCartSummary();
+                                    }
+
+                                } catch (err) {
+                                    console.error("Erro ao verificar status cartão/débito:", err);
+                                }
+                            }, 5000);
+
+                        }
+
+
 
                     } else {
                         responseMessageDiv.classList.add('error');
@@ -924,34 +927,34 @@ else {
         }
 
 
-async function registrarVenda(orderId, items, total, billingData, metodo) {
-    if (sessionStorage.getItem("vendaRegistrada")) return;
+        async function registrarVenda(orderId, items, total, billingData, metodo) {
+            if (sessionStorage.getItem("vendaRegistrada")) return;
 
-    await fetch(`${BASE_URL}/registrar-venda`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ orderId, items, total, billingData, metodo })
-    });
+            await fetch(`${BASE_URL}/registrar-venda`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ orderId, items, total, billingData, metodo })
+            });
 
-    sessionStorage.setItem("vendaRegistrada", "true");
-}
-
-
-function showPixSummaryScreen(pixCode, adjustedCart, paymentId, billingData, totalValue, selectedPaymentMethod) {
-
-    overlay.classList.add('hidden');
-    successModal.classList.add('hidden');
-    document.querySelector('.main-content').style.display = 'none';
-    responseMessageDiv.style.display = 'none';
+            sessionStorage.setItem("vendaRegistrada", "true");
+        }
 
 
-        // Garante que a página possa rolar normalmente
-    document.body.style.overflowY = "auto";
-    document.documentElement.style.overflowY = "auto";
+        function showPixSummaryScreen(pixCode, adjustedCart, paymentId, billingData, totalValue, selectedPaymentMethod) {
 
-    orderSummaryScreen.classList.remove('hidden');
+            overlay.classList.add('hidden');
+            successModal.classList.add('hidden');
+            document.querySelector('.main-content').style.display = 'none';
+            responseMessageDiv.style.display = 'none';
 
-    orderSummaryScreen.innerHTML = `
+
+            // Garante que a página possa rolar normalmente
+            document.body.style.overflowY = "auto";
+            document.documentElement.style.overflowY = "auto";
+
+            orderSummaryScreen.classList.remove('hidden');
+
+            orderSummaryScreen.innerHTML = `
         <div class="summary-content" style="
             max-width: 650px;
             margin: 40px auto;
@@ -1015,17 +1018,17 @@ function showPixSummaryScreen(pixCode, adjustedCart, paymentId, billingData, tot
         </div>
     `;
 
-    // Preencher itens
-    const list = document.getElementById("pix-items-list");
+            // Preencher itens
+            const list = document.getElementById("pix-items-list");
 
-    adjustedCart.forEach(item => {
-        const li = document.createElement("li");
-        li.style.listStyle = "none";
-        li.style.display = "flex";
-        li.style.alignItems = "center";
-        li.style.marginBottom = "12px";
+            adjustedCart.forEach(item => {
+                const li = document.createElement("li");
+                li.style.listStyle = "none";
+                li.style.display = "flex";
+                li.style.alignItems = "center";
+                li.style.marginBottom = "12px";
 
-        li.innerHTML = `
+                li.innerHTML = `
             <img src="${item.img}" width="55"
                 style="border-radius:6px; margin-right:10px;">
             <div>
@@ -1034,78 +1037,78 @@ function showPixSummaryScreen(pixCode, adjustedCart, paymentId, billingData, tot
             </div>
         `;
 
-        list.appendChild(li);
-    });
+                list.appendChild(li);
+            });
 
-    // Copiar código
-   document.getElementById("copyPixButton").addEventListener("click", async (event) => {
-    event.preventDefault(); // garante que nada "submeta" ou recarregue a página
+            // Copiar código
+            document.getElementById("copyPixButton").addEventListener("click", async (event) => {
+                event.preventDefault(); // garante que nada "submeta" ou recarregue a página
 
-    const textarea = document.getElementById("pix-code-area");
-    textarea.select();
-    textarea.setSelectionRange(0, 99999); // para mobile
+                const textarea = document.getElementById("pix-code-area");
+                textarea.select();
+                textarea.setSelectionRange(0, 99999); // para mobile
 
-    let copiou = false;
+                let copiou = false;
 
-    // Tenta usar a API moderna
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        try {
-            await navigator.clipboard.writeText(textarea.value);
-            copiou = true;
-        } catch (e) {
-            console.warn("Falha no navigator.clipboard, tentando execCommand...", e);
+                // Tenta usar a API moderna
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    try {
+                        await navigator.clipboard.writeText(textarea.value);
+                        copiou = true;
+                    } catch (e) {
+                        console.warn("Falha no navigator.clipboard, tentando execCommand...", e);
+                    }
+                }
+
+                // Fallback para navegadores que não suportam navigator.clipboard
+                if (!copiou) {
+                    try {
+                        document.execCommand('copy');
+                        copiou = true;
+                    } catch (e) {
+                        console.error("Não foi possível copiar automaticamente:", e);
+                    }
+                }
+
+                const feedback = document.getElementById("copy-feedback");
+                if (copiou) {
+                    feedback.textContent = "Código copiado! ✔";
+                    feedback.style.color = "green";
+                } else {
+                    feedback.textContent = "Não consegui copiar automaticamente. Copie manualmente o texto selecionado.";
+                    feedback.style.color = "red";
+                }
+                feedback.style.display = "block";
+            });
+
+            // Iniciar verificação automática do pagamento PIX
+            const BASE_URL = "https://livraria-rio-nilo-backend.onrender.com";
+
+            let pixInterval = setInterval(async () => {
+                try {
+                    const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
+                    const statusData = await statusResponse.json();
+
+                    console.log("Status atual do PIX:", statusData);
+
+                    if (statusData.status === 2) {
+                        clearInterval(pixInterval);
+
+                        // Só registra 1 vez
+                        await registrarVenda(paymentId, adjustedCart, totalValue, billingData, selectedPaymentMethod);
+
+
+                        showPixPaidScreen(adjustedCart, totalValue, paymentId);
+                    }
+
+                } catch (err) {
+                    console.error("Erro ao verificar status PIX:", err);
+                }
+            }, 5000);
         }
-    }
 
-    // Fallback para navegadores que não suportam navigator.clipboard
-    if (!copiou) {
-        try {
-            document.execCommand('copy');
-            copiou = true;
-        } catch (e) {
-            console.error("Não foi possível copiar automaticamente:", e);
-        }
-    }
-
-    const feedback = document.getElementById("copy-feedback");
-    if (copiou) {
-        feedback.textContent = "Código copiado! ✔";
-        feedback.style.color = "green";
-    } else {
-        feedback.textContent = "Não consegui copiar automaticamente. Copie manualmente o texto selecionado.";
-        feedback.style.color = "red";
-    }
-    feedback.style.display = "block";
-});
-
-    // Iniciar verificação automática do pagamento PIX
-    const BASE_URL = "https://livraria-rio-nilo-backend.onrender.com";
-
-    let pixInterval = setInterval(async () => {
-        try {
-            const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
-            const statusData = await statusResponse.json();
-
-            console.log("Status atual do PIX:", statusData);
-
-            if (statusData.status === 2) {
-    clearInterval(pixInterval);
-
-    // Só registra 1 vez
-   await registrarVenda(paymentId, adjustedCart, totalValue, billingData, selectedPaymentMethod);
-
-
-    showPixPaidScreen(adjustedCart, totalValue, paymentId);
-}
-
-        } catch (err) {
-            console.error("Erro ao verificar status PIX:", err);
-        }
-    }, 5000);
-}
-
-function showPixPaidScreen(cartItems, totalValue, orderId) {
-    orderSummaryScreen.innerHTML = `
+        function showPixPaidScreen(cartItems, totalValue, orderId) {
+            orderSummaryScreen.innerHTML = `
         <div class="summary-content">
             <h2>Pagamento Confirmado! ✔</h2>
             <p>Seu pedido foi processado com sucesso.</p>
@@ -1122,27 +1125,27 @@ function showPixPaidScreen(cartItems, totalValue, orderId) {
         </div>
     `;
 
-    const list = document.getElementById("paid-items-list");
+            const list = document.getElementById("paid-items-list");
 
-    cartItems.forEach(item => {
-        const li = document.createElement("li");
-        li.innerHTML = `
+            cartItems.forEach(item => {
+                const li = document.createElement("li");
+                li.innerHTML = `
             <img src="${item.img}" width="60" style="border-radius:6px; margin-right:8px;">
             <strong>${item.name}</strong> - ${item.price}
         `;
-        li.style.display = "flex";
-        li.style.alignItems = "center";
-        li.style.marginBottom = "10px";
-        list.appendChild(li);
-    });
+                li.style.display = "flex";
+                li.style.alignItems = "center";
+                li.style.marginBottom = "10px";
+                list.appendChild(li);
+            });
 
-   backToStoreBtn.addEventListener('click', (event) => {
-    event.preventDefault();
-    redirectToLastStore();
-});
+            backToStoreBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                redirectToLastStore();
+            });
 
 
-}
+        }
 
 
         function validarCPF(cpf) {
