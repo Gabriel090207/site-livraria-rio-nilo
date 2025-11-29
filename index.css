@@ -167,6 +167,8 @@ html {
   font-size: 16px;
 }
 
+
+
 @media (max-width: 768px) {
 
   .hamburger {
@@ -210,6 +212,18 @@ html {
   .nav-menu li a {
     font-size: 22px;
   }
+
+  .carousel {
+    height: auto !important; /* Altura automática (se ajusta à imagem) */
+    min-height: 200px;       /* Mínimo para não sumir se a imagem demorar a carregar */
+    padding-top: 60px;       /* Espaço para o menu fixo não cobrir */
+    margin-bottom: 20px;     /* Espacinho antes do título "Encontre sua escola" */
+  }
+
+  .carousel-item {
+    height: auto !important; /* Remove a altura fixa de 800px do desktop */
+  }
+
 }
 
 .navbar .logo {
@@ -319,27 +333,28 @@ html {
   /* Cobre todo o espaço sem distorcer */
 }
 
-.prev,
-.next {
+.prev, .next {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 30px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
+  top: 60% !important; 
+  transform: translateY(-50%) !important;
+  background: transparent !important; 
+  color: white !important;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5); 
+  border: none !important;
+  font-size: 45px !important;
+  padding: 10px 20px;
   cursor: pointer;
-  border-radius: 50%;
+  z-index: 100;
+  /* Garante que não tenha margens antigas atrapalhando */
+  margin-top: 0 !important; 
 }
 
-.prev {
-  left: 10px;
+.prev:hover, .next:hover {
+  transform: translateY(-50%) scale(1.2) !important; 
 }
 
-.next {
-  right: 10px;
-}
+.prev { left: 0 !important; }
+.next { right: 0 !important; }
 
 /*texto escola*/
 .texto__escola {
@@ -867,31 +882,6 @@ footer a:hover {
     display: flex;
   }
 
-  .prev,
-  .next {
-    margin-top: -30px;
-    position: absolute;
-    top: 30%;
-    transform: translateY(-50%);
-    font-size: 30px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-  }
-
-  .prev {
-    margin-top: 50px;
-    left: 10px;
-  }
-
-  .next {
-    margin-top: 50px;
-    right: 10px;
-  }
-
   /*texto escola*/
   .texto__escola {
     text-align: center;
@@ -901,15 +891,17 @@ footer a:hover {
   #buscar-escola {
     position: relative;
     overflow: hidden;
-    padding-top: 100px;
+    padding-top: 70px !important;
+    margin-top: 0 !important;
     padding-bottom: -20px;
     text-align: center;
   }
 
   section#buscar-escola h2 {
-    margin-top: 60px !important;
+    margin-top: 10px !important;
     display: block;
-    font-size: 2.7em;
+    font-size: 2em;
+    padding: 0 20px;
   }
 
   section#buscar-escola p {
@@ -1003,13 +995,13 @@ footer a:hover {
     object-fit: cover;
     overflow: hidden;
     background: black;
-    /* opcional, para cobrir barras pretas */
   }
-
 
   .text_title {
     text-align: center;
     font-size: 1.7em;
+    padding-top: 70px;
+    padding: 10px;
     padding-top: 70px;
   }
 
@@ -1017,6 +1009,7 @@ footer a:hover {
     text-align: center;
     font-size: 17px;
     padding-top: 20px;
+    padding: 0 10px;
   }
 
   /* Ajusta o container principal da seção */
@@ -1104,106 +1097,107 @@ footer a:hover {
     height: auto;
   }
 
-
-
   footer {
-    margin-left: -40px;
+    padding: 40px 20px !important;
+    margin: 0 !important;
+    width: 100%;
     background-color: #F58220;
-    color: #000;
-    padding: 50px 80px;
+    
+    /* Centraliza e define cor branca */
+    text-align: center !important; 
+    color: white !important;
   }
 
+  /* Container principal */
   .footer {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 40px;
-  }
-
-  footer a {
-    text-decoration: none;
-    color: black;
-  }
-
-  footer a:hover {
-    color: #333;
-  }
-
-  .rodapé {
-    margin-right: -10px;
-    text-align: left;
-    list-style: none;
     padding: 0;
-    line-height: 1.8;
+    align-items: center !important; 
   }
 
-  .sobre {
-    margin-right: 80px;
-
+  footer h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white !important; /* Títulos em branco */
+  }
+  
+  /* ZERA MARGENS e força alinhamento */
+  .rodapé, .sobre, .contatos, .horario1, .horario, .footer ul[style] {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+    width: 100% !important;
+    text-align: center !important;
+    color: white !important;
   }
 
-  .redesocial {
+  .rodapé li {
+    margin-bottom: 12px;
+    font-size: 16px;
+  }
+  
+  .rodapé li a {
+      color: white !important; /* Links em branco */
+      text-decoration: none;
+  }
+  
+  /* Efeito opcional ao tocar no link */
+  .rodapé li a:hover {
+      text-decoration: underline;
+      color: #f0f0f0 !important;
+  }
+
+  /* CORREÇÃO DOS CONTATOS */
+  .horario1, .horario {
+    display: flex !important; 
+    justify-content: center !important; 
+    align-items: center !important;
+    
+    margin-bottom: 10px !important;
+    font-size: 15px;
+    line-height: 1.4;
+    width: 100% !important;
+    color: white !important;
+  }
+  
+  /* Link do WhatsApp */
+  .horario1 a {
+      display: flex;
+      align-items: center;
+      justify-content: center !important; 
+      gap: 10px;
+      color: white !important;
+  }
+
+  /* Redes Sociais e Pagamento */
+  .redesocial, .formapagamento {
     display: flex;
+    justify-content: center !important; 
     gap: 20px;
-    margin-right: 30px;
-    align-items: center;
-    font-weight: bold;
+    margin: 0 !important;
+    margin-top: 10px !important;
+    width: 100%;
   }
-
-  .horario1 {
-    margin-top: -230px;
-    margin-right: -10px;
-    margin-left: 455px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-
-  }
-
-  .horario {
-    margin-top: 0px;
-    margin-right: -10px;
-    margin-left: 455px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-
-  }
-
-  .contatos {
-    margin-left: -50px;
-    margin-bottom: -50px;
-  }
-
+  
+  /* Garante que o ícone do Instagram fique branco */
   .redeicones {
-    color: #000;
-    font-size: 24px;
-    font-weight: bold;
+      color: white !important;
   }
 
-  .formapagamento {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-  }
-
-  .politica {
-    border-top: 1px solid #444;
-    margin-top: 40px;
+  /* Texto legal lá embaixo (Copyright) */
+  .politica, .politica1 {
+    margin-top: 40px !important;
+    /* Linha divisória branca transparente para ficar elegante */
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
     padding-top: 20px;
-    font-size: 14px;
-    color: #000;
-    font-weight: bold;
-  }
-
-  .politica1 {
-    border-top: 1px solid #444;
-    margin-top: -40px;
-    padding-top: 20px;
-    font-size: 14px;
-
-
-    color: #000;
-    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.5;
+    color: white !important;
   }
 
 
@@ -1342,7 +1336,6 @@ footer a:hover {
   }
 
   #buscar-escola {
-    margin-top: -250px;
     position: relative;
     overflow: hidden;
     padding-top: 100px;
