@@ -1,213 +1,273 @@
-.devolucao{
-    margin-top: 180px;
-}
-/* Seção de Informações e Botão */
-#devolucao-info {
-    margin-top: 380px;
-    text-align: center;
-    padding: 80px 20px;
-    max-width: 900px;
-    margin: 40px auto;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+/* --- ESTILO GERAL DA PÁGINA DEVOLUÇÃO --- */
+
+body {
+  background-color: #f9f9f9;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  line-height: 1.6;
 }
 
-#devolucao-info h2 {
-    font-size: 2.8em;
-    color: #F58220; /* Cor azul para o título */
-    margin-bottom: 30px;
-    font-weight: 800;
+/* Cabeçalho */
+header {
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 15px 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo1 {
+  height: 50px;
+  width: auto;
+}
+
+/* Botão Voltar (Navbar) */
+.button {
+  background-color: #F58220;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #e07010;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+main.devolucao {
+  width: 90%;
+  max-width: 900px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* Títulos */
+#devolucao-info h2, #processo-entrega h2 {
+  color: #F58220;
+  font-size: 23px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 8px;
+  font-weight: 800;
+  padding-top: 30px;
+}
+
+#devolucao-info h2:first-of-type {
+  margin-top: 0;
 }
 
 #devolucao-info p {
-    font-size: 1.1em;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 40px;
-    padding: 0 20px;
+  font-size: 16px;
+  color: #555;
+  text-align: justify;
+  margin-bottom: 20px;
 }
 
+/* --- BOTÃO DE SOLICITAÇÃO (CTA) --- */
 .devolucao-button {
-    display: inline-block;
-    background-color: #28a745; /* Cor verde */
-    color: white;
-    padding: 15px 30px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  background-color: #F58220;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 50px; /* Borda bem redonda */
+  font-weight: bold;
+  font-size: 18px;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 4px 15px rgba(245, 130, 32, 0.3); /* Sombra laranja suave */
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .devolucao-button:hover {
-    background-color: #218838;
-    transform: translateY(-3px);
+  background-color: white;
+  color: #F58220;
+  border-color: #F58220;
+  transform: translateY(-3px); /* Leve subida ao passar o mouse */
 }
 
-/* Seção do Processo de Devolução (reutiliza estilos do processo de entrega) */
-#processo-devolucao {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: #f0f5fa; /* Fundo diferente para a seção de processo */
-    margin-top: 50px;
-    border-top: 1px solid #e0e0e0;
-}
+/* --- TIMELINE (LINHA DO TEMPO) - DESKTOP --- */
 
-#processo-devolucao h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 50px;
+#processo-entrega {
+  margin-top: 60px;
+  padding-bottom: 20px;
 }
 
 .timeline-container-horizontal {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
 }
 
+/* Passos */
 .timeline-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 160px;
-    flex-shrink: 0;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 120px;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
 }
 
 .timeline-step.animate {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
+/* Ícone */
 .icon-circle {
-    background-color: #007bff; /* Cor azul para os ícones */
-    color: white;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border: 3px solid #F58220;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #F58220;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.timeline-step.animate .icon-circle {
+  background-color: #F58220;
+  color: white;
+  transform: scale(1.1);
 }
 
 .timeline-step p {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #555;
-    text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.horizontal-line {
-    background-color: #007bff; /* Linhas em azul para destaque */
-    height: 4px;
-    width: 0;
-    margin: 0 5px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
+/* Linhas */
+.timeline-line {
+  flex-grow: 1;
+  height: 4px;
+  background-color: #eee;
+  margin: 0 -15px;
+  margin-bottom: 25px;
+  z-index: 1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1s ease-in-out;
 }
 
-.horizontal-line.animate {
-    animation: drawHorizontalLine 1s forwards ease-out;
-    opacity: 1;
+.timeline-line.animate {
+  transform: scaleX(1);
+  background-color: #F58220;
 }
 
-@keyframes drawHorizontalLine {
-    from { width: 0; }
-    to { width: 80px; }
-}
 
-/* Rodapé (copiada do seu index.css) - Adapte conforme seu estilo real */
-
-
-
-/* Responsividade */
+/* --- RESPONSIVIDADE (MOBILE) --- */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 10px 20px;
-    }
-    .navbar ul {
-        display: none; /* Ou adapte para um menu hambúrguer */
-    }
-    #devolucao-info {
-        padding: 40px 15px;
-        margin: 20px auto;
-    }
-    #devolucao-info h2 {
-        font-size: 2em;
-    }
-    #devolucao-info p {
-        font-size: 1em;
-    }
-    .devolucao-button {
-        padding: 12px 25px;
-        font-size: 1em;
-    }
+  
+  /* Correção da Navbar no Mobile */
+  .navbar {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 
-    #processo-devolucao h2 {
-        font-size: 2em;
-    }
-    .timeline-container-horizontal {
-        flex-direction: column;
-        align-items: center;
-    }
-    .timeline-step {
-        width: 80%;
-        margin: 15px 0;
-    }
-    .horizontal-line {
-        width: 4px;
-        height: 60px;
-        margin: 10px 0;
-    }
-    @keyframes drawHorizontalLine {
-        from { height: 0; }
-        to { height: 60px; }
-    }
-    .footer {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 15px;
-    }
-    .footer div {
-        margin-bottom: 20px;
-    }
-    .redesocial, .formapagamento {
-        justify-content: center;
-    }
+  main.devolucao {
+    width: 95%;
+    padding: 30px 20px;
+    margin: 20px auto;
+  }
+
+  #devolucao-info p {
+    text-align: left; /* Leitura mais fácil */
+  }
+  
+  /* Botão ocupa a largura total no mobile para facilitar o toque */
+  .devolucao-button {
+    width: 100%;
+    font-size: 16px;
+    padding: 15px 10px;
+  }
+
+  /* TIMELINE VERTICAL */
+  .timeline-container-horizontal {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+    margin-left: 80px;
+  }
+
+  .timeline-step {
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+
+  .timeline-step p {
+    font-size: 16px;
+  }
+
+  .timeline-line {
+    width: 4px !important;
+    height: 40px !important;
+    flex-grow: 0 !important;
+    margin: 0 !important;
+    margin-left: 23px !important; /* Centraliza com o ícone */
+    transform: scaleY(0); 
+    transform-origin: top;
+  }
+
+  .timeline-line.animate {
+    transform: scaleY(1);
+  }
+  
+  .logo1 {
+    height: 40px;
+  }
 }
 
-@media(max-width:390px){
+@media (min-width: 769px) {
 
-    
-    html, body {
-      overflow-x: hidden;
+    /* Destrava a largura da barra apenas no computador */
+    .navbar {
+        width: 100% !important;
+        /* Ocupa toda a tela */
+        max-width: 100% !important;
+        /* Remove o limite de 1200px/800px */
     }
-    
-    .logo2 {
-      margin-top: -80px;
-      
-      max-width: 370px;
-      margin-left: -720px;
-     
-      height: -30px; 
-      object-fit: cover;
-            
-    }
-  
-  }
+}

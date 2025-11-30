@@ -376,6 +376,7 @@ section#buscar-escola h2 {
 
 section#buscar-escola p {
   font-size: 22px;
+  padding: 0 10px;
 }
 
 div.secaoescola {
@@ -473,12 +474,14 @@ img.escola:hover {
   text-align: center;
   font-size: 2.7em;
   padding-top: 70px;
+  margin: 0 15px;
 }
 
 .text_paragraph {
   text-align: center;
   font-size: 20px;
   padding-top: 20px;
+  margin: 0 15px;
 }
 
 #sobre-livraria {
@@ -1135,6 +1138,10 @@ footer a:hover {
     color: white !important;
   }
 
+  .sobre{
+    margin-bottom: 20px !important;
+  }
+
   .rodapé li {
     margin-bottom: 12px;
     font-size: 16px;
@@ -1191,11 +1198,10 @@ footer a:hover {
   /* Texto legal lá embaixo (Copyright) */
   .politica, .politica1 {
     margin-top: 40px !important;
-    /* Linha divisória branca transparente para ficar elegante */
-    border-top: 1px solid rgba(255, 255, 255, 0.3) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.3) !important; /* Linha divisória branca transparente para ficar elegante */
     padding-top: 20px;
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 1.5;
     color: white !important;
   }
