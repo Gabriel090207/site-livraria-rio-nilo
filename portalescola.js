@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
 }
 
-
   // --- 🔗 Backend base URL ---
   const BASE_URL = 'https://livraria-rio-nilo-backend.onrender.com';
   const API_URL = `${BASE_URL}/vendas?period=allTime`;

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel de Vendas</title>
   <link rel="stylesheet" href="portalescola.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
 
 </head>
+
 <body>
   <header class="header">
     <nav class="navbar">
@@ -17,6 +20,9 @@
           <img src="Nova logo rio nilo.png" alt="Logo Rio Nilo" style="height:50px;" class="logo" />
         </div>
       </div>
+      <button class="btn-logout" onclick="window.location.href='index.html'">
+        Sair <i class="fas fa-sign-out-alt"></i>
+      </button>
     </nav>
   </header>
 
@@ -39,11 +45,7 @@
     <div class="right-column">
       <!-- Barra de pesquisa -->
       <div class="search-bar">
-        <input
-          type="text"
-          placeholder="Pesquisar criança, responsável ou livro..."
-          id="searchInput"
-        />
+        <input type="text" placeholder="Pesquisar criança, responsável ou livro..." id="searchInput" />
       </div>
 
       <!-- Cards -->
@@ -63,4 +65,5 @@
   <!-- Importa o JS -->
   <script src="portalescola.js"></script>
 </body>
+
 </html>
