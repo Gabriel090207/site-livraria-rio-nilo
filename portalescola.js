@@ -59,10 +59,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     totalVendasElement.textContent = vendas.length;
 
     const produtos = {};
-    vendas.forEach((venda) => {
-      const nome = venda.produto || "Produto Desconhecido";
-      produtos[nome] = (produtos[nome] || 0) + 1;
-    });
+   vendas.forEach((venda) => {
+  const nome = venda.produtos?.[0]?.name || "Produto Desconhecido";
+  produtos[nome] = (produtos[nome] || 0) + 1;
+});
+
 
     const produtosOrdenados = Object.entries(produtos).sort((a, b) => b[1] - a[1]);
     atualizarGrafico(produtosOrdenados);
@@ -105,22 +106,23 @@ document.addEventListener("DOMContentLoaded", async function () {
       card.classList.add("card1", "info-card");
 
       // URL da capa (se tiver img_url no backend)
-      const capaLivro = venda.img_url
-        ? venda.img_url
-        : "https://placehold.co/100x140?text=Capa";
+      const capaLivro = venda.produtos?.[0]?.img
+  ? venda.produtos[0].img
+  : "https://placehold.co/100x140?text=Capa";
 
       card.innerHTML = `
-        <div class="card-content">
-          <div class="left-info">
-            <p><strong>RESPONSÁVEL:</strong> ${venda.cliente_nome || "N/A"}</p>
-            <p><strong>CRIANÇA:</strong> ${venda.cliente_escola || "N/A"}</p>
-          </div>
-          <div class="right-info">
-            <p><strong>LIVRO COMPRADO:</strong> ${venda.produto || "N/A"}</p>
-            <img src="${capaLivro}" alt="Capa do Livro">
-          </div>
-        </div>
-      `;
+  <div class="card-content">
+    <div class="left-info">
+      <p><strong>RESPONSÁVEL:</strong> ${venda.cliente_nome || "N/A"}</p>
+      <p><strong>CRIANÇA:</strong> ${venda.nome_crianca || "N/A"}</p>
+    </div>
+    <div class="right-info">
+      <p><strong>LIVRO COMPRADO:</strong> ${venda.produtos?.[0]?.name || "N/A"}</p>
+      <img src="${capaLivro}" alt="Capa do Livro">
+    </div>
+  </div>
+`;
+
       cardsContainer.appendChild(card);
     });
   }
@@ -186,12 +188,19 @@ document.addEventListener("DOMContentLoaded", async function () {
   searchInput.addEventListener("input", () => {
     const termo = searchInput.value.toLowerCase().trim();
     filteredSales = allSales.filter((venda) => {
-      return (
-        (venda.cliente_nome || "").toLowerCase().includes(termo) ||
-        (venda.cliente_escola || "").toLowerCase().includes(termo) ||
-        (venda.produto || "").toLowerCase().includes(termo)
-      );
-    });
+  const responsavel = venda.cliente_nome?.toLowerCase() || "";
+  const crianca = venda.nome_crianca?.toLowerCase() || "";
+  const escola = venda.cliente_escola?.toLowerCase() || "";
+  const livro = venda.produtos?.[0]?.name?.toLowerCase() || "";
+
+  return (
+    responsavel.includes(termo) ||
+    crianca.includes(termo) ||
+    escola.includes(termo) ||
+    livro.includes(termo)
+  );
+});
+
     currentPage = 1;
     exibirPagina(currentPage);
   });
