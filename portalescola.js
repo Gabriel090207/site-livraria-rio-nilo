@@ -4,7 +4,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (!localStorage.getItem("usuarioLogado")) {
     window.location.href = "index.html";
     return;
+<<<<<<< HEAD
   }
+=======
+}
+>>>>>>> 9ae3d0d180d91588cb4d27363a966b143f4f2ef9
 
   // --- 🔗 Backend base URL ---
   const BASE_URL = 'https://livraria-rio-nilo-backend.onrender.com';
