@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="finalizar.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- SweetAlert2 para deixar o aleta mais bonito -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert2 para deixar o aleta mais bonito -->
 </head>
 
 <body>
@@ -256,8 +257,22 @@
     <script>
         const cartKey = 'meuCarrinho';
         let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        // regras de parcelamento por escola
+        const regrasParcelamento = {
+            'adalbertocarvalho-matriz': 3,
+            'adalbertocarvalho-filial': 3,
+            'mundoencantado': 6,
+            'viladacrianca': 6,
+            'senadantas': 6,
+            'educacionalagape': 6,
+            'marijunior': 10,
+            'leaodejuda': 6,
+            'tialinda': 6,
+            'renascer': 6,
+
+        };
         let currentTotal = 0; // Variável para armazenar o total do carrinho
-        const CRECHE_IDENTIFIER = 'escolavivacrianca';
+        const CRECHE_IDENTIFIER = 'espacoviladacrianca';
 
         // Referências aos elementos do DOM
         const checkoutItemsSummary = document.getElementById('checkout-items-summary');
@@ -531,21 +546,35 @@
 
         function updateInstallmentsOptions() {
             installmentsSelect.innerHTML = '';
-            const maxInstallments = 12;
 
+            // Pega o nome que veio da loja.html
+            const rawSchoolName = localStorage.getItem('currentSchoolName');
+
+            // Limpa o nome (tira acentos, espaços e traços) para bater com a lista
+            // Se o nome for "Adalberto Carvalho - Matriz", vira "adalbertocarvalhomatriz"
+            const currentSchool = normalizeText(rawSchoolName);
+
+            console.log("Escola identificada para parcelamento:", currentSchool); // Para ajudar a testar
+
+            // Verifica o limite. Se não achar, usa o 'default'
+            const maxInstallments = regrasParcelamento[currentSchool] || regrasParcelamento['default'] || 12;
+
+            // Gera as opções
             for (let i = 1; i <= maxInstallments; i++) {
                 const option = document.createElement('option');
                 option.value = i;
+
                 if (i === 1) {
                     option.textContent = `1x (à vista) de ${formatPrice(currentTotal)}`;
                 } else {
                     const installmentValue = currentTotal / i;
-                    if (installmentValue <= 0) {
-                        option.textContent = `${i}x de R$ 0,00`;
-                    } else {
-                        option.textContent = `${i}x de ${formatPrice(installmentValue)}`;
+
+                    // Só mostra se a parcela for maior que 1 real (opcional, evita parcelas de centavos)
+                    if (installmentValue > 1) {
+                        option.textContent = `${i}x de ${formatPrice(installmentValue)} sem juros`;
                     }
                 }
+
                 installmentsSelect.appendChild(option);
             }
         }
@@ -764,8 +793,8 @@
                                             title: 'Pagamento Pix Confirmado! 🎉',
                                             text: 'Seu pedido foi processado com sucesso.',
                                             icon: 'success',
-                                            confirmButtonColor: '#ff7a00', 
-                                            confirmButtonText: 'Ver Detalhes',
+                                            confirmButtonColor: '#ff7a00',
+                                            confirmButtonText: 'Fechar',
                                             timer: 20000, // Fecha sozinho em 2 min
                                             timerProgressBar: true
                                         });
