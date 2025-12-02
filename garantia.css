@@ -1,0 +1,120 @@
+/* --- ESTILO DA PÁGINA GARANTIA --- */
+
+body {
+  background-color: #f9f9f9;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 15px 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.logo1 {
+  height: 50px;
+  width: auto;
+}
+
+/* Botão Voltar */
+.button {
+  background-color: #F58220;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #e07010;
+}
+
+/* --- CONTEÚDO PRINCIPAL (CARTÃO BRANCO) --- */
+main.garantia {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+/* Títulos */
+#garantia-info h2 {
+  color: #F58220;
+  font-size: 24px;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 8px;
+  font-weight: 800;
+  padding-top: 30px;
+}
+
+#garantia-info h2:first-of-type {
+  margin-top: 0;
+}
+
+/* Parágrafos */
+#garantia-info p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+#garantia-info strong {
+  font-weight: bold;
+}
+
+/* --- RESPONSIVIDADE (CELULAR) --- */
+@media (max-width: 768px) {
+  
+  main.garantia {
+    width: 95%;
+    padding: 30px 20px;
+    margin: 20px auto;
+  }
+
+  #garantia-info h2 {
+    font-size: 20px;
+    margin-top: 30px;
+  }
+
+  #garantia-info p {
+    font-size: 15px;
+    text-align: left; /* Leitura mais fácil no celular */
+  }
+  
+  .logo1 {
+    height: 40px;
+  }
+}
+
+@media (min-width: 769px) {
+
+    /* Destrava a largura da barra apenas no computador */
+    .navbar {
+        width: 100% !important;
+        /* Ocupa toda a tela */
+        max-width: 100% !important;
+        /* Remove o limite de 1200px/800px */
+    }
+}

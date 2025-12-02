@@ -4,8 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (!localStorage.getItem("usuarioLogado")) {
     window.location.href = "index.html";
     return;
-}
-
+  }
 
   // --- 🔗 Backend base URL ---
   const BASE_URL = 'https://livraria-rio-nilo-backend.onrender.com';
@@ -59,11 +58,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     totalVendasElement.textContent = vendas.length;
 
     const produtos = {};
-   vendas.forEach((venda) => {
-  const nome = venda.produtos?.[0]?.name || "Produto Desconhecido";
-  produtos[nome] = (produtos[nome] || 0) + 1;
-});
+    vendas.forEach((venda) => {
 
+      // CORRIGIDO → pega o nome do livro correto
+      const nome = venda.produtos?.[0]?.name || "Produto Desconhecido";
+
+      produtos[nome] = (produtos[nome] || 0) + 1;
+    });
 
     const produtosOrdenados = Object.entries(produtos).sort((a, b) => b[1] - a[1]);
     atualizarGrafico(produtosOrdenados);
@@ -77,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     produtosOrdenados.forEach(([nome, qtd]) => {
       const nomeLimitado = nome.length > 25 ? nome.slice(0, 22) + "..." : nome;
-      const percentual = (qtd / maxValor) * 85; // nunca chega a 100%
+      const percentual = (qtd / maxValor) * 85;
 
       const barItem = document.createElement("div");
       barItem.classList.add("bar-item");
@@ -105,24 +106,23 @@ document.addEventListener("DOMContentLoaded", async function () {
       const card = document.createElement("div");
       card.classList.add("card1", "info-card");
 
-      // URL da capa (se tiver img_url no backend)
+      // CORRIGIDO → capa real do backend
       const capaLivro = venda.produtos?.[0]?.img
-  ? venda.produtos[0].img
-  : "https://placehold.co/100x140?text=Capa";
+        ? venda.produtos[0].img
+        : "https://placehold.co/100x140?text=Capa";
 
       card.innerHTML = `
-  <div class="card-content">
-    <div class="left-info">
-      <p><strong>RESPONSÁVEL:</strong> ${venda.cliente_nome || "N/A"}</p>
-      <p><strong>CRIANÇA:</strong> ${venda.nome_crianca || "N/A"}</p>
-    </div>
-    <div class="right-info">
-      <p><strong>LIVRO COMPRADO:</strong> ${venda.produtos?.[0]?.name || "N/A"}</p>
-      <img src="${capaLivro}" alt="Capa do Livro">
-    </div>
-  </div>
-`;
-
+        <div class="card-content">
+          <div class="left-info">
+            <p><strong>RESPONSÁVEL:</strong> ${venda.cliente_nome || "N/A"}</p>
+            <p><strong>CRIANÇA:</strong> ${venda.nome_crianca || "N/A"}</p>
+          </div>
+          <div class="right-info">
+            <p><strong>LIVRO COMPRADO:</strong> ${venda.produtos?.[0]?.name || "N/A"}</p>
+            <img src="${capaLivro}" alt="Capa do Livro">
+          </div>
+        </div>
+      `;
       cardsContainer.appendChild(card);
     });
   }
@@ -184,22 +184,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     paginationContainer.appendChild(nextBtn);
   }
 
-  // --- 6️⃣ Filtro de pesquisa ---
+  // --- 6️⃣ Filtro de pesquisa (CORRIGIDO) ---
   searchInput.addEventListener("input", () => {
     const termo = searchInput.value.toLowerCase().trim();
-    filteredSales = allSales.filter((venda) => {
-  const responsavel = venda.cliente_nome?.toLowerCase() || "";
-  const crianca = venda.nome_crianca?.toLowerCase() || "";
-  const escola = venda.cliente_escola?.toLowerCase() || "";
-  const livro = venda.produtos?.[0]?.name?.toLowerCase() || "";
 
-  return (
-    responsavel.includes(termo) ||
-    crianca.includes(termo) ||
-    escola.includes(termo) ||
-    livro.includes(termo)
-  );
-});
+    filteredSales = allSales.filter((venda) => {
+      const responsavel = venda.cliente_nome?.toLowerCase() || "";
+      const crianca = venda.nome_crianca?.toLowerCase() || "";
+      const escola = venda.cliente_escola?.toLowerCase() || "";
+      const livro = venda.produtos?.[0]?.name?.toLowerCase() || "";
+
+      return (
+        responsavel.includes(termo) ||
+        crianca.includes(termo) ||
+        escola.includes(termo) ||
+        livro.includes(termo)
+      );
+    });
 
     currentPage = 1;
     exibirPagina(currentPage);

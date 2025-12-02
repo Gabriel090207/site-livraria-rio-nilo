@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja de Livros</title>
-  <meta name="description" content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
+  <meta name="description"
+    content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
   <link rel="canonical" href="https://www.livrariarionilo.com.br/loja.html">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
@@ -14,9 +15,9 @@
 
 <body>
 
-  <a href="https://wa.me/5571982290909" class="whatsapp-button" target="_blank" style="text-decoration:none">
-    <i class="fab fa-whatsapp"></i>
-  </a>
+  <a href="https://wa.me/557191896650" class="whatsapp-button" target="_blank" style="text-decoration:none">
+      <i class="fab fa-whatsapp"></i>
+    </a>
 
   <div class="side-menu" id="side-menu">
     <div class="side-menu-header">
@@ -41,7 +42,7 @@
       <i class="fas fa-user" id="userIcon"></i>
       <div id="profileInfo" class="profile-dropdown">
         <p><strong>Usuário:</strong> João Silva</p>
-        <p><strong>Escola:</strong> Escola Santos Dumont</p> 
+        <p><strong>Escola:</strong> Escola Santos Dumont</p>
       </div>
       <div id="cart-container" style="position: relative;">
         <i class="fas fa-shopping-cart" id="cart-icon" style="cursor: pointer; position: relative;"></i>
@@ -56,8 +57,9 @@
     <nav class="sidebar">
       <div class="school-card">
         <h2>Colégio</h2>
-        <img src="unesp.png" alt="Logo da Escola" class="school-logo">
-        <h3 class="school-name" id="currentSchoolName">Mario Junior</h3> </div>
+        <img src="Logo Escolas/Escola MariJunior.png" alt="Logo da Escola" class="school-logo">
+        <h3 class="school-name" id="currentSchoolName">MariJunior</h3>
+      </div>
       <nav class="texto">
         <h2>Filtrar</h2>
       </nav>
@@ -88,81 +90,102 @@
       <h2 class="section-title">Livros em Destaque</h2>
 
       <div class="cards" id="book-cards-container">
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 2 ANOS - MOD 1.jpg" alt="Capa do livro Educação infantil G2">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - INFANTIL - 2 ANOS - MOD 1.jpg|Capas Mario Junior/EVOLUIR - INFANTIL - 2 ANOS - MOD 2.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 2 ANOS - MOD 1.jpg"
+            alt="Capa do livro Educação infantil G2">
           <h3>Educação infantil G2</h3>
           <p class="price">R$ 432,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 3 ANOS - MOD 1.jpg" alt="Capa do livro Educação infantil G3">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - INFANTIL - 3 ANOS - MOD 1.jpg|Capas Mario Junior/EVOLUIR - INFANTIL - 3 ANOS - MOD 2.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 3 ANOS - MOD 1.jpg"
+            alt="Capa do livro Educação infantil G3">
           <h3>Educação infantil G3</h3>
           <p class="price">R$ 432,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 4 ANOS - MOD 1.jpg" alt="Capa do livro Educação infantil G4">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - INFANTIL - 4 ANOS - MOD 1.jpg|Capas Mario Junior/EVOLUIR - INFANTIL - 4 ANOS - MOD 2.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 4 ANOS - MOD 1.jpg"
+            alt="Capa do livro Educação infantil G4">
           <h3>Educação infantil G4</h3>
           <p class="price">R$ 432,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 5 ANOS - MOD 1.jpg" alt="Capa do livro Educação infantil G5">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - INFANTIL - 5 ANOS - MOD 1.jpg|Capas Mario Junior/EVOLUIR - INFANTIL - 5 ANOS - MOD 2.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - INFANTIL - 5 ANOS - MOD 1.jpg"
+            alt="Capa do livro Educação infantil G5">
           <h3>Educação infantil G5</h3>
           <p class="price">R$ 432,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <!-- Anos iniciais -->
-         <div class="card">
+        <div class="card" data-fit="cover"
+          data-images="Capas Mario Junior/LIN1 (1).png|Capas Mario Junior/MAT1 (1).png|Capas Mario Junior/NAT1 (1).png|Capas Mario Junior/HUM1 (1).png">
           <img src="Capas Mario Junior/LIN1 (1).png" alt="Capa do livro Ensino Fundamental 1ºAno">
           <h3>Ensino Fundamental 1ºAno</h3>
           <p class="price">R$ 864,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - FUND - 2º ANO - MOD1 - ESTUDANTE.jpg" alt="Capa do livro Ensino Fundamental 2ºAno">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 2º ANO - MOD1 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 2º ANO - MOD2 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 2º ANO - MOD3 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 2º ANO - MOD4 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 2º ANO - MOD COMP - ESTUDANTE.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - FUND - 2º ANO - MOD1 - ESTUDANTE.jpg"
+            alt="Capa do livro Ensino Fundamental 2ºAno">
           <h3>Ensino Fundamental 2ºAno</h3>
           <p class="price">R$ 864,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - FUND - 3º ANO - MOD1 - ESTUDANTE.jpg" alt="Capa do livro Ensino Fundamental 3ºAno">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 3º ANO - MOD1 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 3º ANO - MOD2 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 3º ANO - MOD3 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 3º ANO - MOD4 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 3º ANO - MOD COMP - ESTUDANTE.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - FUND - 3º ANO - MOD1 - ESTUDANTE.jpg"
+            alt="Capa do livro Ensino Fundamental 3ºAno">
           <h3>Ensino Fundamental 3ºAno</h3>
           <p class="price">R$ 864,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - FUND - 4º ANO - MOD1 - ESTUDANTE.jpg" alt="Capa do livro Ensino Fundamental 4ºAno">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 4º ANO - MOD1 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 4º ANO - MOD2 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 4º ANO - MOD3 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 4º ANO - MOD4 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 4º ANO - MOD COMP - ESTUDANTE.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - FUND - 4º ANO - MOD1 - ESTUDANTE.jpg"
+            alt="Capa do livro Ensino Fundamental 4ºAno">
           <h3>Ensino Fundamental 4ºAno</h3>
           <p class="price">R$ 864,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mario Junior/EVOLUIR - FUND - 5º ANO - MOD1 - ESTUDANTE.jpg" alt="Capa do livro Ensino Fundamental 5ºAno">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 5º ANO - MOD1 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 5º ANO - MOD2 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 5º ANO - MOD3 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 5º ANO - MOD4 - ESTUDANTE.jpg|Capas Mario Junior/EVOLUIR - FUND - 5º ANO - MOD COMP - ESTUDANTE.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - FUND - 5º ANO - MOD1 - ESTUDANTE.jpg"
+            alt="Capa do livro Ensino Fundamental 5ºAno">
           <h3>Ensino Fundamental 5ºAno</h3>
           <p class="price">R$ 864,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <!-- Anos finais -->
-        <div class="card">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD1.jpg|Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD2.jpg|Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD3.jpg|Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD4.jpg">
           <img src="Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 6ºAno">
           <h3>Ensino Fundamental 6ºAno</h3>
           <p class="price">R$ 972,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD1.jpg|Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD2.jpg|Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD3.jpg|Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD4.jpg">
           <img src="Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 7ºAno">
           <h3>Ensino Fundamental 7ºAno</h3>
           <p class="price">R$ 972,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 8º ANO - MOD1.jpg|Capas Mario Junior/EVOLUIR - FUND - 8º ANO - MOD2.jpg|Capas Mario Junior/EVOLUIR - FUND - 8º ANO - MOD3.jpg|Capas Mario Junior/EVOLUIR - FUND - 8º ANO - MOD4.jpg">
           <img src="Capas Mario Junior/EVOLUIR - FUND - 8º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 8ºAno">
           <h3>Ensino Fundamental 8ºAno</h3>
           <p class="price">R$ 972,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
+        <div class="card"
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 9º ANO - MOD1.jpg|Capas Mario Junior/EVOLUIR - FUND - 9º ANO - MOD2.jpg|Capas Mario Junior/EVOLUIR - FUND - 9º ANO - MOD3.jpg|Capas Mario Junior/EVOLUIR - FUND - 9º ANO - MOD4.jpg">
           <img src="Capas Mario Junior/EVOLUIR - FUND - 9º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 9ºAno">
           <h3>Ensino Fundamental 9ºAno</h3>
           <p class="price">R$ 972,00</p>
@@ -178,32 +201,32 @@
     Item adicionado ao carrinho!
   </div>
 
-  
+
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const schoolNameElement = document.getElementById('currentSchoolName');
-        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+    document.addEventListener('DOMContentLoaded', function () {
+      const schoolNameElement = document.getElementById('currentSchoolName');
+      let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
 
-        if (schoolNameElement && schoolNameElement.textContent) {
-            schoolName = schoolNameElement.textContent.trim();
-        } 
-        
-        // Salva o nome da escola no localStorage
-        localStorage.setItem('currentSchoolName', schoolName);
-        console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+      if (schoolNameElement && schoolNameElement.textContent) {
+        schoolName = schoolNameElement.textContent.trim();
+      }
 
-        // Opcional: Atualizar a exibição da escola no dropdown do perfil
-        const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
-        if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
-            profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
-        }
+      // Salva o nome da escola no localStorage
+      localStorage.setItem('currentSchoolName', schoolName);
+      console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+
+      // Opcional: Atualizar a exibição da escola no dropdown do perfil
+      const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
+      if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
+        profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
+      }
     });
 
     // --- SALVAR NOME COMPLETO DA CRIANÇA ---
-document.addEventListener("DOMContentLoaded", function () {
-    const userParagraph = document.querySelector("#profileInfo p:first-child");
+    document.addEventListener("DOMContentLoaded", function () {
+      const userParagraph = document.querySelector("#profileInfo p:first-child");
 
-    if (userParagraph) {
+      if (userParagraph) {
         // Remove "Usuário:" e pega só o nome
         const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
 
@@ -211,8 +234,8 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("nomeDaCrianca", rawText);
 
         console.log("[loja.html] Nome da criança salvo:", rawText);
-    }
-});
+      }
+    });
 
   </script>
 
@@ -440,6 +463,68 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   </script>
 
+  <script>
+    // Slider simples para múltiplas capas nos cards (usa data-images="img1|img2|...")
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.card').forEach(card => {
+        const baseImg = card.querySelector('img');
+        if (!baseImg) return;
+
+        const images = [];
+        const mainSrc = baseImg.getAttribute('src');
+        if (mainSrc) images.push(mainSrc);
+
+        const extra = card.getAttribute('data-images');
+        if (extra) {
+          extra.split('|').map(s => s.trim()).filter(Boolean).forEach(src => {
+            if (!images.includes(src)) images.push(src);
+          });
+        }
+
+        if (images.length <= 1) return;
+
+        const slider = document.createElement('div');
+        slider.className = 'card-slider';
+        slider.dataset.index = '0';
+
+        const imgEl = document.createElement('img');
+        imgEl.src = images[0];
+        imgEl.alt = baseImg.alt || '';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'prev-slide';
+        prevBtn.innerHTML = '&#10094;';
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'next-slide';
+        nextBtn.innerHTML = '&#10095;';
+
+        function updateSlide(step) {
+          const total = images.length;
+          let idx = parseInt(slider.dataset.index || '0', 10);
+          idx = (idx + step + total) % total;
+          slider.dataset.index = String(idx);
+          imgEl.src = images[idx];
+        }
+
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(-1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          updateSlide(1);
+        });
+
+        slider.appendChild(imgEl);
+        slider.appendChild(prevBtn);
+        slider.appendChild(nextBtn);
+
+        baseImg.replaceWith(slider);
+      });
+    });
+  </script>
 </body>
 
 </html>

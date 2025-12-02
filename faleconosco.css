@@ -1,0 +1,183 @@
+/* --- ESTILO GERAL DA PÁGINA FALE CONOSCO --- */
+
+body {
+    background-color: #f9f9f9;
+    font-family: 'Open Sans', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Cabeçalho */
+header {
+    background: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 15px 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.logo1 {
+    height: 50px;
+    width: auto;
+}
+
+/* Botão Voltar */
+.button {
+    background-color: #F58220;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.button:hover {
+    background-color: #e07010;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+main.faleconosco {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    /* Centraliza tudo nesta página específica */
+}
+
+/* Títulos */
+#faleconosco-info h2 {
+    color: #F58220;
+    font-size: 28px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    padding-top: 30px;
+}
+
+#faleconosco-info p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- CAIXA DE CONTATO --- */
+.contato-box {
+    background-color: #fffbf7;
+    /* Fundo laranja bem clarinho */
+    border: 1px solid #ffead1;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 30px 0;
+}
+
+.contato-box h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+/* Lista de Canais (WhatsApp / Email) */
+.canais-lista {
+    list-style: none;
+    /* Remove bolinhas */
+    padding: 0;
+    margin: 0 0 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.canais-lista li {
+    font-size: 18px;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Ícones (FontAwesome) */
+.canais-lista i {
+    color: #F58220;
+    font-size: 22px;
+}
+
+/* --- BOTÃO DE AÇÃO (WhatsApp Grande) --- */
+.fale-button {
+    display: inline-block;
+    background-color: #25d366;
+    /* Verde WhatsApp */
+    color: white;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
+
+.fale-button:hover {
+    background-color: #1ebc57;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+}
+
+.aviso-final {
+    font-size: 14px !important;
+    color: #888 !important;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+/* --- RESPONSIVIDADE (MOBILE) --- */
+@media (max-width: 768px) {
+
+    /* Navbar ocupa tela toda */
+    .navbar {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    main.faleconosco {
+        width: 95%;
+        padding: 30px 20px;
+        margin: 20px auto;
+    }
+
+    /* Ajuste para ícones e texto não quebrarem feio */
+    .canais-lista li {
+        font-size: 16px;
+        flex-direction: column;
+        /* Ícone em cima, texto embaixo se ficar apertado */
+        gap: 5px;
+    }
+
+    .fale-button {
+        width: 100%;
+        /* Botão ocupa largura total para facilitar o toque */
+        padding: 15px 10px;
+        font-size: 16px;
+    }
+
+    .logo1 {
+        height: 40px;
+    }
+}

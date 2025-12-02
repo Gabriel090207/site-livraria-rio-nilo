@@ -1,127 +1,238 @@
-/* entregas.css */
-.entregas{
-    margin-top: 130px;
+/* --- ESTILO GERAL DA PÁGINA ENTREGAS --- */
+
+body {
+  background-color: #f9f9f9;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  line-height: 1.6;
 }
+
+/* Cabeçalho (Padrão das outras páginas) */
+header {
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  padding: 15px 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.logo1 {
+  height: 50px;
+  width: auto;
+}
+
+/* Botão Voltar */
+.button {
+  background-color: #F58220;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background-color: #e07010;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+main.entregas {
+  width: 90%;
+  max-width: 800px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+#devolucao-info h2, #processo-entrega h2 {
+  color: #F58220;
+  font-size: 24px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 8px;
+  font-weight: 800;
+  padding-top: 30px;
+}
+
+#devolucao-info h2:first-of-type {
+  margin-top: 0;
+}
+
+#devolucao-info p {
+  font-size: 16px;
+  color: #555;
+  text-align: justify;
+}
+
+/* --- TIMELINE (LINHA DO TEMPO) - DESKTOP --- */
+
 #processo-entrega {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: white;
-    margin-top: px;
-    margin-bottom: 50px;
+  margin-top: 60px;
+  padding-bottom: 20px;
 }
 
-#processo-entrega h2 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 50px;
+.timeline-container-horizontal {
+  display: flex; /* Coloca tudo lado a lado */
+  justify-content: space-between;
+  align-items: center; /* Alinha verticalmente pelo centro */
+  position: relative;
+  width: 100%;
+  margin-top: 40px;
 }
 
-.timeline-container-horizontal { /* Novo contêiner para layout horizontal */
-    display: flex;
-   
-    flex-wrap: wrap; /* Permite quebrar a linha em telas menores */
-    justify-content: center;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 50px;
-    padding: 20px;
-}
-
+/* Passos (Bolinha + Texto) */
 .timeline-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px; /* Ajuste a margem para espaços menores */
-    padding: 15px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 140px; /* Largura fixa para os passos */
-    flex-shrink: 0;
-    opacity: 0; /* Inicialmente invisível para a animação */
-    transform: translateY(20px); /* Deslocamento inicial para a animação */
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 120px; /* Largura fixa para o texto não espalhar */
+  position: relative;
+  z-index: 2; /* Fica acima da linha */
+  
+  /* Estado inicial da animação (invisível) */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
 }
 
 .timeline-step.animate {
-    opacity: 1;
-    transform: translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
+/* O Círculo do Ícone */
 .icon-circle {
-    background-color:#F58220; /* Cor azul para os ícones */
-    color: white;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  width: 60px;
+  height: 60px;
+  background-color: white;
+  border: 3px solid #F58220;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #F58220;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Quando anima, o círculo fica laranja cheio */
+.timeline-step.animate .icon-circle {
+  background-color: #F58220;
+  color: white;
+  transform: scale(1.1);
 }
 
 .timeline-step p {
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #555;
-    text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+  margin: 0;
+  line-height: 1.2;
 }
 
-/* Estilo das linhas horizontais */
-.horizontal-line {
-    background-color: #F58220; /* Linhas em azul para destaque */
-    height: 4px; /* Espessura da linha */
-    width: 0; /* Começa com largura zero para a animação */
-    margin: 0 5px; /* Margem entre os elementos */
-    opacity: 0; /* Inicialmente invisível */
-    transition: opacity 0.5s ease-in-out;
+/* Linhas Conectoras (Desktop: Horizontais) */
+.timeline-line {
+  flex-grow: 1; /* Ocupa o espaço que sobrar entre os passos */
+  height: 4px;
+  background-color: #eee;
+  margin: 0 -15px; /* Puxa um pouco para entrar debaixo da bolinha */
+  margin-bottom: 25px; /* Alinha com o centro das bolinhas */
+  z-index: 1; /* Animação da linha */
+  transform: scaleX(0); /* Começa com largura zero */
+  transform-origin: left;
+  transition: transform 1s ease-in-out;
 }
 
-.horizontal-line.animate {
-    animation: drawHorizontalLine 1s forwards ease-out;
-    opacity: 1;
+.timeline-line.animate {
+  transform: scaleX(1); /* Cresce até preencher */
+  background-color: #F58220; /* Fica laranja */
 }
 
-/* Animação para a linha horizontal */
-@keyframes drawHorizontalLine {
-    from { width: 0; }
-    to { width: 80px; } /* Comprimento da linha entre os passos */
-}
 
-/* Responsividade básica */
+/* --- RESPONSIVIDADE E TIMELINE VERTICAL (MOBILE) --- */
 @media (max-width: 768px) {
-    .timeline-container-horizontal {
-        flex-direction: column; /* Em telas menores, os itens ficam em coluna */
-        align-items: center;
-    }
+  
+  main.entregas {
+    width: 95%;
+    padding: 30px 20px;
+    margin: 20px auto;
+  }
 
-    .timeline-step {
-        width: 80%; /* Ocupa mais largura em telas menores */
-        margin: 15px 0;
-    }
+  /* Transforma a linha horizontal em COLUNA vertical */
+  .timeline-container-horizontal {
+    flex-direction: column;
+    align-items: flex-start; /* Alinha tudo à esquerda */
+    padding-left: 10px;
+    margin-left: 50px;
+  }
 
-    .horizontal-line {
-        width: 4px; /* Linhas verticais em telas menores */
-        height: 60px; /* Comprimento vertical da linha */
-        margin: 10px 0;
-    }
+  /* Ajuste dos Passos para ficarem lado a lado (Ícone + Texto) */
+  .timeline-step {
+    flex-direction: row; /* Ícone na esquerda, Texto na direita */
+    width: 100%;
+    align-items: center;
+    margin-bottom: 0; /* A linha vai dar o espaçamento */
+    text-align: left;
+  }
 
-    /* Animação para a linha vertical em mobile */
-    @keyframes drawHorizontalLine { /* Reutilizando o nome, mas animando altura */
-        from { height: 0; }
-        to { height: 60px; }
-    }
+  .icon-circle {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-right: 15px; /* Espaço entre ícone e texto */
+    flex-shrink: 0; /* Impede o ícone de amassar */
+  }
+
+  .timeline-step p {
+    font-size: 16px;
+  }
+
+  /* Ajuste das Linhas para virarem VERTICAIS */
+  .timeline-line {
+    width: 4px !important;      /* Vira uma linha fina vertical */
+    height: 40px !important;    /* Altura fixa entre os passos */
+    flex-grow: 0 !important;
+    margin: 0 !important;       /* Remove margens negativas antigas */
+    margin-left: 23px !important; /* Centraliza a linha com o ícone (50px/2 = 25px - 2px borda) */
+    /* Ajuste da animação para vertical */
+    transform: scaleY(0); 
+    transform-origin: top;
+    transition: transform 1s ease-in-out;
+  }
+
+  .timeline-line.animate {
+    transform: scaleY(1);
+  }
+  
+  .logo1 {
+    height: 40px;
+  }
 }
 
-@media(max-width:390px){
+@media (min-width: 769px) {
 
-    
-    html, body {
-      overflow-x: hidden;
+    /* Destrava a largura da barra apenas no computador */
+    .navbar {
+        width: 100% !important;
+        /* Ocupa toda a tela */
+        max-width: 100% !important;
+        /* Remove o limite de 1200px/800px */
     }
- 
-  
-  }
+}

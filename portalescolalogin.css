@@ -1,104 +1,123 @@
+/* Reset Básico para evitar quebras de layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* ISSO É CRUCIAL: Garante que o padding não aumente a largura dos inputs */
+  font-family: 'Poppins', sans-serif;
+}
+
 /* Fundo */
 body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(to bottom right, #fdfdfd, #f58220);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  /* Container */
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-  
-  /* Box de login */
+  min-height: 100vh; /* Use min-height para permitir rolagem em telas pequenas viradas (landscape) */
+  background: linear-gradient(to bottom right, #fdfdfd, #f58220);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Garante que a caixa não cole nas bordas da tela */
+}
+
+/* Container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Box de login */
+.login-box {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  max-width: 380px;
+  width: 100%; /* Ocupa o espaço disponível até o max-width */
+  text-align: center;
+  border: 2px solid #f58220;
+}
+
+/* Logo */
+.logo {
+  width: 120px;
+  margin-bottom: 10px;
+  height: auto; /* Garante proporção correta */
+}
+
+/* Títulos */
+h2 {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px; /* Espaço extra antes do formulário */
+}
+
+/* Inputs */
+.input-group {
+  text-align: left;
+  margin-top: 15px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px; /* Aumentei um pouquinho para facilitar o toque no celular */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px; /* Fonte 16px evita que o iPhone dê zoom automático ao clicar */
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  border-color: #f58220;
+  box-shadow: 0 0 4px rgba(245, 130, 32, 0.5);
+}
+
+/* Botão */
+.btn-login {
+  width: 100%;
+  margin-top: 25px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f58220;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-login:hover {
+  background-color: #d96c18;
+}
+
+/* Mensagem de erro */
+.error-message {
+  color: red;
+  margin-top: 15px;
+  font-size: 14px;
+  display: none;
+}
+
+/* Ajuste específico para celulares pequenos */
+@media (max-width: 480px) {
   .login-box {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    padding: 40px;
-    max-width: 380px;
-    width: 90%;
-    text-align: center;
-    border: 2px solid #f58220;
+    padding: 30px 20px; /* Reduz o espaço interno para caber mais conteúdo */
   }
   
-  /* Logo */
-  .logo {
-    width: 120px;
-    margin-bottom: 10px;
-  }
-  
-  /* Títulos */
   h2 {
-    margin-bottom: 5px;
-    color: #333;
+    font-size: 22px;
   }
-  
-  p {
-    color: #666;
-    font-size: 14px;
-  }
-  
-  /* Inputs */
-  .input-group {
-    text-align: left;
-    margin-top: 15px;
-  }
-  
-  .input-group label {
-    display: block;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 6px;
-    color: #333;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    font-size: 14px;
-    transition: 0.3s;
-  }
-  
-  .input-group input:focus {
-    border-color: #f58220;
-    box-shadow: 0 0 4px rgba(245, 130, 32, 0.5);
-  }
-  
-  /* Botão */
-  .btn-login {
-    width: 100%;
-    margin-top: 25px;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background-color: #f58220;
-    color: white;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .btn-login:hover {
-    background-color: #d96c18;
-  }
-  
-  /* Mensagem de erro */
-  .error-message {
-    color: red;
-    margin-top: 15px;
-    font-size: 14px;
-    display: none;
-  }
-  
+}
