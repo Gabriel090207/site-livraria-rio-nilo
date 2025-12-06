@@ -403,3 +403,85 @@ h2 {
     padding: 30px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
+
+@media (max-width: 768px) {
+    
+    /* Ajuste do Cabeçalho e Espaçamento */
+    header {
+        padding: 10px 15px;
+    }
+
+    .logo {
+        height: 40px;
+    }
+
+    .checkout-area {
+        font-size: 14px;
+    }
+
+    /* Resolve o buraco branco gigante no topo */
+    .main-content {
+        margin-top: 80px; 
+        padding: 15px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+    }
+
+    /* Formulários: Garante que fiquem um embaixo do outro */
+    .form-group.col-2 {
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* Espaço entre os campos */
+    }
+
+    .form-group.col-2 > div {
+        width: 100%; /* Ocupa a largura total */
+    }
+
+    .form-group input, .form-group select {
+        font-size: 16px; /* Evita zoom automático em alguns celulares */
+        padding: 14px;   /* Área de toque melhor para o dedo */
+    }
+
+    /* Botões de Pagamento (Crédito, Débito, Pix) */
+    .payment-options {
+        grid-template-columns: 1fr; /* Um botão por linha para não espremer */
+        gap: 10px;
+    }
+    
+    /* Se a tela for um pouco mais larguinha, tenta colocar 2 por linha */
+    @media (min-width: 350px) {
+        .payment-options {
+            grid-template-columns: 1fr 1fr; 
+        }
+        /* Faz o último item (Pix) ocupar a largura total para ficar bonito */
+        .payment-option-wrapper:last-child {
+            grid-column: span 2; 
+        }
+    }
+
+    /* Modais (Sucesso/Erro) para não cortarem na tela */
+    #success-modal, 
+    .modal-content, 
+    .summary-content {
+        width: 95% !important; /* Ocupa quase toda a largura */
+        max-width: 95% !important;
+        padding: 25px 20px;
+        
+        /* Centralização absoluta garantida */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        /* Barra de rolagem se o conteúdo for maior que a tela */
+        max-height: 90vh; 
+        overflow-y: auto;
+    }
+
+    /* Ajuste no texto do modal */
+    #success-modal h2 {
+        font-size: 1.5em;
+    }
+}

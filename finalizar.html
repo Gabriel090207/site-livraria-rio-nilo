@@ -147,6 +147,17 @@
                     </div>
                 </div>
 
+                <div id="overlay" class="hidden"></div>
+
+                <div id="success-modal" class="hidden">
+                    <div class="modal-content">
+                        <span class="checkmark">&#10004;</span>
+                        <h2>Pagamento Confirmado!</h2>
+                        <p>Seu pedido foi processado com sucesso.</p>
+                        <button id="viewOrderDetailsBtn">Ver Detalhes do Pedido</button>
+                    </div>
+                </div>
+
                 <div id="debitCardDetails" class="payment-details">
                     <h4>Detalhes do Cartão de Débito</h4>
                     <p class="warning-message">Para pagamentos com Cartão de Débito, você será redirecionado para o site
@@ -217,16 +228,6 @@
         </div>
     </div>
 
-    <div id="overlay" class="hidden"></div>
-    <div id="success-modal" class="hidden">
-        <div class="modal-content">
-            <span class="checkmark">&#10004;</span>
-            <h2>Pagamento Confirmado!</h2>
-            <p>Seu pedido foi processado com sucesso.</p>
-            <button id="viewOrderDetailsBtn">Ver Detalhes do Pedido</button>
-        </div>
-    </div>
-
     <div id="order-summary-screen" class="hidden">
         <div class="summary-content">
             <h2>Seu Pedido #<span id="order-id-display"></span></h2>
@@ -246,7 +247,7 @@
                     style="width: 100%; height: 90px; resize: vertical;"></textarea>
             </div>
 
-            <button id="backToStoreBtn">Voltar para a Loja</button>
+            <button id="backToStoreBtn" onclick="window.location.href='index.html'">Voltar para a Loja</button>
         </div>
     </div>
 
@@ -257,6 +258,7 @@
     <script>
         const cartKey = 'meuCarrinho';
         let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        let verificadorPagamento = null;
         // regras de parcelamento por escola
         const regrasParcelamento = {
             'adalbertocarvalho-matriz': 3,
@@ -618,6 +620,11 @@
 
         async function handleFinalizeOrder(event) {
             event.preventDefault();
+
+            if (finalizeOrderBtn.disabled) return; // Se já clicou, não deixa clicar de novo
+            finalizeOrderBtn.disabled = true;      // Trava o botão
+            finalizeOrderBtn.textContent = "Processando...";
+
             renderCartSummary();
 
             responseMessageDiv.style.display = 'none';
@@ -646,6 +653,8 @@
                     responseMessageDiv.classList.add('error');
                     responseMessageDiv.style.display = 'block';
                     responseMessageDiv.innerHTML = `Por favor, preencha todos os campos de ${key.replace(/([A-Z])/g, ' $1').toLowerCase()}.`;
+                    finalizeOrderBtn.disabled = false;
+                    finalizeOrderBtn.textContent = "Finalizar Compra";
                     return;
                 }
             }
@@ -654,6 +663,8 @@
                 responseMessageDiv.classList.add('error');
                 responseMessageDiv.style.display = 'block';
                 responseMessageDiv.innerHTML = 'CPF inválido. Por favor, preencha corretamente.';
+                finalizeOrderBtn.disabled = false;
+                finalizeOrderBtn.textContent = "Finalizar Compra";
                 return;
             }
 
@@ -720,6 +731,8 @@
                 responseMessageDiv.classList.add('error');
                 responseMessageDiv.style.display = 'block';
                 responseMessageDiv.innerHTML = 'Por favor, selecione um método de pagamento.';
+                finalizeOrderBtn.disabled = false;
+                finalizeOrderBtn.textContent = "Finalizar Compra";
                 return;
             }
 
@@ -750,6 +763,8 @@
                     responseMessageDiv.style.display = 'block';
                     responseMessageDiv.classList.add('error');
                     responseMessageDiv.innerHTML = `Erro inesperado do servidor. Resposta não JSON. Status: ${response.status}. Detalhes: ${await response.text()}`;
+                    finalizeOrderBtn.disabled = false;
+                    finalizeOrderBtn.textContent = "Finalizar Compra";
                     return;
                 }
 
@@ -774,48 +789,8 @@
                                 currentTotal,
                                 selectedPaymentMethod
                             );
-
-
                             // (se quiser ainda manter o QR code, dá pra colocar ele aí embaixo também depois)
 
-                            // Continua verificando status em background
-                            let pixInterval = setInterval(async () => {
-                                try {
-                                    const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
-                                    const statusData = await statusResponse.json();
-
-                                    console.log("Status atual do PIX:", statusData);
-
-                                    if (statusData.status === 2) { // Pago!
-                                        clearInterval(pixInterval);
-
-                                        await Swal.fire({
-                                            title: 'Pagamento Pix Confirmado! 🎉',
-                                            text: 'Seu pedido foi processado com sucesso.',
-                                            icon: 'success',
-                                            confirmButtonColor: '#ff7a00',
-                                            confirmButtonText: 'Fechar',
-                                            timer: 20000, // Fecha sozinho em 2 min
-                                            timerProgressBar: true
-                                        });
-
-                                        // Depois do pagamento confirmado, você pode:
-                                        // - limpar carrinho
-                                        // - atualizar alguma mensagem
-                                        sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
-                                        sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-                                        sessionStorage.setItem('lastOrderId', paymentId);
-
-                                        localStorage.removeItem(cartKey);
-                                        renderCartSummary();
-                                    }
-
-                                } catch (err) {
-                                    console.error("Erro ao verificar status PIX:", err);
-                                }
-                            }, 5000); // verifica a cada 5s
-
-                            // IMPORTANTE: dá um return aqui pra não cair nos outros fluxos
                             return;
                         }
 
@@ -864,34 +839,74 @@
                         }
                         // --- CRÉDITO OU DÉBITO (agora débito funciona como crédito à vista)
                         else {
-                            overlay.classList.remove('hidden');
-                            successModal.classList.remove('hidden');
 
                             const paymentId = result.cielo_response.Payment.PaymentId;
 
-                            // 🔥 Polling para cartão e débito (igual ao PIX)
-                            let cardInterval = setInterval(async () => {
+                            // Limpa verificação anterior se existir
+                            if (verificadorPagamento) clearInterval(verificadorPagamento);
+
+                            // Usa a variável global 'verificadorPagamento'
+                            verificadorPagamento = setInterval(async () => {
                                 try {
                                     const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
                                     const statusData = await statusResponse.json();
 
                                     console.log("Status atual cartão/débito:", statusData);
 
+                                    // --- CENÁRIO 1: APROVADO (Status 2) ---
                                     if (statusData.status === 2) {
-                                        clearInterval(cardInterval);
+                                        clearInterval(verificadorPagamento);
+                                        verificadorPagamento = null; // Limpa a variável
 
-                                        // salvar resumo
+                                        // 1. Mostra sucesso visual (Feedback imediato)
+                                        overlay.classList.remove('hidden');
+
+                                        // 2. Salva dados na sessão e limpa carrinho
                                         sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
                                         sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
                                         sessionStorage.setItem('lastOrderId', paymentId);
-
-                                        // limpar carrinho
                                         localStorage.removeItem(cartKey);
                                         renderCartSummary();
+
+                                        // 3. Registra a venda no banco em segundo plano (Adicionei para garantir igual ao Pix)
+                                        registrarVenda(paymentId, adjustedCart, currentTotal, billingData, selectedPaymentMethod)
+                                            .catch(err => console.error("Erro background:", err));
+
+                                        // 3. Mostra o Modal Bonito (SweetAlert)
+                                        Swal.fire({
+                                            title: 'Pagamento Confirmado! 🎉',
+                                            text: 'Seu pedido foi processado com sucesso.',
+                                            icon: 'success',
+                                            confirmButtonColor: '#28a745',
+                                            confirmButtonText: 'Ver Detalhes'
+                                        }).then((result) => {
+                                            // Quando clicar em "Ver Detalhes", mostra o resumo do pedido
+                                            if (result.isConfirmed) {
+                                                showOrderSummary();
+                                            }
+                                        });
+                                    }
+                                    // --- CENÁRIO 2: RECUSADO OU ERRO (Qualquer status que não seja 1 ou 2) ---
+                                    else if (statusData.status !== 1 && statusData.status !== 0 && statusData.status !== 12) {
+                                        clearInterval(verificadorPagamento);
+                                        verificadorPagamento = null;
+
+                                        // IMPORTANTE: Destrava o botão para o cliente tentar outro cartão
+                                        finalizeOrderBtn.disabled = false;
+                                        finalizeOrderBtn.textContent = "Finalizar Compra";
+
+                                        // Mostra o alerta de erro
+                                        Swal.fire({
+                                            title: 'Pagamento Não Aprovado 😢',
+                                            text: 'O banco recusou a transação ou houve um erro. Verifique os dados do cartão e tente novamente.',
+                                            icon: 'error',
+                                            confirmButtonColor: '#d33',
+                                            confirmButtonText: 'Tentar Novamente'
+                                        });
                                     }
 
                                 } catch (err) {
-                                    console.error("Erro ao verificar status cartão/débito:", err);
+                                    console.error("Erro ao verificar status cartão:", err);
                                 }
                             }, 5000);
 
@@ -902,10 +917,14 @@
                     } else {
                         responseMessageDiv.classList.add('error');
                         responseMessageDiv.innerHTML = `Erro no Pagamento: ❌<br><br>Mensagem: ${result.message || 'Erro desconhecido'}<br><br>Detalhes da Cielo:<pre>${JSON.stringify(result.cielo_error, null, 2)}</pre>`;
+                        finalizeOrderBtn.disabled = false;
+                        finalizeOrderBtn.textContent = "Finalizar Compra";
                     }
                 } else {
                     responseMessageDiv.classList.add('error');
                     responseMessageDiv.innerHTML = `Erro na Comunicação com o Back-end: ❌<br><br>Mensagem: ${result.message || 'Erro inesperado'}`;
+                    finalizeOrderBtn.disabled = false;
+                    finalizeOrderBtn.textContent = "Finalizar Compra";
                     if (result.cielo_error) {
                         responseMessageDiv.innerHTML += `<br><br>Detalhes da Cielo:<pre>${JSON.stringify(result.cielo_error, null, 2)}</pre>`;
                     }
@@ -916,6 +935,8 @@
                 responseMessageDiv.classList.add('error');
                 responseMessageDiv.innerHTML = `Erro de Conexão: ❌<br>Não foi possível conectar ao back-end. Certifique-se de que ele está rodando. Detalhes: ${error.message}`;
                 console.error('Erro ao enviar requisição (catch geral):', error);
+                finalizeOrderBtn.disabled = false;
+                finalizeOrderBtn.textContent = "Finalizar Compra";
             }
         }
 
@@ -1113,27 +1134,77 @@
             // Iniciar verificação automática do pagamento PIX
             const BASE_URL = "https://livraria-rio-nilo-backend.onrender.com";
 
-            let pixInterval = setInterval(async () => {
+            // Limpa verificação anterior para não rodar duas ao mesmo tempo
+            if (verificadorPagamento) clearInterval(verificadorPagamento);
+
+            // Usa a variável global 'verificadorPagamento'
+            verificadorPagamento = setInterval(async () => {
                 try {
                     const statusResponse = await fetch(`${BASE_URL}/verificar-status/${paymentId}`);
                     const statusData = await statusResponse.json();
 
-                    console.log("Status atual do PIX:", statusData);
+                    console.log("Status Cielo (Pix):", statusData.status);
 
-                    if (statusData.status === 2) {
-                        clearInterval(pixInterval);
+                    // --- CENÁRIO 1: PAGO (SUCESSO) ---
+                    if (statusData.status === 2) { 
+                                        clearInterval(verificadorPagamento);
 
-                        // Só registra 1 vez
-                        await registrarVenda(paymentId, adjustedCart, totalValue, billingData, selectedPaymentMethod);
+                                        // Limpa a referência 
+                                        verificadorPagamento = null;
+                                        
+                                        // Mostra os elementos visuais
+                                        overlay.classList.remove('hidden');
+                                        successModal.classList.remove('hidden');
 
+                                        // Atualiza a tela de fundo para mostrar que foi pago!
+                                        showPixPaidScreen(adjustedCart, currentTotal, paymentId);
 
-                        showPixPaidScreen(adjustedCart, totalValue, paymentId);
-                    }
+                                        sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
+                                        sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+                                        sessionStorage.setItem('lastOrderId', paymentId);
 
-                } catch (err) {
-                    console.error("Erro ao verificar status PIX:", err);
-                }
-            }, 5000);
+                                        // Limpando carrinho
+                                        localStorage.removeItem(cartKey);
+                                        renderCartSummary();
+
+                                        // Registra a venda
+                                        registrarVenda(paymentId, adjustedCart, currentTotal, billingData, selectedPaymentMethod)
+                                            .catch(err => console.error("Erro ao registrar venda no background:", err));
+
+                                        // Mostra o Modal Bonito (SweetAlert)
+                                        Swal.fire({
+                                            title: 'Pagamento Pix Confirmado! 🎉',
+                                            text: 'Seu pedido foi processado com sucesso.',
+                                            icon: 'success',
+                                            confirmButtonColor: '#28a745', 
+                                            confirmButtonText: 'Ver Detalhes'
+                                        });
+                                    }
+
+                                    // --- CENÁRIO 2: ERRO OU EXPIRADO (Qualquer status que não seja 1 ou 2) ---
+                                    // Status 1 = Pendente. Se não for 1 e nem 2, deu erro.
+                                    else if (statusData.status !== 1 && statusData.status !== 0 && statusData.status !== 12) {
+                                        clearInterval(verificadorPagamento);
+
+                                        verificadorPagamento = null;
+
+                                        // Destrava o botão para tentar de novo
+                                        finalizeOrderBtn.disabled = false;
+                                        finalizeOrderBtn.textContent = "Finalizar Compra";
+
+                                        Swal.fire({
+                                            title: 'Pagamento Pix Não Confirmado 😢',
+                                            text: 'O banco informou um erro ou o código expirou. Por favor, tente novamente.',
+                                            icon: 'error',
+                                            confirmButtonColor: '#d33',
+                                            confirmButtonText: 'Fechar'
+                                        });
+                                    }
+
+                                } catch (err) {
+                                    console.error("Erro ao verificar status PIX:", err);
+                                }
+                            }, 5000);
         }
 
         function showPixPaidScreen(cartItems, totalValue, orderId) {
