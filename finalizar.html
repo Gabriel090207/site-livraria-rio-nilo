@@ -251,10 +251,6 @@
         </div>
     </div>
 
-
-
-
-
     <script>
         const cartKey = 'meuCarrinho';
         let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
@@ -625,8 +621,6 @@
             finalizeOrderBtn.disabled = true;      // Trava o botão
             finalizeOrderBtn.textContent = "Processando...";
 
-            renderCartSummary();
-
             responseMessageDiv.style.display = 'none';
             responseMessageDiv.classList.remove('success', 'error');
 
@@ -882,7 +876,14 @@
                                         }).then((result) => {
                                             // Quando clicar em "Ver Detalhes", mostra o resumo do pedido
                                             if (result.isConfirmed) {
-                                                showOrderSummary();
+                                                document.querySelector('.main-content').style.display = 'none';
+
+                                                // 2. Garante que o container de resumo esteja visível
+                                                orderSummaryScreen.classList.remove('hidden');
+
+                                                const qtdParcelas = paymentDetails.installments || 1;
+
+                                                showPixPaidScreen(adjustedCart, currentTotal, paymentId, qtdParcelas);
                                             }
                                         });
                                     }
@@ -1146,68 +1147,68 @@
                     console.log("Status Cielo (Pix):", statusData.status);
 
                     // --- CENÁRIO 1: PAGO (SUCESSO) ---
-                    if (statusData.status === 2) { 
-                                        clearInterval(verificadorPagamento);
+                    if (statusData.status === 2) {
+                        clearInterval(verificadorPagamento);
 
-                                        // Limpa a referência 
-                                        verificadorPagamento = null;
-                                        
-                                        // Mostra os elementos visuais
-                                        overlay.classList.remove('hidden');
-                                        successModal.classList.remove('hidden');
+                        // Limpa a referência 
+                        verificadorPagamento = null;
 
-                                        // Atualiza a tela de fundo para mostrar que foi pago!
-                                        showPixPaidScreen(adjustedCart, currentTotal, paymentId);
+                        // Mostra os elementos visuais
+                        overlay.classList.remove('hidden');
+                        successModal.classList.remove('hidden');
 
-                                        sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
-                                        sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
-                                        sessionStorage.setItem('lastOrderId', paymentId);
+                        // Atualiza a tela de fundo para mostrar que foi pago!
+                        showPixPaidScreen(adjustedCart, currentTotal, paymentId);
 
-                                        // Limpando carrinho
-                                        localStorage.removeItem(cartKey);
-                                        renderCartSummary();
+                        sessionStorage.setItem('lastOrderCart', JSON.stringify(adjustedCart));
+                        sessionStorage.setItem('lastOrderTotal', currentTotal.toFixed(2));
+                        sessionStorage.setItem('lastOrderId', paymentId);
 
-                                        // Registra a venda
-                                        registrarVenda(paymentId, adjustedCart, currentTotal, billingData, selectedPaymentMethod)
-                                            .catch(err => console.error("Erro ao registrar venda no background:", err));
+                        // Limpando carrinho
+                        localStorage.removeItem(cartKey);
+                        renderCartSummary();
 
-                                        // Mostra o Modal Bonito (SweetAlert)
-                                        Swal.fire({
-                                            title: 'Pagamento Pix Confirmado! 🎉',
-                                            text: 'Seu pedido foi processado com sucesso.',
-                                            icon: 'success',
-                                            confirmButtonColor: '#28a745', 
-                                            confirmButtonText: 'Ver Detalhes'
-                                        });
-                                    }
+                        // Registra a venda
+                        registrarVenda(paymentId, adjustedCart, currentTotal, billingData, selectedPaymentMethod)
+                            .catch(err => console.error("Erro ao registrar venda no background:", err));
 
-                                    // --- CENÁRIO 2: ERRO OU EXPIRADO (Qualquer status que não seja 1 ou 2) ---
-                                    // Status 1 = Pendente. Se não for 1 e nem 2, deu erro.
-                                    else if (statusData.status !== 1 && statusData.status !== 0 && statusData.status !== 12) {
-                                        clearInterval(verificadorPagamento);
+                        // Mostra o Modal Bonito (SweetAlert)
+                        Swal.fire({
+                            title: 'Pagamento Pix Confirmado! 🎉',
+                            text: 'Seu pedido foi processado com sucesso.',
+                            icon: 'success',
+                            confirmButtonColor: '#28a745',
+                            confirmButtonText: 'Ver Detalhes'
+                        });
+                    }
 
-                                        verificadorPagamento = null;
+                    // --- CENÁRIO 2: ERRO OU EXPIRADO (Qualquer status que não seja 1 ou 2) ---
+                    // Status 1 = Pendente. Se não for 1 e nem 2, deu erro.
+                    else if (statusData.status !== 1 && statusData.status !== 0 && statusData.status !== 12) {
+                        clearInterval(verificadorPagamento);
 
-                                        // Destrava o botão para tentar de novo
-                                        finalizeOrderBtn.disabled = false;
-                                        finalizeOrderBtn.textContent = "Finalizar Compra";
+                        verificadorPagamento = null;
 
-                                        Swal.fire({
-                                            title: 'Pagamento Pix Não Confirmado 😢',
-                                            text: 'O banco informou um erro ou o código expirou. Por favor, tente novamente.',
-                                            icon: 'error',
-                                            confirmButtonColor: '#d33',
-                                            confirmButtonText: 'Fechar'
-                                        });
-                                    }
+                        // Destrava o botão para tentar de novo
+                        finalizeOrderBtn.disabled = false;
+                        finalizeOrderBtn.textContent = "Finalizar Compra";
 
-                                } catch (err) {
-                                    console.error("Erro ao verificar status PIX:", err);
-                                }
-                            }, 5000);
+                        Swal.fire({
+                            title: 'Pagamento Pix Não Confirmado 😢',
+                            text: 'O banco informou um erro ou o código expirou. Por favor, tente novamente.',
+                            icon: 'error',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'Fechar'
+                        });
+                    }
+
+                } catch (err) {
+                    console.error("Erro ao verificar status PIX:", err);
+                }
+            }, 5000);
         }
 
-        function showPixPaidScreen(cartItems, totalValue, orderId) {
+        function showPixPaidScreen(cartItems, totalValue, orderId, installments = 1) {
             orderSummaryScreen.innerHTML = `
         <div class="summary-content">
             <h2>Pagamento Confirmado! ✔</h2>
@@ -1216,10 +1217,13 @@
             <h3>Itens Comprados:</h3>
             <ul id="paid-items-list"></ul>
 
-            <h3>Total: <strong>${formatPrice(totalValue)}</strong></h3>
+            <h3>
+            Total:<strong>${formatPrice(totalValue)}</strong>
+            ${installments > 1 ? `<span style="display:block; font-size:14px; color:#666; font-weight:normal; margin-top:5px;">Parcelado em ${installments}x sem juros</span>` : ''}
+            </h3>
 
             <button id="backToStoreBtn"
-                style="margin-top:20px; padding:12px 20px; background:#008f29; color:white; border:none; border-radius:8px; cursor:pointer; font-size:16px;">
+                style="margin-top:20px; padding:12px 20px; background:#008f29; color:white; border:none; border-radius:8px; cursor:pointer; font-size:16px;" onclick="window.location.href='index.html'">
                 Voltar para loja
             </button>
         </div>
