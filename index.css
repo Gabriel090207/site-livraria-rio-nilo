@@ -407,7 +407,7 @@ img.escola:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.192);
   /* branco transparente bem leve */
   backdrop-filter: blur(8px);
   /* desfoca o fundo atrás */
@@ -427,6 +427,18 @@ img.escola:hover {
   height: auto;
   border: 3px solid white;
   border-radius: 8px;
+}
+
+.titulo-video{
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.paragrafo-video{
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  color: #000000;
 }
 
 .skip-button {
