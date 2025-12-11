@@ -181,3 +181,14 @@ main.faleconosco {
         height: 40px;
     }
 }
+
+@media (min-width: 769px) {
+
+    /* Destrava a largura da barra apenas no computador */
+    .navbar {
+        width: 100% !important;
+        /* Ocupa toda a tela */
+        max-width: 100% !important;
+        /* Remove o limite de 1200px/800px */
+    }
+}
