@@ -731,12 +731,22 @@
             }
 
             try {
-                const fullPayload = {
-                    billingData: billingData,
-                    paymentMethod: selectedPaymentMethod,
-                    paymentDetails: paymentDetails,
-                    cartItems: adjustedCart
-                };
+
+                // PEGAR QUANTIDADE DE PARCELAS SE O MÉTODO FOR CARTÃO DE CRÉDITO
+// PEGAR QUANTIDADE DE PARCELAS SE O MÉTODO FOR CARTÃO DE CRÉDITO
+let parcelas = 1;
+if (selectedPaymentMethod === "CreditCard") {
+    parcelas = parseInt(document.getElementById('installments').value);
+}
+
+const fullPayload = {
+    billingData: billingData,
+    paymentMethod: selectedPaymentMethod,
+    paymentDetails: paymentDetails,
+    cartItems: adjustedCart,
+    parcelas: parcelas  // <<-- ESSA LINHA ENVIA O NÚMERO DE PARCELAS PARA O BACKEND
+};
+
 
                 console.log('Payload enviado para o backend:', fullPayload);
                 console.log('Stringified payload:', JSON.stringify(fullPayload));
