@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "escolaleaodejuda@hotmail.com": "22211",          // Leão de Judá
     "roseanejv15@gmail.com": "13479",          // Tia Linda
     "educandarior26@gmail.com": "55775",          // Escola Renascer
+    "recantodaemilia.mais@gmail.com": "12017",        // Recanto da Emília
 
   };
 
