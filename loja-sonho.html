@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja de Livros</title>
-  <meta name="description" content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
+  <meta name="description"
+    content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
   <link rel="canonical" href="https://www.livrariarionilo.com.br/loja.html">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
@@ -41,7 +42,7 @@
       <i class="fas fa-user" id="userIcon"></i>
       <div id="profileInfo" class="profile-dropdown">
         <p><strong>Usuário:</strong> João Silva</p>
-        <p><strong>Escola:</strong> Escola Santos Dumont</p> 
+        <p><strong>Escola:</strong> Escola Santos Dumont</p>
       </div>
       <div id="cart-container" style="position: relative;">
         <i class="fas fa-shopping-cart" id="cart-icon" style="cursor: pointer; position: relative;"></i>
@@ -56,8 +57,9 @@
     <nav class="sidebar">
       <div class="school-card">
         <h2>Escola</h2>
-        <img src="Logo Escolas/Renascer.png" alt="Logo da Escola" class="school-logo">
-        <h3 class="school-name" id="currentSchoolName">Renascer</div>
+        <img src="Logo Escolas/Sonho feliz.png" alt="Logo da Escola" class="school-logo">
+        <h3 class="school-name" id="currentSchoolName">Sonho Feliz</h3>
+      </div>
       <nav class="texto">
         <h2>Filtrar</h2>
       </nav>
@@ -65,14 +67,13 @@
       <label for="tipo">Categoria:</label>
       <select id="tipo" class="filter">
         <option value="">Todos</option>
-        <option value="terror">Fundamental Anos Iniciais</option>
+        <option value="biografia">Fundamental Anos Finais</option>
       </select>
 
       <label for="tipo">Série:</label>
       <select id="idade" class="filter">
         <option value="">Todos</option>
-        <option value="juvenil">1º Ano - 5º Ano</option>
-
+        <option value="adulto">6º Ano - 8º Ano</option>
       </select>
 
     </nav>
@@ -85,34 +86,26 @@
       <h2 class="section-title">Livros em Destaque</h2>
 
       <div class="cards" id="book-cards-container">
-        <div class="card" data-images="Capas Renascer/LIN1.png|Capas Renascer/MAT1.png|Capas Renascer/HUM1.png|Capas Renascer/NAT1.png">
-          <img src="Capas Renascer/LIN1.png" alt="Capa do Ensino Fundamental 1ºAno">
-          <h3>Ensino Fundamental 1ºAno + Inglês</h3>
-          <p class="price">R$595,00</p>
+        <!-- Anos finais -->
+        <div class="card"
+          data-images="Capas Sonho Feliz/EVOLUIR - FUND - 6º ANO - MOD1.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 6º ANO - MOD2.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 6º ANO - MOD3.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 6º ANO - MOD4.jpg">
+          <img src="Capas Sonho Feliz/EVOLUIR - FUND - 6º ANO - MOD1.jpg" alt="Capa do KIT Evoluir Fundamental 6ºAno">
+          <h3>KIT Evoluir Fundamental 6ºAno</h3>
+          <p class="price">R$ 720,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Renascer/LIN2.png|Capas Renascer/MAT2.png|Capas Renascer/HUM2.png|Capas Renascer/NAT2.png">
-          <img src="Capas Renascer/LIN2.png" alt="Capa do Ensino Fundamental 2ºAno">
-          <h3>Ensino Fundamental 2ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
+        <div class="card"
+          data-images="Capas Sonho Feliz/EVOLUIR - FUND - 7º ANO - MOD1.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 7º ANO - MOD2.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 7º ANO - MOD3.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 7º ANO - MOD4.jpg">
+          <img src="Capas Sonho Feliz/EVOLUIR - FUND - 7º ANO - MOD1.jpg" alt="Capa do KIT Evoluir Fundamental 7ºAno">
+          <h3>KIT Evoluir Fundamental 7ºAno</h3>
+          <p class="price">R$ 798,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Renascer/LIN3.png|Capas Renascer/MAT3.png|Capas Renascer/HUM3.png|Capas Renascer/NAT3.png">
-          <img src="Capas Renascer/LIN3.png" alt="Capa do Ensino Fundamental 3ºAno">
-          <h3>Ensino Fundamental 3ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card" data-images="Capas Renascer/LIN4.png|Capas Renascer/MAT4.png|Capas Renascer/HUM4.png|Capas Renascer/NAT4.png">
-          <img src="Capas Renascer/LIN4.png" alt="Capa do Ensino Fundamental 4ºAno">
-          <h3>Ensino Fundamental 4ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card" data-images="Capas Renascer/LIN5.png|Capas Renascer/MAT5.png|Capas Renascer/HUM5.png|Capas Renascer/NAT5.png">
-          <img src="Capas Renascer/LIN5.png" alt="Capa do Ensino Fundamental 5ºAno">
-          <h3>Ensino Fundamental 5ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
+        <div class="card"
+          data-images="Capas Sonho Feliz/EVOLUIR - FUND - 8º ANO - MOD1.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 8º ANO - MOD2.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 8º ANO - MOD3.jpg|Capas Sonho Feliz/EVOLUIR - FUND - 8º ANO - MOD4.jpg">
+          <img src="Capas Sonho Feliz/EVOLUIR - FUND - 8º ANO - MOD1.jpg" alt="Capa do KIT Evoluir Fundamental 8ºAno">
+          <h3>KIT Evoluir Fundamental 8ºAno</h3>
+          <p class="price">R$ 810,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
       </div>
@@ -125,31 +118,32 @@
     Item adicionado ao carrinho!
   </div>
 
+
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const schoolNameElement = document.getElementById('currentSchoolName');
-        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+    document.addEventListener('DOMContentLoaded', function () {
+      const schoolNameElement = document.getElementById('currentSchoolName');
+      let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
 
-        if (schoolNameElement && schoolNameElement.textContent) {
-            schoolName = schoolNameElement.textContent.trim();
-        } 
-        
-        // Salva o nome da escola no localStorage
-        localStorage.setItem('currentSchoolName', schoolName);
-        console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+      if (schoolNameElement && schoolNameElement.textContent) {
+        schoolName = schoolNameElement.textContent.trim();
+      }
 
-        // Opcional: Atualizar a exibição da escola no dropdown do perfil
-        const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
-        if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
-            profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
-        }
+      // Salva o nome da escola no localStorage
+      localStorage.setItem('currentSchoolName', schoolName);
+      console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+
+      // Opcional: Atualizar a exibição da escola no dropdown do perfil
+      const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
+      if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
+        profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
+      }
     });
 
     // --- SALVAR NOME COMPLETO DA CRIANÇA ---
-document.addEventListener("DOMContentLoaded", function () {
-    const userParagraph = document.querySelector("#profileInfo p:first-child");
+    document.addEventListener("DOMContentLoaded", function () {
+      const userParagraph = document.querySelector("#profileInfo p:first-child");
 
-    if (userParagraph) {
+      if (userParagraph) {
         // Remove "Usuário:" e pega só o nome
         const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
 
@@ -157,8 +151,8 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("nomeDaCrianca", rawText);
 
         console.log("[loja.html] Nome da criança salvo:", rawText);
-    }
-});
+      }
+    });
 
   </script>
 

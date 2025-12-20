@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
     "roseanejv15@gmail.com": "13479",          // Tia Linda
     "educandarior26@gmail.com": "55775",          // Escola Renascer
     "recantodaemilia.mais@gmail.com": "12017",        // Recanto da Emília
+    "escolinhajulele@gmail.com": "12258",        // Escolinha Julelê
+    "daysealmeida@gmail.com": "33478",        // Maria Milza
+    "escolasonhofeliz12@hotmail.com": "66789",        // Sonho Feliz
+    "colegiodummont@hotmail.com": "19456"         // Colégio Dummont
 
   };
 

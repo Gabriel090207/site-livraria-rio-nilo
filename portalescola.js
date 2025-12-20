@@ -27,6 +27,11 @@ document.addEventListener("DOMContentLoaded", async function () {
     "roseanejv15@gmail.com": "Tia Linda",
     "educandarior26@gmail.com": "Escola Renascer",
     "recantodaemilia.mais@gmail.com": "Recanto da Emilia",
+    "escolinhajulele@gmail.com": "Escolinha Julelê",
+    "daysealmeida@gmail.com": "Maria Milza",
+    "escolasonhofeliz12@hotmail.com": "Sonho Feliz",
+    "colegiodummont@hotmail.com": "Colégio Dummont"
+
   };
 
   // --- Normalizador (resolve acentos, hífen, maiúscula/minúscula)

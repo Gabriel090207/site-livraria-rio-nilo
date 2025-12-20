@@ -55,9 +55,9 @@
   <div class="container">
     <nav class="sidebar">
       <div class="school-card">
-        <h2>Escola</h2>
-        <img src="Logo Escolas/Renascer.png" alt="Logo da Escola" class="school-logo">
-        <h3 class="school-name" id="currentSchoolName">Renascer</div>
+        <h2>Escolinha</h2>
+        <img src="Logo Escolas/Julele.png" alt="Logo da Escola" class="school-logo">
+        <h3 class="school-name" id="currentSchoolName">Julelê</h3> </div>
       <nav class="texto">
         <h2>Filtrar</h2>
       </nav>
@@ -65,14 +65,13 @@
       <label for="tipo">Categoria:</label>
       <select id="tipo" class="filter">
         <option value="">Todos</option>
-        <option value="terror">Fundamental Anos Iniciais</option>
+        <option value="aventura">Infantil</option>
       </select>
 
       <label for="tipo">Série:</label>
       <select id="idade" class="filter">
         <option value="">Todos</option>
-        <option value="juvenil">1º Ano - 5º Ano</option>
-
+        <option value="infantil">G1 - G5</option>
       </select>
 
     </nav>
@@ -85,37 +84,44 @@
       <h2 class="section-title">Livros em Destaque</h2>
 
       <div class="cards" id="book-cards-container">
-        <div class="card" data-images="Capas Renascer/LIN1.png|Capas Renascer/MAT1.png|Capas Renascer/HUM1.png|Capas Renascer/NAT1.png">
-          <img src="Capas Renascer/LIN1.png" alt="Capa do Ensino Fundamental 1ºAno">
-          <h3>Ensino Fundamental 1ºAno + Inglês</h3>
-          <p class="price">R$595,00</p>
+        <div class="card">
+          <img src="Capas Julelê/INF1 (1).png" alt="Capa do KIT VORTEX Educação infantil G1">
+          <h3>KIT VORTEX Educação infantil G1</h3>
+          <p class="price">R$395,00</p>
+          <button class="add-to-cart">Comprar</button>
+        </div> 
+
+        <div class="card" data-images="Capas Julelê/INF2 (1).png | Capas Julelê/INF2C (1).png">
+          <img src="Capas Julelê/INF2 (1).png" alt="Capa do KIT VORTEX Educação infantil G2">
+          <h3>KIT VORTEX Educação infantil G2</h3>
+          <p class="price">R$680,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Renascer/LIN2.png|Capas Renascer/MAT2.png|Capas Renascer/HUM2.png|Capas Renascer/NAT2.png">
-          <img src="Capas Renascer/LIN2.png" alt="Capa do Ensino Fundamental 2ºAno">
-          <h3>Ensino Fundamental 2ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
+
+        <div class="card" data-images="Capas Julelê/INF3.png | Capas Julelê/INF3C.png">
+          <img src="Capas Julelê/INF3.png" alt="Capa do KIT VORTEX Educação infantil G3">
+          <h3>KIT VORTEX Educação infantil G3</h3>
+          <p class="price">R$1.080,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Renascer/LIN3.png|Capas Renascer/MAT3.png|Capas Renascer/HUM3.png|Capas Renascer/NAT3.png">
-          <img src="Capas Renascer/LIN3.png" alt="Capa do Ensino Fundamental 3ºAno">
-          <h3>Ensino Fundamental 3ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
+
+        <div class="card" data-images="Capas Julelê/INF4.png | Capas Julelê/INF4C.png">
+          <img src="Capas Julelê/INF4.png" alt="Capa do KIT VORTEX Educação infantil G4">
+          <h3>KIT VORTEX Educação infantil G4</h3>
+          <p class="price">R$1.080,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Renascer/LIN4.png|Capas Renascer/MAT4.png|Capas Renascer/HUM4.png|Capas Renascer/NAT4.png">
-          <img src="Capas Renascer/LIN4.png" alt="Capa do Ensino Fundamental 4ºAno">
-          <h3>Ensino Fundamental 4ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
+        
+        <div class="card" data-images="Capas Julelê/INF5.png | Capas Julelê/INF5C.png">
+          <img src="Capas Julelê/INF5.png" alt="Capa do KIT VORTEX Educação infantil G5">
+          <h3>KIT VORTEX Educação infantil G5</h3>
+          <p class="price">R$1.080,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Renascer/LIN5.png|Capas Renascer/MAT5.png|Capas Renascer/HUM5.png|Capas Renascer/NAT5.png">
-          <img src="Capas Renascer/LIN5.png" alt="Capa do Ensino Fundamental 5ºAno">
-          <h3>Ensino Fundamental 5ºAno + Inglês</h3>
-          <p class="price">R$685,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
+      
+
       </div>
+      
 
     </main>
 
@@ -144,22 +150,6 @@
             profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
         }
     });
-
-    // --- SALVAR NOME COMPLETO DA CRIANÇA ---
-document.addEventListener("DOMContentLoaded", function () {
-    const userParagraph = document.querySelector("#profileInfo p:first-child");
-
-    if (userParagraph) {
-        // Remove "Usuário:" e pega só o nome
-        const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
-
-        // Salva no localStorage
-        localStorage.setItem("nomeDaCrianca", rawText);
-
-        console.log("[loja.html] Nome da criança salvo:", rawText);
-    }
-});
-
   </script>
 
   <script>
