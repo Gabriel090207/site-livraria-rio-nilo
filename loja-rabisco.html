@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja de Livros</title>
-  <meta name="description" content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
+  <meta name="description"
+    content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
   <link rel="canonical" href="https://www.livrariarionilo.com.br/loja.html">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
@@ -41,7 +42,7 @@
       <i class="fas fa-user" id="userIcon"></i>
       <div id="profileInfo" class="profile-dropdown">
         <p><strong>Usuário:</strong> João Silva</p>
-        <p><strong>Escola:</strong> Escola Santos Dumont</p> 
+        <p><strong>Escola:</strong> Escola Santos Dumont</p>
       </div>
       <div id="cart-container" style="position: relative;">
         <i class="fas fa-shopping-cart" id="cart-icon" style="cursor: pointer; position: relative;"></i>
@@ -55,9 +56,10 @@
   <div class="container">
     <nav class="sidebar">
       <div class="school-card">
-        <h2>Instituto</h2>
-        <img src="Logo Escolas/Instituto Mundo Encantado.png" alt="Logo da Escola" class="school-logo">
-        <h3 class="school-name" id="currentSchoolName">Mundo Encantado</h3></div>
+        <h2>Creche Escola</h2>
+        <img src="Logo Escolas/Risco e Rabisco.png" alt="Logo da Escola" class="school-logo">
+        <h3 class="school-name" id="currentSchoolName">Risco e Rabisco</h3>
+      </div>
       <nav class="texto">
         <h2>Filtrar</h2>
       </nav>
@@ -72,7 +74,7 @@
       <label for="tipo">Série:</label>
       <select id="idade" class="filter">
         <option value="">Todos</option>
-        <option value="infantil">G1 - G5</option>
+        <option value="infantil">2 Anos - 5 Anos</option>
         <option value="juvenil">1º Ano - 5º Ano</option>
       </select>
 
@@ -86,65 +88,71 @@
       <h2 class="section-title">Livros em Destaque</h2>
 
       <div class="cards" id="book-cards-container">
-        <div class="card">
-          <img src="Capas Mundo Encantado/INF1 (1).png" alt="Capa do livro Educação infantil G1">
-          <h3>Educação infantil G1</h3>
-          <p class="price">R$ 310,00</p>
+        <div class="card"
+          data-images="">
+          <img src="Capas Maria Milza/Nivel 2 Amarelinha M.png"
+            alt="Capa do KIT Amarelinha Infantil G2">
+          <h3>KIT Amarelinha Infantil G2</h3>
+          <p class="price">R$ 350,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mundo Encantado/INF2 (1).png" alt="Capa do livro Educação infantil G2">
-          <h3>Educação infantil G2</h3>
-          <p class="price">R$ 420,00</p>
+        <div class="card"
+          data-images="">
+          <img src="Capas Maria Milza/Nivel 3 Amarelinhas M.png"
+            alt="Capa do KIT Amarelinha Infantil G3">
+          <h3>KIT Amarelinha Infantil G3</h3>
+          <p class="price">R$ 350,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mundo Encantado/INF3.png" alt="Capa do livro Educação infantil G3">
-          <h3>Educação infantil G3</h3>
-          <p class="price">R$ 685,00</p>
+        <div class="card"
+          data-images="">
+          <img src="Capas Maria Milza/Nivel 4 Amarelinha M.png"
+            alt="Capa do KIT Amarelinha Infantil G4">
+          <h3>KIT Amarelinha Infantil G4</h3>
+          <p class="price">R$ 350,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card">
-          <img src="Capas Mundo Encantado/INF4.png" alt="Capa do livro Educação infantil G4">
-          <h3>Educação infantil G4</h3>
-          <p class="price">R$ 795,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card">
-          <img src="Capas Mundo Encantado/INF5.png" alt="Capa do livro Educação infantil G5">
-          <h3>Educação infantil G5</h3>
-          <p class="price">R$ 815,00</p>
+        <div class="card"
+          data-images="">
+          <img src="Capas Maria Milza/Nivel 5 Amarelinha Caligrafia M.png"
+            alt="Capa do KIT Amarelinha Infantil G5">
+          <h3>KIT Amarelinha Infantil G5</h3>
+          <p class="price">R$ 350,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <!-- Anos iniciais -->
-         <div class="card" data-images="Capas Mundo Encantado/LIN1 (1).png|Capas Mundo Encantado/MAT1 (1).png|Capas Mundo Encantado/NAT1 (1).png|Capas Mundo Encantado/HUM1 (1).png">
-          <img src="Capas Mundo Encantado/LIN1 (1).png" alt="Capa do livro Ensino Fundamental 1ºAno + Inglês">
-          <h3>Ensino Fundamental 1ºAno + Inglês</h3>
-          <p class="price">R$ 1.010,00</p>
+        <div class="card" data-fit="cover">
+          <img src="Capas Risco e Rabisco/Amarelinha 1.png" alt="Capa do KIT Amarelinha Fundamental 1ºAno">
+          <h3>KIT Amarelinha Fundamental 1ºAno</h3>
+          <p class="price">R$ 410,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Mundo Encantado/Fundamental 1 02AM (1).png|Capas Mundo Encantado/Fundamental 1 02BM (1).png">
-          <img src="Capas Mundo Encantado/Fundamental 1 02AM (1).png" alt="Capa do Livro Ensino Fundamental 2ºAno + Inglês">
-          <h3>Ensino Fundamental 2ºAno + Inglês</h3>
-          <p class="price">R$ 1.070,00</p>
+        <div class="card">
+          <img src="Capas Risco e Rabisco/Amarelinha 2.png"
+            alt="Capa do KIT Amarelinha Fundamental 2ºAno">
+          <h3>KIT Amarelinha Fundamental 2ºAno</h3>
+          <p class="price">R$ 410,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Mundo Encantado/Fundamental 1 03AM (1).png|Capas Mundo Encantado/Fundamental 1 03BM (1).png">
-          <img src="Capas Mundo Encantado/Fundamental 1 03AM (1).png" alt="Capa do livro Ensino Fundamental 3ºAno + Inglês">
-          <h3>Ensino Fundamental 3ºAno + Inglês</h3>
-          <p class="price">R$ 1.070,00</p>
+        <div class="card">
+          <img src="Capas Risco e Rabisco/Amarelinha 3.png"
+            alt="Capa do KIT Amarelinha Fundamental 3ºAno">
+          <h3>KIT Amarelinha Fundamental 3ºAno</h3>
+          <p class="price">R$ 410,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Mundo Encantado/Fundamental 1 04AM (1).png|Capas Mundo Encantado/Fundamental 1 04BM (1).png">
-          <img src="Capas Mundo Encantado/Fundamental 1 04AM (1).png" alt="Capa do livro Ensino Fundamental 4ºAno + Inglês">
-          <h3>Ensino Fundamental 4ºAno + Inglês</h3>
-          <p class="price">R$ 1.070,00</p>
+        <div class="card">
+          <img src="Capas Risco e Rabisco/Amarelinha 4.png"
+            alt="Capa do KIT Amarelinha Fundamental 4ºAno">
+          <h3>KIT Amarelinha Fundamental 4ºAno</h3>
+          <p class="price">R$ 410,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card" data-images="Capas Mundo Encantado/Fundamental 1 05AM (1).png|Capas Mundo Encantado/Fundamental 1 05BM (1).png">
-          <img src="Capas Mundo Encantado/Fundamental 1 05AM (1).png" alt="Capa do livro Ensino Fundamental 5ºAno + Inglês">
-          <h3>Ensino Fundamental 5ºAno + Inglês</h3>
-          <p class="price">R$ 1.070,00</p>
+        <div class="card">
+          <img src="Capas Risco e Rabisco/Amarelinha 5.png"
+            alt="Capa do KIT Amarelinha Fundamental 5ºAno">
+          <h3>KIT Amarelinha Fundamental 5ºAno</h3>
+          <p class="price">R$ 410,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
       </div>
@@ -157,31 +165,32 @@
     Item adicionado ao carrinho!
   </div>
 
+
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const schoolNameElement = document.getElementById('currentSchoolName');
-        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+    document.addEventListener('DOMContentLoaded', function () {
+      const schoolNameElement = document.getElementById('currentSchoolName');
+      let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
 
-        if (schoolNameElement && schoolNameElement.textContent) {
-            schoolName = schoolNameElement.textContent.trim();
-        } 
-        
-        // Salva o nome da escola no localStorage
-        localStorage.setItem('currentSchoolName', schoolName);
-        console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+      if (schoolNameElement && schoolNameElement.textContent) {
+        schoolName = schoolNameElement.textContent.trim();
+      }
 
-        // Opcional: Atualizar a exibição da escola no dropdown do perfil
-        const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
-        if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
-            profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
-        }
+      // Salva o nome da escola no localStorage
+      localStorage.setItem('currentSchoolName', schoolName);
+      console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
+
+      // Opcional: Atualizar a exibição da escola no dropdown do perfil
+      const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
+      if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
+        profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
+      }
     });
 
     // --- SALVAR NOME COMPLETO DA CRIANÇA ---
-document.addEventListener("DOMContentLoaded", function () {
-    const userParagraph = document.querySelector("#profileInfo p:first-child");
+    document.addEventListener("DOMContentLoaded", function () {
+      const userParagraph = document.querySelector("#profileInfo p:first-child");
 
-    if (userParagraph) {
+      if (userParagraph) {
         // Remove "Usuário:" e pega só o nome
         const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
 
@@ -189,10 +198,11 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("nomeDaCrianca", rawText);
 
         console.log("[loja.html] Nome da criança salvo:", rawText);
-    }
-});
+      }
+    });
 
   </script>
+
   <script>
     // Menu lateral
     const menuIcon = document.querySelector('.menu-icon');

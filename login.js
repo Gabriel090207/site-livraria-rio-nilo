@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
     "escolinhajulele@gmail.com": "12258",        // Escolinha Julelê
     "daysealmeida@gmail.com": "33478",        // Maria Milza
     "escolasonhofeliz12@hotmail.com": "66789",        // Sonho Feliz
-    "colegiodummont@hotmail.com": "19456"         // Colégio Dummont
+    "colegiodummont@hotmail.com": "19456",         // Colégio Dummont
+    "educandariosementesdabemmequer@hotmail.com": "33440",         // Sementes do Bem-Me-Quer
+    "sladejesus@hotmail.com": "44567",         // Risco e Rabisco
 
   };
 

@@ -30,7 +30,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     "escolinhajulele@gmail.com": "Escolinha Julelê",
     "daysealmeida@gmail.com": "Maria Milza",
     "escolasonhofeliz12@hotmail.com": "Sonho Feliz",
-    "colegiodummont@hotmail.com": "Colégio Dummont"
+    "colegiodummont@hotmail.com": "Colégio Dummont",
+    "educandariosementesdabemmequer@hotmail.com": "Sementes do Bem-Me-Quer",
+    "sladejesus@hotmail.com": "Risco e Rabisco",
 
   };
 
