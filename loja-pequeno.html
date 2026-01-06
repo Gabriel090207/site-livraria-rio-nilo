@@ -56,9 +56,9 @@
   <div class="container">
     <nav class="sidebar">
       <div class="school-card">
-        <h2>Colégio</h2>
-        <img src="Logo Escolas/Dummont.png" alt="Logo da Escola" class="school-logo">
-        <h3 class="school-name" id="currentSchoolName">Santos Dummont</h3>
+        <h2>Escola</h2>
+        <img src="Logo Escolas/Pequeno cidadão.png" alt="Logo da Escola" class="school-logo">
+        <h3 class="school-name" id="currentSchoolName">Pequeno Cidadão</h3>
       </div>
       <nav class="texto">
         <h2>Filtrar</h2>
@@ -67,17 +67,13 @@
       <label for="tipo">Categoria:</label>
       <select id="tipo" class="filter">
         <option value="">Todos</option>
-        <option value="aventura">Infantil</option>
-        <option value="terror">Fundamental Anos Iniciais</option>
         <option value="biografia">Fundamental Anos Finais</option>
       </select>
 
       <label for="tipo">Série:</label>
       <select id="idade" class="filter">
         <option value="">Todos</option>
-        <option value="infantil">1 Ano - 5 Anos</option>
-        <option value="juvenil">1º Ano - 4º Ano</option>
-        <option value="adulto">5º Ano - 9º Ano</option>
+        <option value="fundamental">6º Ano - 7º Ano</option>
       </select>
 
     </nav>
@@ -90,106 +86,22 @@
       <h2 class="section-title">Livros em Destaque</h2>
 
       <div class="cards" id="book-cards-container">
-        <div class="card" data-images="Capas Dummont/INF2 (1).png|Capas Dummont/INF2C (1).png">
-          <img src="Capas Dummont/INF2 (1).png"
-            alt="Capa do KTI Vortex infantil G2">
-          <h3>KTI Vortex infantil G2</h3>
-          <p class="price">R$ 400,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/INF3.png|Capas Dummont/INF3C.png">
-          <img src="Capas Dummont/INF3.png"
-            alt="Capa do KTI Vortex infantil G3">
-          <h3>KTI Vortex infantil G3</h3>
-          <p class="price">R$ 580,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/INF4.png|Capas Dummont/INF4C.png">
-          <img src="Capas Dummont/INF4.png"
-            alt="Capa do KTI Vortex infantil G4">
-          <h3>KTI Vortex infantil G4</h3>
-          <p class="price">R$ 580,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/INF5.png|Capas Dummont/INF5C.png">
-          <img src="Capas Dummont/INF5.png"
-            alt="Capa do KTI Vortex infantil G5">
-          <h3>KTI Vortex infantil G5</h3>
-          <p class="price">R$ 580,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <!-- Anos iniciais -->
-        <div class="card" data-fit="cover"
-          data-images="Capas Dummont/Fundamental 1 01AM (1).png|Capas Dummont/Fundamental 1 01BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 01AM (1).png" alt="Capa do KTI Vortex Fundamental 1ºAno">
-          <h3>KTI Vortex Fundamental 1ºAno</h3>
-          <p class="price">R$ 900,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 02AM (1).png|Capas Dummont/Fundamental 1 02BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 02AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 2ºAno">
-          <h3>KTI Vortex Fundamental 2ºAno</h3>
-          <p class="price">R$ 900,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 03AM (1).png|Capas Dummont/Fundamental 1 03BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 03AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 3ºAno">
-          <h3>KTI Vortex Fundamental 3ºAno</h3>
-          <p class="price">R$ 900,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 04AM (1).png|Capas Dummont/Fundamental 1 04BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 04AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 4ºAno">
-          <h3>KTI Vortex Fundamental 4ºAno</h3>
-          <p class="price">R$ 900,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 05AM (1).png|Capas Dummont/Fundamental 1 05BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 05AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 5ºAno">
-          <h3>KTI Vortex Fundamental 5ºAno</h3>
-          <p class="price">R$ 900,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
         <!-- Anos finais -->
         <div class="card"
-          data-images="Capas Dummont/6°º ANO - LINGUAGENS E M.png|Capas Dummont/6°º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/6°º ANO - LINGUAGENS E M.png" alt="Capa do KIT Vortex Fundamental 6ºAno">
-          <h3>KIT Vortex Fundamental 6ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD1.jpg|Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD2.jpg|Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD3.jpg|Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD4.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - FUND - 6º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 6ºAno">
+          <h3>Ensino Fundamental 6ºAno</h3>
+          <p class="price">R$ 780,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <div class="card"
-          data-images="Capas Dummont/7°º ANO - LINGUAGENS E MATEMÁTICA.png|Capas Dummont/7°º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/7°º ANO - LINGUAGENS E MATEMÁTICA.png" alt="Capa do KIT Vortex Fundamental 7ºAno">
-          <h3>KIT Vortex Fundamental 7ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
+          data-images="Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD1.jpg|Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD2.jpg|Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD3.jpg|Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD4.jpg">
+          <img src="Capas Mario Junior/EVOLUIR - FUND - 7º ANO - MOD1.jpg" alt="Capa do livro Ensino Fundamental 7ºAno">
+          <h3>Ensino Fundamental 7ºAno</h3>
+          <p class="price">R$ 780,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/8°º ANO - LINGUAGENS E MATEMÁTICA.png|Capas Dummont/8°º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/8°º ANO - LINGUAGENS E MATEMÁTICA.png" alt="Capa do KIT Vortex Fundamental 8ºAno">
-          <h3>KIT Vortex Fundamental 8ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/9º ANO - LINGUAGENS E MATEMÁTICA.png|Capas Dummont/9º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/9º ANO - LINGUAGENS E MATEMÁTICA.png" alt="Capa do KIT Vortex Fundamental 9ºAno">
-          <h3>KIT Vortex Fundamental 9ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
+
       </div>
 
     </main>

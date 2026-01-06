@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja de Livros</title>
-  <meta name="description"
-    content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
+  <meta name="description" content="Explore a loja online da Livraria Rio Nilo, filtre livros por categoria, s&eacute;rie e escola e finalize suas compras com carrinho e suporte via WhatsApp.">
   <link rel="canonical" href="https://www.livrariarionilo.com.br/loja.html">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="shortcut icon" href="Nova-logo-rio-nilo-_3_.ico" type="image/x-icon">
@@ -42,7 +41,7 @@
       <i class="fas fa-user" id="userIcon"></i>
       <div id="profileInfo" class="profile-dropdown">
         <p><strong>Usuário:</strong> João Silva</p>
-        <p><strong>Escola:</strong> Escola Santos Dumont</p>
+        <p><strong>Escola:</strong> Escola Santos Dumont</p> 
       </div>
       <div id="cart-container" style="position: relative;">
         <i class="fas fa-shopping-cart" id="cart-icon" style="cursor: pointer; position: relative;"></i>
@@ -56,10 +55,9 @@
   <div class="container">
     <nav class="sidebar">
       <div class="school-card">
-        <h2>Colégio</h2>
-        <img src="Logo Escolas/Dummont.png" alt="Logo da Escola" class="school-logo">
-        <h3 class="school-name" id="currentSchoolName">Santos Dummont</h3>
-      </div>
+        <h2>Escola</h2>
+        <img src="Logo Escolas/Raio de sol.png" alt="Logo do Recanto da Emilia" class="school-logo">
+        <h3 class="school-name" id="currentSchoolName">Raio de Sol</h3></div>
       <nav class="texto">
         <h2>Filtrar</h2>
       </nav>
@@ -69,15 +67,15 @@
         <option value="">Todos</option>
         <option value="aventura">Infantil</option>
         <option value="terror">Fundamental Anos Iniciais</option>
-        <option value="biografia">Fundamental Anos Finais</option>
+        <option value="terror">Fundamental Anos Finais</option>
       </select>
 
       <label for="tipo">Série:</label>
       <select id="idade" class="filter">
         <option value="">Todos</option>
-        <option value="infantil">1 Ano - 5 Anos</option>
-        <option value="juvenil">1º Ano - 4º Ano</option>
-        <option value="adulto">5º Ano - 9º Ano</option>
+        <option value="infantil">G2 - G5</option>
+        <option value="juvenil">1º Ano - 5º Ano</option>
+        <option value="juvenil">6º Ano - 9º Ano</option>
       </select>
 
     </nav>
@@ -90,104 +88,60 @@
       <h2 class="section-title">Livros em Destaque</h2>
 
       <div class="cards" id="book-cards-container">
-        <div class="card" data-images="Capas Dummont/INF2 (1).png|Capas Dummont/INF2C (1).png">
-          <img src="Capas Dummont/INF2 (1).png"
-            alt="Capa do KTI Vortex infantil G2">
-          <h3>KTI Vortex infantil G2</h3>
-          <p class="price">R$ 400,00</p>
+        
+        <div class="card">
+          <img src="Capas Raio de Sol/Nivel 2 Amarelinha M.png" alt="KIT Amarelinha G2">
+          <h3>KIT Amarelinha G2</h3>
+          <p class="price">R$ 365,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/INF3.png|Capas Dummont/INF3C.png">
-          <img src="Capas Dummont/INF3.png"
-            alt="Capa do KTI Vortex infantil G3">
-          <h3>KTI Vortex infantil G3</h3>
-          <p class="price">R$ 580,00</p>
+        <div class="card">
+          <img src="Capas Raio de Sol/Nivel 3 Amarelinhas M.png" alt="KIT Amarelinha G3">
+          <h3>KIT Amarelinha G3</h3>
+          <p class="price">R$ 365,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/INF4.png|Capas Dummont/INF4C.png">
-          <img src="Capas Dummont/INF4.png"
-            alt="Capa do KTI Vortex infantil G4">
-          <h3>KTI Vortex infantil G4</h3>
-          <p class="price">R$ 580,00</p>
+        <div class="card">
+          <img src="Capas Raio de Sol/Nivel 4 Amarelinha M.png" alt="KIT Amarelinha G4">
+          <h3>KIT Amarelinha + Caligrafia G4</h3>
+          <p class="price">R$ 445,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/INF5.png|Capas Dummont/INF5C.png">
-          <img src="Capas Dummont/INF5.png"
-            alt="Capa do KTI Vortex infantil G5">
-          <h3>KTI Vortex infantil G5</h3>
-          <p class="price">R$ 580,00</p>
+        <div class="card">
+          <img src="Capas Raio de Sol/Nivel 5 Amarelinha Caligrafia M.png" alt="KIT Amarelinha G5">
+          <h3>KIT Amarelinha + Caligrafia G5</h3>
+          <p class="price">R$ 445,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
         <!-- Anos iniciais -->
-        <div class="card" data-fit="cover"
-          data-images="Capas Dummont/Fundamental 1 01AM (1).png|Capas Dummont/Fundamental 1 01BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 01AM (1).png" alt="Capa do KTI Vortex Fundamental 1ºAno">
-          <h3>KTI Vortex Fundamental 1ºAno</h3>
-          <p class="price">R$ 900,00</p>
+         <div class="card" data-images="Capas Raio de Sol/LIN1.png|Capas Raio de Sol/MAT1.png|Recanto da Emilia/HUM1.png|Capas Raio de Sol/NAT1.png ">
+          <img src="Capas Raio de Sol/LIN1.png" alt="KIT Amarelinha 1ºAno + Inglês">
+          <h3>KIT Amarelinha 1ºAno + Inglês</h3>
+          <p class="price">R$ 545,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 02AM (1).png|Capas Dummont/Fundamental 1 02BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 02AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 2ºAno">
-          <h3>KTI Vortex Fundamental 2ºAno</h3>
-          <p class="price">R$ 900,00</p>
+        <div class="card" data-images="Capas Raio de Sol/LIN2.png|Capas Raio de Sol/MAT2.png|Capas Raio de Sol/HUM2.png|Capas Raio de Sol/NAT2.png">
+          <img src="Capas Raio de Sol/LIN2.png" alt="KIT Amarelinha 2ºAno + Inglês">
+          <h3>KIT Amarelinha 2ºAno + Inglês</h3>
+          <p class="price">R$ 545,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 03AM (1).png|Capas Dummont/Fundamental 1 03BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 03AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 3ºAno">
-          <h3>KTI Vortex Fundamental 3ºAno</h3>
-          <p class="price">R$ 900,00</p>
+        <div class="card" data-images="Capas Raio de Sol/LIN3.png|Capas Raio de Sol/MAT3.png|Capas Raio de Sol/HUM3.png|Capas Raio de Sol/NAT3.png">
+          <img src="Capas Raio de Sol/LIN3.png" alt="KIT Amarelinha 3ºAno + Inglês">
+          <h3>KIT Amarelinha 3ºAno + Inglês</h3>
+          <p class="price">R$ 575,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 04AM (1).png|Capas Dummont/Fundamental 1 04BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 04AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 4ºAno">
-          <h3>KTI Vortex Fundamental 4ºAno</h3>
-          <p class="price">R$ 900,00</p>
+        <div class="card" data-images="Capas Raio de Sol/LIN4.png|Capas Raio de Sol/MAT4.png|Capas Raio de Sol/HUM4.png|Capas Raio de Sol/NAT4.png">
+          <img src="Capas Raio de Sol/LIN4.png" alt="KIT Amarelinha 4ºAno + Inglês">
+          <h3>KIT Amarelinha 4ºAno + Inglês</h3>
+          <p class="price">R$ 575,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
-        <div class="card"
-          data-images="Capas Dummont/Fundamental 1 05AM (1).png|Capas Dummont/Fundamental 1 05BM (1).png">
-          <img src="Capas Dummont/Fundamental 1 05AM (1).png"
-            alt="Capa do KTI Vortex Fundamental 5ºAno">
-          <h3>KTI Vortex Fundamental 5ºAno</h3>
-          <p class="price">R$ 900,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <!-- Anos finais -->
-        <div class="card"
-          data-images="Capas Dummont/6°º ANO - LINGUAGENS E M.png|Capas Dummont/6°º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/6°º ANO - LINGUAGENS E M.png" alt="Capa do KIT Vortex Fundamental 6ºAno">
-          <h3>KIT Vortex Fundamental 6ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/7°º ANO - LINGUAGENS E MATEMÁTICA.png|Capas Dummont/7°º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/7°º ANO - LINGUAGENS E MATEMÁTICA.png" alt="Capa do KIT Vortex Fundamental 7ºAno">
-          <h3>KIT Vortex Fundamental 7ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/8°º ANO - LINGUAGENS E MATEMÁTICA.png|Capas Dummont/8°º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/8°º ANO - LINGUAGENS E MATEMÁTICA.png" alt="Capa do KIT Vortex Fundamental 8ºAno">
-          <h3>KIT Vortex Fundamental 8ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
-          <button class="add-to-cart">Comprar</button>
-        </div>
-        <div class="card"
-          data-images="Capas Dummont/9º ANO - LINGUAGENS E MATEMÁTICA.png|Capas Dummont/9º ANO - NATUREZA E HUMANAS.png">
-          <img src="Capas Dummont/9º ANO - LINGUAGENS E MATEMÁTICA.png" alt="Capa do KIT Vortex Fundamental 9ºAno">
-          <h3>KIT Vortex Fundamental 9ºAno</h3>
-          <p class="price">R$ 1.100,00</p>
+        <div class="card" data-images="Capas Raio de Sol/LIN5.png|Capas Raio de Sol/MAT5.png|Capas Raio de Sol/HUM5.png|Capas Raio de Sol/NAT5.png">
+          <img src="Capas Raio de Sol/LIN5.png" alt="KIT Amarelinha 5ºAno + Inglês">
+          <h3>KIT Amarelinha 5ºAno + Inglês</h3>
+          <p class="price">R$ 575,00</p>
           <button class="add-to-cart">Comprar</button>
         </div>
       </div>
@@ -200,32 +154,31 @@
     Item adicionado ao carrinho!
   </div>
 
-
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const schoolNameElement = document.getElementById('currentSchoolName');
-      let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
+    document.addEventListener('DOMContentLoaded', function() {
+        const schoolNameElement = document.getElementById('currentSchoolName');
+        let schoolName = 'Escola Não Identificada'; // Valor padrão de fallback
 
-      if (schoolNameElement && schoolNameElement.textContent) {
-        schoolName = schoolNameElement.textContent.trim();
-      }
+        if (schoolNameElement && schoolNameElement.textContent) {
+            schoolName = schoolNameElement.textContent.trim();
+        } 
+        
+        // Salva o nome da escola no localStorage
+        localStorage.setItem('currentSchoolName', schoolName);
+        console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
 
-      // Salva o nome da escola no localStorage
-      localStorage.setItem('currentSchoolName', schoolName);
-      console.log(`[loja.html] Nome da escola salvo no localStorage: ${schoolName}`);
-
-      // Opcional: Atualizar a exibição da escola no dropdown do perfil
-      const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
-      if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
-        profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
-      }
+        // Opcional: Atualizar a exibição da escola no dropdown do perfil
+        const profileSchoolParagraph = document.querySelector("#profileInfo p:last-child");
+        if (profileSchoolParagraph && profileSchoolParagraph.textContent.includes('Escola:')) {
+            profileSchoolParagraph.innerHTML = `<strong>Escola:</strong> ${schoolName}`;
+        }
     });
 
     // --- SALVAR NOME COMPLETO DA CRIANÇA ---
-    document.addEventListener("DOMContentLoaded", function () {
-      const userParagraph = document.querySelector("#profileInfo p:first-child");
+document.addEventListener("DOMContentLoaded", function () {
+    const userParagraph = document.querySelector("#profileInfo p:first-child");
 
-      if (userParagraph) {
+    if (userParagraph) {
         // Remove "Usuário:" e pega só o nome
         const rawText = userParagraph.textContent.replace("Usuário:", "").trim();
 
@@ -233,11 +186,10 @@
         localStorage.setItem("nomeDaCrianca", rawText);
 
         console.log("[loja.html] Nome da criança salvo:", rawText);
-      }
-    });
+    }
+});
 
   </script>
-
   <script>
     // Menu lateral
     const menuIcon = document.querySelector('.menu-icon');

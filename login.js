@@ -25,6 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
     "colegiodummont@hotmail.com": "19456",         // Colégio Dummont
     "educandariosementesdabemmequer@hotmail.com": "33440",         // Sementes do Bem-Me-Quer
     "sladejesus@hotmail.com": "44567",         // Risco e Rabisco
+    "k.rsantana@yahoo.com.br": "77889",         // Pequeno Cidadão
+    "adrisousa082@gmail.com": "99001",         // Raio de Sol
 
   };
 

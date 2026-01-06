@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     "colegiodummont@hotmail.com": "Colégio Dummont",
     "educandariosementesdabemmequer@hotmail.com": "Sementes do Bem-Me-Quer",
     "sladejesus@hotmail.com": "Risco e Rabisco",
+    "k.rsantana@yahoo.com.br": "Pequeno Cidadão",
+    "adrisousa082@gmail.com": "Raio de Sol",
 
   };
 
