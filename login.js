@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "sladejesus@hotmail.com": "44567",         // Risco e Rabisco
     "k.rsantana@yahoo.com.br": "77889",         // Pequeno Cidadão
     "adrisousa082@gmail.com": "99001",         // Raio de Sol
+    "escolanovosrumos10@gmail.com": "22334",         // Novos Rumos
 
   };
 

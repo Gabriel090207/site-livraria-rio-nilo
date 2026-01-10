@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     "sladejesus@hotmail.com": "Risco e Rabisco",
     "k.rsantana@yahoo.com.br": "Pequeno Cidadão",
     "adrisousa082@gmail.com": "Raio de Sol",
+    "escolanovosrumos10@gmail.com": "Novos Rumos",
 
   };
 
