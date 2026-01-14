@@ -6,14 +6,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     return;
   }
 
-  // --- Quem logou ---
   const usuarioLogado = localStorage.getItem("usuarioLogado");
 
   // --- 🔗 Backend ---
-  const BASE_URL = 'https://livraria-rio-nilo-backend.onrender.com';
+  const BASE_URL = "https://livraria-rio-nilo-backend.onrender.com";
   const API_URL = `${BASE_URL}/vendas?period=allTime`;
 
-  // --- Mapeamento do login para nome da escola ---
+  // --- Mapeamento de usuários para escolas ---
   const ESCOLAS = {
     "cackidsfinanceiro1+matriz@gmail.com": "Adalberto Carvalho - Matriz",
     "cackidsfinanceiro1+filial1@gmail.com": "Adalberto Carvalho - Filial",
@@ -35,17 +34,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     "sladejesus@hotmail.com": "Risco e Rabisco",
     "k.rsantana@yahoo.com.br": "Pequeno Cidadão",
     "adrisousa082@gmail.com": "Raio de Sol",
-    "escolanovosrumos10@gmail.com": "Novos Rumos",
-
+    "escolanovosrumos10@gmail.com": "Novos Rumos"
   };
 
-  // --- Normalizador (resolve acentos, hífen, maiúscula/minúscula)
+  // --- Normalizador robusto ---
   function normalizar(str) {
-    return str
-      ?.toLowerCase()
+    return (str || "")
+      .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[-]/g, "")
+      .replace(/[^a-z0-9 ]/g, "")
       .replace(/\s+/g, " ")
       .trim();
   }
@@ -62,7 +60,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const logoutBtn = document.getElementById("logoutBtn");
   const tituloEscola = document.getElementById("tituloEscola");
 
-  // Exibe nome da escola
   if (tituloEscola) tituloEscola.textContent = escolaDoUsuario;
 
   // --- Logout ---
@@ -87,21 +84,34 @@ document.addEventListener("DOMContentLoaded", async function () {
       const response = await fetch(API_URL);
       const vendas = await response.json();
 
-      console.log("🔥 Escola logada:", escolaDoUsuario);
-      console.log("📌 Escolas retornadas:", [...new Set(vendas.map(v => v.cliente_escola))]);
+      console.log("👤 Usuário:", usuarioLogado);
+      console.log("🏫 Escola login:", escolaDoUsuario);
+      console.log("🏫 Escola normalizada:", escolaNormalizada);
 
-      // Filtro inteligente por escola
-      allSales = vendas.filter(venda =>
-        normalizar(venda.cliente_escola) === escolaNormalizada
-      );
+      // 🔎 DEBUG específico Recanto
+      vendas.forEach(v => {
+        if (normalizar(v.cliente_escola).includes("recanto")) {
+          console.log("🧪 VENDA RECANTO:", v.cliente_escola);
+        }
+      });
+
+      // ✅ FILTRO DEFINITIVO
+      allSales = vendas.filter(venda => {
+        const escolaVenda = normalizar(venda.cliente_escola);
+        if (!escolaVenda) return false;
+
+        return (
+          escolaVenda.includes(escolaNormalizada) ||
+          escolaNormalizada.includes(escolaVenda)
+        );
+      });
 
       filteredSales = [...allSales];
-
       atualizarPainel(filteredSales);
-      atualizarPaginacao();
+
     } catch (error) {
-      console.error("Erro ao buscar vendas:", error);
-      chartContainer.innerHTML = "<p style='color:red;'>Erro ao carregar dados.</p>";
+      console.error("Erro ao carregar vendas:", error);
+      cardsContainer.innerHTML = "<p style='color:red;'>Erro ao carregar dados.</p>";
       totalVendasElement.textContent = "Erro";
     }
   }
@@ -111,31 +121,33 @@ document.addEventListener("DOMContentLoaded", async function () {
     totalVendasElement.textContent = vendas.length;
 
     const produtos = {};
-    vendas.forEach((venda) => {
+    vendas.forEach(venda => {
       const nome = venda.produtos?.[0]?.name || "Indefinido";
       produtos[nome] = (produtos[nome] || 0) + 1;
     });
 
-    const produtosOrdenados = Object.entries(produtos).sort((a, b) => b[1] - a[1]);
+    const produtosOrdenados = Object.entries(produtos)
+      .sort((a, b) => b[1] - a[1]);
+
     atualizarGrafico(produtosOrdenados);
+    currentPage = 1;
     exibirPagina(currentPage);
   }
 
   // --- 3️⃣ Gráfico ---
   function atualizarGrafico(produtosOrdenados) {
     chartContainer.innerHTML = "";
-    const maxValor = Math.max(...produtosOrdenados.map((p) => p[1])) || 1;
+    const maxValor = Math.max(...produtosOrdenados.map(p => p[1]), 1);
 
     produtosOrdenados.forEach(([nome, qtd]) => {
-      const nomeLimitado = nome.length > 25 ? nome.slice(0, 22) + "..." : nome;
       const percentual = (qtd / maxValor) * 85;
 
       const barItem = document.createElement("div");
       barItem.classList.add("bar-item");
       barItem.innerHTML = `
-        <span>${nomeLimitado}</span>
+        <span>${nome.length > 25 ? nome.slice(0, 22) + "..." : nome}</span>
         <div class="bar">
-          <div class="fill" style="width:${percentual.toFixed(1)}%;"></div>
+          <div class="fill" style="width:${percentual}%;"></div>
           <span class="value">${qtd}</span>
         </div>
       `;
@@ -147,33 +159,24 @@ document.addEventListener("DOMContentLoaded", async function () {
   function atualizarCards(vendasParaMostrar) {
     cardsContainer.innerHTML = "";
 
-    if (vendasParaMostrar.length === 0) {
+    if (!vendasParaMostrar.length) {
       cardsContainer.innerHTML = "<p style='text-align:center;color:#888;'>Nenhuma venda encontrada.</p>";
       return;
     }
 
-    vendasParaMostrar.forEach((venda) => {
+    vendasParaMostrar.forEach(venda => {
       const produto = venda.produtos?.[0] || {};
-
-      // Correção: aceita múltiplos formatos de nome da imagem
       let capaLivro =
-        produto.img ||
-        produto.image ||
-        produto.capa ||
-        produto.thumbnail ||
-        produto.foto ||
-        produto.cover ||
-        produto.url ||
+        produto.img || produto.image || produto.capa || produto.thumbnail ||
+        produto.foto || produto.cover || produto.url ||
         "https://placehold.co/100x140?text=Capa";
 
-      // Se veio caminho local → substitui
-      if (capaLivro.includes("127.0.0.1") || capaLivro.includes("localhost")) {
+      if (capaLivro.includes("localhost") || capaLivro.includes("127.0.0.1")) {
         capaLivro = "https://placehold.co/100x140?text=Capa";
       }
 
       const card = document.createElement("div");
       card.classList.add("card1", "info-card");
-
       card.innerHTML = `
         <div class="card-content">
           <div class="left-info">
@@ -182,7 +185,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             <p><strong>ESCOLA:</strong> ${venda.cliente_escola || "N/A"}</p>
           </div>
           <div class="right-info">
-            <p><strong>LIVRO COMPRADO:</strong> ${produto.name || "N/A"}</p>
+            <p><strong>LIVRO:</strong> ${produto.name || "N/A"}</p>
             <img src="${capaLivro}" alt="Capa do Livro">
           </div>
         </div>
@@ -195,8 +198,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function exibirPagina(pagina) {
     const start = (pagina - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    const vendasPagina = filteredSales.slice(start, end);
-    atualizarCards(vendasPagina);
+    atualizarCards(filteredSales.slice(start, end));
     atualizarPaginacao();
   }
 
@@ -207,60 +209,38 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (totalPaginas <= 1) {
       paginationContainer.style.display = "none";
       return;
-    } else {
-      paginationContainer.style.display = "flex";
     }
 
-    const prev = document.createElement("button");
-    prev.classList.add("page-btn", "prev");
-    prev.innerHTML = "&laquo;";
-    prev.disabled = currentPage === 1;
-    prev.addEventListener("click", () => {
-      currentPage--;
-      exibirPagina(currentPage);
-    });
-    paginationContainer.appendChild(prev);
+    paginationContainer.style.display = "flex";
 
-    for (let i = 1; i <= totalPaginas; i++) {
+    ["«", "»"].forEach((txt, idx) => {
       const btn = document.createElement("button");
       btn.classList.add("page-btn");
-      if (i === currentPage) btn.classList.add("active");
-      btn.textContent = i;
-      btn.addEventListener("click", () => {
-        currentPage = i;
+      btn.textContent = txt;
+      btn.disabled = idx === 0 ? currentPage === 1 : currentPage === totalPaginas;
+      btn.onclick = () => {
+        currentPage += idx === 0 ? -1 : 1;
         exibirPagina(currentPage);
-      });
+      };
       paginationContainer.appendChild(btn);
-    }
-
-    const next = document.createElement("button");
-    next.classList.add("page-btn", "next");
-    next.innerHTML = "&raquo;";
-    next.disabled = currentPage === totalPaginas;
-    next.addEventListener("click", () => {
-      currentPage++;
-      exibirPagina(currentPage);
     });
-    paginationContainer.appendChild(next);
   }
 
   // --- 6️⃣ Pesquisa ---
   searchInput.addEventListener("input", () => {
     const termo = normalizar(searchInput.value);
 
-    filteredSales = allSales.filter((venda) => {
-      return (
-        normalizar(venda.cliente_nome).includes(termo) ||
-        normalizar(venda.nome_crianca).includes(termo) ||
-        normalizar(venda.cliente_escola).includes(termo) ||
-        normalizar(venda.produtos?.[0]?.name).includes(termo)
-      );
-    });
+    filteredSales = allSales.filter(v =>
+      normalizar(v.cliente_nome).includes(termo) ||
+      normalizar(v.nome_crianca).includes(termo) ||
+      normalizar(v.cliente_escola).includes(termo) ||
+      normalizar(v.produtos?.[0]?.name).includes(termo)
+    );
 
     currentPage = 1;
     exibirPagina(currentPage);
   });
 
-  // --- 🚀 Iniciar painel ---
+  // --- 🚀 Start ---
   carregarVendas();
 });
